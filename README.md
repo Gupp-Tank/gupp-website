@@ -2,6 +2,8 @@
 
 Gupp Tank public website — React + TypeScript + Vite. Deployed on Vercel.
 
+Live at [gupp.app](https://gupp.app).
+
 ## Local setup
 
 ```bash
