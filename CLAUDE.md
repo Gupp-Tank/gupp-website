@@ -16,7 +16,7 @@ Public marketing/landing site for Gupp Tank. React + TypeScript + Vite, deployed
 
 - `gupp-docs/design/` (`colors`, `typography`, `icons`, `components`) is the source of truth. Never hardcode a color or font here that isn't documented there — reuse the same tokens defined in `src/index.css` (`--primary-green`, `--secondary-blue`, `--coral`, `--bg`, `--surface`, `--text-primary`, `--text-secondary`).
 - Brand assets (logo, favicon) live in `public/branding/`. Don't drop loose image files elsewhere.
-- Headings use Baloo 2; body text uses Karla (loaded via Google Fonts in `index.html`).
+- Website titles and body text use Karla (`--font-title` / `--font-body`); Baloo 2 (`--font-heading`) is only for the wordmark and the app mockup UI. See `gupp-docs/design/typography` ("Website") for why.
 
 ## Writing rules
 

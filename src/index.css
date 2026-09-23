@@ -1,29 +1,122 @@
+/* Every value here comes from gupp-docs/design (colors, components, spacing). */
 :root {
   --primary-green: #0e7c5a;
   --secondary-blue: #0d5c73;
+  --secondary-blue-solid: #0d5c73;
   --coral: #ef5b4e;
   --bg: #f2f7fb;
   --surface: #ffffff;
   --text-primary: #132322;
   --text-secondary: #7a8d84;
+  --on-solid: #ffffff;
+  /* Reading text. Light mode reuses the documented deep blues (colors: parameter states)
+     because the green-gray secondary drops below AA contrast on the pale blue background. */
+  --text-body: #0d4859;
+  --headline-muted: #0d5c73;
 
+  --warning: #8a5f00;
+  --param-normal: #0e4d38;
+  --nav-bar: #ffffff;
+  --nav-border: #f0f3f1;
+  --nav-active-bg: #eef6f2;
+  --nav-active-fg: #0e7c5a;
+  --device-bezel: #132322;
+  --caustic-color: #0d5c73;
+  --caustic-strength: 0.34;
+
+  --tool-dosing: #0d5c73;
+  --tool-co2: #7a5cc7;
+  --tool-feeding: #b98a00;
+  --tool-volume: #4e8cb8;
+  --tool-acclimation: #3da5a0;
+
+  /* Quick-action tint cards in the app mockup (Diagnose/Log). Derived from
+     --coral/--secondary-blue via color-mix, not new raw colors — see the
+     mockup note in AppHomeScreen.css for why these use a tint, not a solid fill. */
+  --quick-coral-bg: color-mix(in srgb, var(--coral) 16%, var(--surface));
+  --quick-coral-fg: color-mix(in srgb, var(--coral) 55%, var(--text-primary));
+  --quick-blue-bg: color-mix(in srgb, var(--secondary-blue) 14%, var(--surface));
+  --quick-blue-fg: var(--secondary-blue);
+
+  --shadow-card: 0 1px 2px rgba(19, 35, 34, 0.04), 0 16px 32px -16px rgba(19, 35, 34, 0.16);
+  --shadow-float: 0 1px 2px rgba(19, 35, 34, 0.04), 0 32px 64px -24px rgba(19, 35, 34, 0.28);
+  --glow-green: rgba(14, 124, 90, 0.5);
+  --glow-blue: rgba(13, 92, 115, 0.5);
+
+  /* Baloo 2 is the app's voice (wordmark, mockup UI). Website titles use Karla:
+     gupp-docs/design/typography, "Website". */
   --font-heading: 'Baloo 2', system-ui, sans-serif;
   --font-body: 'Karla', system-ui, sans-serif;
+  --font-title: var(--font-body);
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --touch-comfortable: 56px;
+  --page-max: 1240px;
+  --header-height: 76px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-green: #17a883;
-    --secondary-blue: #4fa8db;
-    --bg: #14191b;
-    --surface: #1b2124;
-    --text-primary: #edf1ef;
-    --text-secondary: #8a9793;
-  }
+:root {
+  color-scheme: light;
 }
 
-* {
+/* Light is the default regardless of OS preference; dark is an explicit user choice (see src/lib/theme.ts). */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --primary-green: #17a883;
+  --secondary-blue: #4fa8db;
+  --secondary-blue-solid: #2e86c1;
+  --bg: #14191b;
+  --surface: #1b2124;
+  --text-primary: #edf1ef;
+  --text-secondary: #8a9793;
+  --text-body: #8a9793;
+  --headline-muted: #8a9793;
+
+  --warning: #e3b23a;
+  --param-normal: #edf1ef;
+  --nav-bar: #191f21;
+  --nav-border: #262d30;
+  --nav-active-bg: #173832;
+  --nav-active-fg: #3fe0c4;
+  --device-bezel: #0d1210;
+  --caustic-color: #4fa8db;
+  --caustic-strength: 0.24;
+
+  --tool-dosing: #4fa8db;
+  --tool-co2: #b79cf0;
+  --tool-feeding: #e3b23a;
+  --tool-volume: #6fa9d0;
+  --tool-acclimation: #5fc9c3;
+
+  --quick-coral-bg: color-mix(in srgb, var(--coral) 24%, var(--surface));
+  --quick-coral-fg: var(--coral);
+  --quick-blue-bg: color-mix(in srgb, var(--secondary-blue) 22%, var(--surface));
+  --quick-blue-fg: var(--secondary-blue);
+
+  --shadow-card: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 16px 32px -16px rgba(0, 0, 0, 0.6);
+  --shadow-float: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 32px 64px -24px rgba(0, 0, 0, 0.65);
+  --glow-green: rgba(23, 168, 131, 0.45);
+  --glow-blue: rgba(46, 134, 193, 0.45);
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -31,57 +124,45 @@ body {
   background: var(--bg);
   color: var(--text-primary);
   font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-#root {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 24px;
-}
-
-.logo {
-  width: 160px;
-  height: auto;
-  margin-bottom: 24px;
-}
-
-h1 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 32px;
-  margin: 0 0 12px;
-  color: var(--text-primary);
+h1,
+h2,
+h3 {
+  font-family: var(--font-title);
+  margin: 0;
 }
 
 p {
-  font-size: 16px;
-  color: var(--text-secondary);
-  margin: 0 0 24px;
-  max-width: 420px;
+  margin: 0;
 }
 
-.links {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
+img,
+svg {
+  display: block;
 }
 
-.links a {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 14px;
-  color: #ffffff;
-  background: var(--primary-green);
-  border-radius: 999px;
-  padding: 10px 20px;
-  text-decoration: none;
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-.links a.secondary {
-  background: var(--secondary-blue);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

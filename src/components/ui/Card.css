@@ -1,0 +1,20 @@
+/* Separation comes from shadow only — never border + shadow on the same element. */
+.card {
+  background: var(--surface);
+}
+
+.card--r-md {
+  border-radius: var(--radius-md);
+}
+
+.card--r-lg {
+  border-radius: var(--radius-lg);
+}
+
+.card--card {
+  box-shadow: var(--shadow-card);
+}
+
+.card--float {
+  box-shadow: var(--shadow-float);
+}

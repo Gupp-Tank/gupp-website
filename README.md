@@ -20,4 +20,4 @@ npm run dev
 
 ## Status
 
-Placeholder landing page. See `gupp-docs` (`product/roadmap`) for what's planned here.
+Landing page with a bilingual (es/en) hero, light/dark theme and an app mockup that mirrors the real Home screen. Copy lives in `src/i18n/dictionaries/`; pages in `src/pages/` only compose sections. See `gupp-docs` (`product/roadmap`) for what's planned next.

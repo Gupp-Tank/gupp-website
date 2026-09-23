@@ -1,0 +1,130 @@
+.insight-card {
+  padding: var(--space-md) var(--space-lg);
+  color: var(--text-primary);
+}
+
+.insight-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.insight-card__eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.insight-card__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.insight-card__body {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-body);
+}
+
+/* Diagnosis */
+.diagnosis-card__thumb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--nav-active-bg);
+}
+
+/* White ich spots over the fish mark — reads as "the photo you just took". */
+.diagnosis-card__spots {
+  position: absolute;
+  inset: 0;
+  fill: var(--on-solid);
+}
+
+.diagnosis-card__cause {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+}
+
+.diagnosis-card__cause-text {
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--warning);
+}
+
+.diagnosis-card__trend {
+  flex-shrink: 0;
+  color: var(--warning);
+}
+
+.diagnosis-card__action {
+  display: inline-flex;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+/* Compatibility */
+.compat-card__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.compat-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.compat-card__verdict {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--nav-active-bg);
+  color: var(--nav-active-fg);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.compat-card__checks {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  color: var(--text-body);
+}
+
+.compat-card__checks li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.compat-card__checks svg {
+  flex-shrink: 0;
+  color: var(--primary-green);
+}

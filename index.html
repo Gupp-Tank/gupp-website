@@ -1,17 +1,40 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Gupp Tank — AI-powered aquarium management." />
+    <meta
+      name="description"
+      content="Perfil del acuario, parámetros, dosis, alimentación y chequeo de especies conectados: cada recordatorio y diagnóstico se calcula para tu acuario real."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Karla:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Karla:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <title>Gupp Tank</title>
+    <!--
+      Runs before first paint so a saved theme or language never flashes the default.
+      Storage keys must match src/lib/theme.ts and src/i18n/locales.ts.
+      Language rule mirrors the app: saved choice, else browser language if es/en, else es.
+    -->
+    <script>
+      ;(function () {
+        var root = document.documentElement
+        try {
+          if (localStorage.getItem('gupp-theme') === 'dark') root.dataset.theme = 'dark'
+          var locale = localStorage.getItem('gupp-locale')
+          if (locale !== 'es' && locale !== 'en') {
+            locale = (navigator.language || '').slice(0, 2).toLowerCase() === 'en' ? 'en' : 'es'
+          }
+          root.lang = locale
+        } catch (e) {
+          root.lang = 'es'
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

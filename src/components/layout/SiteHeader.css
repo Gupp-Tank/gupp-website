@@ -1,0 +1,92 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition:
+    background-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.site-header.is-scrolled {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  box-shadow: var(--shadow-card);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  max-width: var(--page-max);
+  height: var(--header-height);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.site-header__brand {
+  display: flex;
+  margin-left: -12px;
+}
+
+.site-header__nav {
+  display: flex;
+  gap: var(--space-xs);
+  margin-left: auto;
+}
+
+.site-header__link {
+  padding: 10px var(--space-md);
+  border-radius: var(--radius-pill);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.site-header__link:hover {
+  background: var(--nav-active-bg);
+  color: var(--nav-active-fg);
+}
+
+.site-header__link:focus-visible {
+  outline: 2px solid var(--secondary-blue);
+  outline-offset: 2px;
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-header__cta {
+  height: 44px;
+  padding: 0 var(--space-lg);
+  font-size: 14px;
+}
+
+@media (max-width: 860px) {
+  .site-header__nav {
+    display: none;
+  }
+
+  .site-header__actions {
+    margin-left: auto;
+  }
+}
+
+/* The hero repeats this CTA right below, so on phones the header keeps only
+   the preferences and stays uncluttered. */
+@media (max-width: 560px) {
+  .site-header__inner {
+    padding: 0 var(--space-md);
+  }
+
+  .site-header__cta {
+    display: none;
+  }
+}

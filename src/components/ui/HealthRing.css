@@ -1,0 +1,44 @@
+.health-ring {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.health-ring svg {
+  transform: rotate(-90deg);
+}
+
+.health-ring circle {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.health-ring__track {
+  stroke: var(--nav-active-bg);
+}
+
+.health-ring__value {
+  stroke: var(--primary-green);
+}
+
+.health-ring__number {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.health-ring__scale {
+  margin-top: 1px;
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
