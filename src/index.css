@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Karla:wght@400;500;600;700&display=swap');
 
-:root { --green:#0e7c5a; --blue:#0d5c73; --coral:#ef5b4e; --bg:#f2f7fb; --surface:#fff; --ink:#132322; --muted:#7a8d84; --line:rgba(19,35,34,.12); --font-head:'Baloo 2',sans-serif; --font-body:'Karla',sans-serif; }
-:root[data-theme='dark'] { --green:#17a883; --blue:#4fa8db; --bg:#14191b; --surface:#1b2124; --ink:#edf1ef; --muted:#8a9793; --line:rgba(237,241,239,.14); }
+:root { --green:#0b8065; --blue:#12677d; --coral:#f46a5d; --bg:#eef7f5; --surface:#ffffff; --ink:#102625; --muted:#718783; --line:rgba(16,38,37,.12); --font-head:'Baloo 2',sans-serif; --font-body:'Karla',sans-serif; }
+:root[data-theme='dark'] { --green:#4ee0b0; --blue:#55c8e8; --coral:#ff8878; --bg:#071c24; --surface:#0d2a31; --ink:#ecfffa; --muted:#98b7b5; --line:rgba(236,255,250,.15); }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); overflow-x:hidden; }
