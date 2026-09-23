@@ -63,12 +63,6 @@
   gap: 12px;
 }
 
-.site-header__cta {
-  height: 44px;
-  padding: 0 var(--space-lg);
-  font-size: 14px;
-}
-
 @media (max-width: 860px) {
   .site-header__nav {
     display: none;
@@ -79,14 +73,8 @@
   }
 }
 
-/* The hero repeats this CTA right below, so on phones the header keeps only
-   the preferences and stays uncluttered. */
 @media (max-width: 560px) {
   .site-header__inner {
     padding: 0 var(--space-md);
-  }
-
-  .site-header__cta {
-    display: none;
   }
 }

@@ -1,19 +1,17 @@
 import { useScrolled } from '../../hooks/useScrolled'
 import type { Locale } from '../../i18n/locales'
-import type { CallToAction, HeaderCopy } from '../../types/content'
-import { ButtonLink } from '../ui/Button'
+import type { HeaderCopy } from '../../types/content'
 import { Logo } from '../ui/Logo'
 import { PreferenceControls } from '../ui/PreferenceControls'
 import './SiteHeader.css'
 
 interface SiteHeaderProps {
   copy: HeaderCopy
-  cta: CallToAction
   locale: Locale
   onLocaleChange: (locale: Locale) => void
 }
 
-export function SiteHeader({ copy, cta, locale, onLocaleChange }: SiteHeaderProps) {
+export function SiteHeader({ copy, locale, onLocaleChange }: SiteHeaderProps) {
   const scrolled = useScrolled()
 
   return (
@@ -38,9 +36,6 @@ export function SiteHeader({ copy, cta, locale, onLocaleChange }: SiteHeaderProp
 
         <div className="site-header__actions">
           <PreferenceControls copy={copy} locale={locale} onLocaleChange={onLocaleChange} />
-          <ButtonLink href={cta.href} size="sm" className="site-header__cta">
-            {cta.label}
-          </ButtonLink>
         </div>
       </div>
     </header>

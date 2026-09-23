@@ -9,7 +9,6 @@ export const es: Dictionary = {
   header: {
     links: [
       { label: 'Cómo funciona', href: links.modules },
-      { label: 'GitHub', href: links.github, external: true },
     ],
     homeLabel: 'Gupp Tank, inicio',
     navLabel: 'Principal',
@@ -27,8 +26,7 @@ export const es: Dictionary = {
     },
     description: 'Agua, peces y dosis, todo en un solo lugar.',
     actions: [
-      { label: 'Acceso anticipado', href: links.earlyAccess, variant: 'primary' },
-      { label: 'Ver cómo funciona', href: links.modules, variant: 'ghost' },
+      { label: 'Ver cómo funciona', href: links.modules, variant: 'primary' },
     ],
     facts: ['Gratis para tu primer acuario', 'iOS y Android', 'Español & English'],
   },

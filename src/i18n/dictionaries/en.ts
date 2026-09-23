@@ -9,7 +9,6 @@ export const en: Dictionary = {
   header: {
     links: [
       { label: 'How it works', href: links.modules },
-      { label: 'GitHub', href: links.github, external: true },
     ],
     homeLabel: 'Gupp Tank home',
     navLabel: 'Primary',
@@ -27,8 +26,7 @@ export const en: Dictionary = {
     },
     description: 'Water, fish and dosing, all in one place.',
     actions: [
-      { label: 'Get early access', href: links.earlyAccess, variant: 'primary' },
-      { label: 'See how it works', href: links.modules, variant: 'ghost' },
+      { label: 'See how it works', href: links.modules, variant: 'primary' },
     ],
     facts: ['Free for your first tank', 'iOS & Android', 'English & Español'],
   },
