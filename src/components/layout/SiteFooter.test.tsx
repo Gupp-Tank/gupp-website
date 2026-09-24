@@ -30,7 +30,7 @@ describe('SiteFooter', () => {
     expect(within(nav).getByRole('link', { name: es.header.links[0].label })).toHaveAttribute('href', es.header.links[0].href)
   })
 
-  it('links the logo home under the header label', () => {
+  it('links the mark to the home page of the active language', () => {
     renderFooter()
     expect(screen.getByRole('link', { name: es.header.homeLabel })).toHaveAttribute('href', '/es')
   })
@@ -48,52 +48,34 @@ describe('SiteFooter', () => {
 })
 
 describe('footer content', () => {
-  afterEach(() => vi.useRealTimers())
+  afterEach(() => vi.restoreAllMocks())
 
   it('shows the product highlights', () => {
     renderFooter()
     for (const item of es.hero.facts) expect(screen.getByText(item)).toBeInTheDocument()
   })
 
-  it('shows one fun fact under a labelled aside', () => {
+  it('uses the fish mark alone, not the wordmark logotype', () => {
     renderFooter()
-    const aside = screen.getByRole('complementary', { name: es.footer.funFactLabel })
-    const shown = es.footer.funFacts.filter((fact) => within(aside).queryByText(fact))
-    expect(shown).toHaveLength(1)
+    const home = screen.getByRole('link', { name: es.header.homeLabel })
+    const img = home.querySelector('img')!
+    expect(img.getAttribute('src')).toBe('/branding/icon.png')
+    expect(img).toHaveAttribute('alt', '')
+    expect(document.querySelector('img[src*="logotype"]')).toBeNull()
   })
 
-  it('starts on the fact of the day, which changes with the date', () => {
-    vi.useFakeTimers()
-    const seen = new Set<string>()
-    for (const day of [1, 2, 3, 4, 5]) {
-      vi.setSystemTime(new Date(2026, 0, day, 12))
-      const { unmount } = renderFooter()
-      seen.add(es.footer.funFacts.find((f) => screen.queryByText(f))!)
-      unmount()
-    }
-    expect(seen.size).toBe(es.footer.funFacts.length)
+  it('names the tagline as a heading and labels the links block', () => {
+    renderFooter()
+    expect(screen.getByRole('heading', { level: 2, name: es.footer.tagline })).toBeInTheDocument()
+    expect(screen.getByText(es.footer.exploreLabel)).toBeInTheDocument()
   })
 
-  it('pages to another fact and wraps around after the last one', async () => {
+  it('scrolls back to the top when asked', async () => {
+    const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {})
     const user = userEvent.setup()
     renderFooter()
-    const current = () => es.footer.funFacts.findIndex((f) => screen.queryByText(f))
-    const first = current()
-    await user.click(screen.getByRole('button', { name: es.footer.funFactAction }))
-    expect(current()).toBe((first + 1) % es.footer.funFacts.length)
-    for (let i = 0; i < es.footer.funFacts.length - 1; i++) await user.click(screen.getByRole('button', { name: es.footer.funFactAction }))
-    expect(current()).toBe(first)
-  })
-
-  it('hides the button when there is nothing else to show', () => {
-    renderFooter({ ...es.footer, funFacts: ['Solo uno'] })
-    expect(screen.getByText('Solo uno')).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: es.footer.funFactAction })).not.toBeInTheDocument()
-  })
-
-  it('renders no card when there are no facts', () => {
-    renderFooter({ ...es.footer, funFacts: [] })
-    expect(screen.queryByRole('complementary')).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: es.footer.backToTopLabel }))
+    expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' })
   })
 })
 
