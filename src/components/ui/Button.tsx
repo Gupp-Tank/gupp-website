@@ -1,5 +1,6 @@
 import type { AnchorHTMLAttributes, ReactNode } from 'react'
-import { Icon, type IconName } from './Icon'
+import type { IconName } from '../../types/icon'
+import { Icon } from './Icon'
 import './Button.css'
 
 export type ButtonVariant = 'primary' | 'ghost'

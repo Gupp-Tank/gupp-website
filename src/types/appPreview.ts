@@ -1,4 +1,4 @@
-import type { IconName } from '../components/ui/Icon'
+import type { IconName } from './icon'
 import type { WaterParameter } from './content'
 
 export interface TankSummary {

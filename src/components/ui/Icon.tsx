@@ -1,4 +1,5 @@
 import type { ReactNode, SVGProps } from 'react'
+import type { IconName } from '../../types/icon'
 
 // Stroke-only, round caps/joins, 2–2.4 width: gupp-docs/design/icons.
 const paths = {
@@ -88,9 +89,7 @@ const paths = {
       <circle cx="16.5" cy="10.7" r="0.6" fill="currentColor" stroke="none" />
     </>
   ),
-} satisfies Record<string, ReactNode>
-
-export type IconName = keyof typeof paths
+} satisfies Record<IconName, ReactNode>
 
 interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'name'> {
   name: IconName
