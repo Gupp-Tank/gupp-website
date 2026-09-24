@@ -1,8 +1,171 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
+  "plugins": [
+    "react",
+    "typescript",
+    "oxc"
+  ],
   "rules": {
     "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
+    "react/only-export-components": [
+      "warn",
+      {
+        "allowConstantExport": true
+      }
+    ],
+    "max-lines": [
+      "error",
+      {
+        "max": 500,
+        "skipBlankLines": true,
+        "skipComments": true
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/pages/**"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "**/services/**",
+                  "**/services",
+                  "**/lib/**",
+                  "**/lib",
+                  "**/i18n/dictionaries/**",
+                  "**/i18n/dictionaries"
+                ],
+                "message": "Pages only compose sections and call hooks; move logic to a hook or service."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "src/sections/**",
+        "src/components/**"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "**/pages/**",
+                  "**/pages"
+                ],
+                "message": "A lower layer must not import from pages."
+              },
+              {
+                "group": [
+                  "**/services/**",
+                  "**/services",
+                  "**/i18n/dictionaries/**",
+                  "**/i18n/dictionaries"
+                ],
+                "message": "Call a hook; components never reach services or dictionaries directly."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "src/components/**"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "**/pages/**",
+                  "**/pages",
+                  "**/sections/**",
+                  "**/sections"
+                ],
+                "message": "Components are reusable: they must not depend on sections or pages."
+              },
+              {
+                "group": [
+                  "**/services/**",
+                  "**/services",
+                  "**/i18n/dictionaries/**",
+                  "**/i18n/dictionaries"
+                ],
+                "message": "Call a hook; components never reach services or dictionaries directly."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "src/hooks/**"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "**/pages/**",
+                  "**/pages",
+                  "**/sections/**",
+                  "**/sections",
+                  "**/components/**",
+                  "**/components"
+                ],
+                "message": "Hooks hold behavior and must not depend on UI."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "src/lib/**",
+        "src/services/**",
+        "src/types/**",
+        "src/errors/**",
+        "src/i18n/**"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "**/pages/**",
+                  "**/pages",
+                  "**/sections/**",
+                  "**/sections",
+                  "**/components/**",
+                  "**/components",
+                  "**/hooks/**",
+                  "**/hooks"
+                ],
+                "message": "Domain, types and I/O layers must not depend on UI or hooks."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }

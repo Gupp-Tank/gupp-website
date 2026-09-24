@@ -1,6 +1,6 @@
 import { SiteHeader } from '../components/layout/SiteHeader'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { useI18n } from '../i18n/useI18n'
+import { useI18n } from '../hooks/useI18n'
 import { Hero } from '../sections/hero/Hero'
 import { ModulesSection } from '../sections/modules/ModulesSection'
 
