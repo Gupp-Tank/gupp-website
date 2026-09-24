@@ -48,6 +48,10 @@ Network: only `src/services/http` calls `fetch` (lint enforces it). Feature serv
 
 No file over 500 lines (also enforced by lint). Colors come from tokens in `src/index.css`, never from literals: `npm run lint` fails on a hex/rgb/hsl/named color anywhere else, and on a token missing its dark value.
 
+## Fonts
+
+Karla and Baloo 2 are self-hosted (`src/fonts.css`, variable fonts from Fontsource, latin + latin-ext), so no third-party host sees visitors' IPs; `npm run lint` fails if a font CDN appears. For another language, copy its subset from `node_modules/@fontsource-variable/<font>/wght.css`.
+
 ## UI primitives
 
 New sections compose these instead of restating layout and type CSS (extend by composition, never by editing a primitive for one caller):
