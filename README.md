@@ -63,6 +63,21 @@ New sections compose these instead of restating layout and type CSS (extend by c
 
 Spacing and radius come from the documented scale (`--space-*`, `--radius-*`); combine tokens with `calc()` instead of adding loose pixel values.
 
+## Themes and contrast
+
+Light is the default; dark is opt-in and applied before first paint. Switching themes moves nothing (measured: 0 of 76 elements shift). `src/index.contrast.test.ts` fails if a token change drops a used pair below its minimum in either theme:
+
+| Pair | Light | Dark |
+|---|---|---|
+| text-primary on bg | 15.1 | 15.6 |
+| text-body on bg / surface | 9.3 / 10.1 | 5.8 / 5.4 |
+| primary-green on bg | 4.8 | 5.9 |
+| on-primary on primary-green (buttons) | 5.2 | 6.3 |
+| nav-active-fg on nav-active-bg | 4.7 | 7.7 |
+| secondary-blue on bg | 7.0 | 6.7 |
+
+`--text-secondary` is 3.5:1 on white in light mode, so it is only for large text and decoration, never small copy (use `--text-body`). Text on the primary green uses `--on-primary` (dark ink in dark mode, as the brand docs do for the tool FAB).
+
 ## Copy and languages
 
 All user-facing text lives in `src/i18n/dictionaries/<locale>/`, one file per section (`hero.ts`, `header.ts`, ...). Both locales implement the same `Dictionary` type, so a string added to one language and not the other fails type-check. Use `useFormat()` (or `src/i18n/format.ts`) for numbers, dates, lists and plurals instead of building them by hand.

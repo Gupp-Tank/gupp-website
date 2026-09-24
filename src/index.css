@@ -18,6 +18,9 @@
   --text-primary: #132322;
   --text-secondary: #7a8d84;
   --on-solid: #ffffff;
+  /* Text/icons on the primary action green. Dark mode flips to the dark ink the
+     brand docs use on green (tool FAB), because white on #17a883 is only 3:1. */
+  --on-primary: #ffffff;
   /* Reading text. Light mode reuses the documented deep blues (colors: parameter states)
      because the green-gray secondary drops below AA contrast on the pale blue background. */
   --text-body: #0d4859;
@@ -79,6 +82,14 @@
   color-scheme: light;
 }
 
+/* Narrow screens put the caustics behind more of the headline, so light mode
+   eases off to keep the large green text above 3:1. */
+@media (max-width: 600px) {
+  :root {
+    --caustic-strength: 0.2;
+  }
+}
+
 /* Light is the default regardless of OS preference; dark is an explicit user choice (see src/lib/theme.ts). */
 :root[data-theme='dark'] {
   color-scheme: dark;
@@ -99,6 +110,7 @@
   --nav-active-bg: #173832;
   --nav-active-fg: #3fe0c4;
   --device-bezel: #0d1210;
+  --on-primary: #0d1210;
   --scrim: rgba(0, 0, 0, 0.6);
   --caustic-color: #4fa8db;
   --caustic-strength: 0.24;

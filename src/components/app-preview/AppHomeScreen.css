@@ -312,7 +312,7 @@
   height: 44px;
   border-radius: 50%;
   background: var(--primary-green);
-  color: var(--on-solid);
+  color: var(--on-primary);
   box-shadow: 0 10px 20px -8px var(--glow-green);
 }
 

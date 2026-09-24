@@ -46,7 +46,7 @@
   font-family: var(--font-title);
   font-weight: 700;
   font-size: 15px;
-  color: var(--text-secondary);
+  color: var(--text-body);
   font-variant-numeric: tabular-nums;
 }
 
