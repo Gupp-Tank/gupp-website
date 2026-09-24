@@ -50,7 +50,7 @@ for (const locale of LOCALES) {
 }
 
 // Unknown paths: the client renders the localized 404 (inside the layout for /es/whatever).
-writeFileSync(join(dist, '404.html'), template.replace('</head>', '    <meta name="robots" content="noindex" />\n  </head>'))
+writeFileSync(join(dist, '404.html'), template.replace('</head>', '    <meta name="robots" content="noindex" data-seo />\n  </head>'))
 writeFileSync(join(dist, 'sitemap.xml'), buildSitemap(['']))
 writeFileSync(join(dist, 'robots.txt'), buildRobots())
 console.log('wrote 404.html, sitemap.xml, robots.txt')

@@ -75,9 +75,20 @@ No file over 500 lines (also enforced by lint). Colors come from tokens in `src/
 
 ## Accessibility and end-to-end tests
 
-`npx playwright test` builds and serves the production build and runs `e2e/`: **axe (WCAG 2.1 A + AA) on every route in both languages and themes**, with the mobile menu open, plus structure checks (one banner/main/contentinfo, labelled navs, one `h1`, no skipped heading levels), a skip link that moves focus into `main`, a visible focus outline on every keyboard stop in both themes, and no infinite animations under reduced motion. Desktop and mobile (Pixel 7) projects. The `E2E and accessibility` workflow runs it on PRs that touch shipped code.
+`npx playwright test` builds the site and serves `dist/` with `scripts/serve-dist.mjs`, a small server that copies Vercel's behavior (prerendered `/es` and `/en`, `/es/` redirecting to `/es`, a real 404 for unknown paths, brotli/gzip, and the headers from `vercel.json`), so the tests exercise what production serves. Lighthouse CI uses the same server. Desktop and mobile (Pixel 7) projects. The `E2E and accessibility` workflow runs it on PRs that touch shipped code.
 
-The phone mockup in the hero is an illustration (an image with a text alternative), so its inner text is excluded from the color-contrast rule only; every other rule still scans it. What automation cannot do is a screen-reader pass: check VoiceOver/NVDA by hand before a launch.
+| Spec | Covers |
+|---|---|
+| `a11y.spec.ts` | axe (WCAG 2.1 A + AA) on every route, both languages and themes, and with the mobile menu open |
+| `a11y-structure.spec.ts` | landmarks, one `h1` and no skipped levels, skip link, visible focus on every keyboard stop in both themes, no infinite animations under reduced motion |
+| `language.spec.ts` | detection at `/` (browser language, saved choice, unsupported language), the URL winning and being remembered, switching keeping `?query#hash` with back/forward, head updated on switch, localized 404 |
+| `theme.spec.ts` | light default even with an OS in dark mode, toggle and persistence, dark applied before React runs, logo per theme, nothing moves when switching |
+| `navigation.spec.ts` | header link scrolls and highlights, footer links land on their card, logo, 404 pages, mobile menu (focus trap, Escape, link, controls stay reachable) |
+| `seo.spec.ts` | content without JavaScript, hreflang/Open Graph/JSON-LD, share image reachable, sitemap, robots, security headers, hydration with no console errors and no CSP violations |
+
+Still to add when the features exist: the early-access form (success and each error state against a mocked API), the terms/privacy consent, and the cookie banner gating.
+
+The phone mockup in the hero is an illustration (an image with a text alternative), so its inner text is excluded from the color-contrast rule only. What automation cannot do is a screen-reader pass: check VoiceOver/NVDA by hand before a launch.
 
 ## Performance budget
 

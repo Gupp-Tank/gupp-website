@@ -46,7 +46,7 @@ const sitemap = read('sitemap.xml')
 for (const url of [`${ORIGIN}/es`, `${ORIGIN}/en`]) check(sitemap.includes(`<loc>${url}</loc>`), `sitemap.xml: missing ${url}`)
 const robots = read('robots.txt')
 check(/Allow: \//.test(robots) && robots.includes(`Sitemap: ${ORIGIN}/sitemap.xml`), 'robots.txt: must allow crawling and list the sitemap')
-check(read('404.html').includes('noindex'), '404.html: must be noindex')
+check(/name="robots" content="noindex" data-seo/.test(read('404.html')), '404.html: must carry a data-seo noindex robots tag (so useSeo replaces it, not duplicates it)')
 check(!read('index.html').includes('data-seo'), 'index.html (the / redirect shell) must not carry page SEO tags')
 
 if (problems.length) {
