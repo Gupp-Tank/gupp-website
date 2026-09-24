@@ -49,6 +49,15 @@ Network: only `src/services/http` calls `fetch` (lint enforces it). Feature serv
 
 No file over 500 lines (also enforced by lint). Colors come from tokens in `src/index.css`, never from literals: `npm run lint` fails on a hex/rgb/hsl/named color anywhere else, and on a token missing its dark value.
 
+## Performance budget
+
+`npm run check:budget` (runs in CI after the build) fails if the production build exceeds: entry JS 120 kB gzip, all JS 135 kB, CSS 12 kB, any font subset 40 kB (120 kB total), any image 60 kB. Today: 92 / 95 / 6 / 105 (fonts) / 32 kB. Raise a number only deliberately, in its own PR.
+
+`lighthouserc.json` holds the Lighthouse budgets (mobile preset): performance >= 0.9, LCP <= 3 s, CLS <= 0.1, TBT <= 200 ms (the lab proxy for INP). Measured on the production build: mobile **95** (LCP 2.6 s, CLS 0, TBT 90 ms), desktop **100** (LCP 0.6 s). The LCP budget is loose on purpose: the page is client-rendered, so mobile LCP drops when the SEO issue adds prerendering.
+
+- **Images** are shipped at their real display size (about 4x): originals live in `gupp-docs/logo`. Don't drop a full-size source into `public/`.
+- **The WebGL background** starts when the browser is idle, and is skipped on data-saver / `prefers-reduced-data`, on devices reporting <= 2 GB or <= 2 cores, and on software renderers (no GPU); it also pauses off-screen and hides behind reduced motion. To see it on a software renderer while developing: `localStorage.setItem('gupp-caustics', 'force')`.
+
 ## Security headers
 
 `vercel.json` sets a strict Content-Security-Policy and the baseline headers (see `SECURITY.md`); `src/security.test.ts` checks them. The only inline script (theme/language pre-paint in `index.html`) is allowed by SHA-256 hash: **if you edit it, update the hash in `vercel.json`** (the test tells you the new one). Anything else that loads from another origin needs a deliberate CSP change, e.g. the early-access form must add the API origin to `connect-src`.

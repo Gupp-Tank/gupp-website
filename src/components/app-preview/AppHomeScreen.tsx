@@ -28,7 +28,7 @@ export function AppHomeScreen({
     <div className="app-home">
       <div className="app-home__header">
         <span className="app-home__brand">
-          <img src="/branding/icon.png" alt="" width={20} height={20} />
+          <img src="/branding/icon.png" alt="" width={20} height={20} decoding="async" />
           Gupp
         </span>
         <span className="app-home__score">

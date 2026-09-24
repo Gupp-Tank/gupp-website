@@ -10,6 +10,7 @@ function fakeGl(overrides: Partial<Record<string, unknown>> = {}) {
       return ret
     })
   const gl = {
+    getExtension: () => null, getParameter: () => '',
     VERTEX_SHADER: 1, FRAGMENT_SHADER: 2, COMPILE_STATUS: 3, LINK_STATUS: 4, ARRAY_BUFFER: 5, STATIC_DRAW: 6, FLOAT: 7, TRIANGLES: 8,
     createShader: rec('createShader', {}), shaderSource: rec('shaderSource'), compileShader: rec('compileShader'),
     getShaderParameter: rec('getShaderParameter', true), deleteShader: rec('deleteShader'),
@@ -34,6 +35,14 @@ describe('createCausticsRenderer', () => {
 
   it('returns null when WebGL is unavailable, so the page just has no effect', () => {
     expect(createCausticsRenderer(canvasWith(null))).toBeNull()
+  })
+
+  it('returns null on a software renderer (no GPU: not worth the CPU)', () => {
+    const { gl } = fakeGl({
+      getExtension: () => ({ UNMASKED_RENDERER_WEBGL: 1 }),
+      getParameter: () => 'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device), SwiftShader driver)',
+    })
+    expect(createCausticsRenderer(canvasWith(gl))).toBeNull()
   })
 
   it('returns null when a shader fails to compile', () => {
