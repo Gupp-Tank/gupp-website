@@ -4,7 +4,7 @@
       "startServerCommand": "npm run preview -- --port 4173 --strictPort",
       "startServerReadyPattern": "Local",
       "url": [
-        "http://localhost:4173/es"
+        "http://localhost:4173/es/"
       ],
       "numberOfRuns": 3,
       "settings": {
