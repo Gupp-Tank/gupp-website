@@ -33,7 +33,17 @@ export function SiteLayout() {
       <main inert={menu.open}>
         <Outlet />
       </main>
-      <SiteFooter copy={t.footer} navLinks={t.header.links} highlights={t.hero.facts} homeLabel={t.header.homeLabel} localePath={localePath} inert={menu.open} />
+      <SiteFooter
+        copy={t.footer}
+        modules={t.modules.items}
+        highlights={t.hero.facts}
+        preferencesCopy={t.header}
+        locale={locale}
+        onLocaleChange={switchLocale}
+        homeLabel={t.header.homeLabel}
+        localePath={localePath}
+        inert={menu.open}
+      />
     </>
   )
 }

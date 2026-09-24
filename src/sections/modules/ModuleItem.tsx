@@ -9,7 +9,7 @@ interface ModuleItemProps {
 
 export function ModuleItem({ module }: ModuleItemProps) {
   return (
-    <li className="module-item">
+    <li id={`module-${module.slug}`} className="module-item">
       <div className="module-item__top">
         <span className="module-item__icon">
           <Icon name={module.icon} size={22} />

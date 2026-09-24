@@ -1,17 +1,21 @@
 import { Link } from 'react-router'
-import { useScrollToTop } from '../../hooks/useScrollToTop'
 import { cx } from '../../lib/classNames'
-import type { FooterCopy, NavLink } from '../../types/content'
-import { Icon } from '../ui/Icon'
-import { Heading } from '../ui/Heading'
+import type { Locale } from '../../i18n/locales'
+import type { FooterCopy, HeaderCopy, ProductModule } from '../../types/content'
+import { PreferenceControls } from '../ui/PreferenceControls'
 import { Container } from './Container'
 import './SiteFooter.css'
 
 interface SiteFooterProps {
   copy: FooterCopy
-  navLinks: NavLink[]
+  /** Each module becomes a link to its own card. */
+  modules: ProductModule[]
   /** Short key facts about the product, reused from the hero. */
   highlights: string[]
+  /** Copy of the language/theme controls (same as the header's). */
+  preferencesCopy: HeaderCopy
+  locale: Locale
+  onLocaleChange: (locale: Locale) => void
   /** Accessible name of the logo link (same as the header's). */
   homeLabel: string
   /** Resolves a language-less path to the active language: '/privacy' -> '/es/privacy'. */
@@ -20,9 +24,19 @@ interface SiteFooterProps {
   className?: string
 }
 
-export function SiteFooter({ copy, navLinks, highlights, homeLabel, localePath, inert, className }: SiteFooterProps) {
+export function SiteFooter({
+  copy,
+  modules,
+  highlights,
+  preferencesCopy,
+  locale,
+  onLocaleChange,
+  homeLabel,
+  localePath,
+  inert,
+  className,
+}: SiteFooterProps) {
   const year = new Date().getFullYear()
-  const scrollToTop = useScrollToTop()
 
   return (
     <footer className={cx('site-footer', className)} inert={inert}>
@@ -32,9 +46,7 @@ export function SiteFooter({ copy, navLinks, highlights, homeLabel, localePath, 
           <Link to={localePath()} aria-label={homeLabel} className="site-footer__mark">
             <img src="/branding/icon.png" alt="" width={56} height={56} />
           </Link>
-          <Heading level={2} size="section" className="site-footer__tagline">
-            {copy.tagline}
-          </Heading>
+          <p className="site-footer__tagline">{copy.tagline}</p>
           <ul className="site-footer__highlights">
             {highlights.map((item) => (
               <li key={item}>{item}</li>
@@ -42,28 +54,27 @@ export function SiteFooter({ copy, navLinks, highlights, homeLabel, localePath, 
           </ul>
         </div>
 
-        <nav className="site-footer__nav" aria-label={copy.navLabel}>
-          <p className="site-footer__heading">{copy.exploreLabel}</p>
-          <ul>
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a href={link.href}>{link.label}</a>
-              </li>
-            ))}
-          </ul>
-          <button type="button" className="site-footer__top" onClick={scrollToTop}>
-            {copy.backToTopLabel}
-            <Icon name="arrowUp" size={16} strokeWidth={2.4} />
-          </button>
-        </nav>
+        <div className="site-footer__columns">
+          <nav className="site-footer__column" aria-label={copy.productLabel}>
+            <p className="site-footer__heading">{copy.productLabel}</p>
+            <ul>
+              {modules.map((module) => (
+                <li key={module.slug}>
+                  <a href={`#module-${module.slug}`}>{module.title}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <div className="site-footer__bottom">
-          <p className="site-footer__copyright">
-            © {year} {copy.copyright}
-          </p>
+          <div className="site-footer__column">
+            <p className="site-footer__heading">{preferencesCopy.preferencesLabel}</p>
+            <PreferenceControls copy={preferencesCopy} locale={locale} onLocaleChange={onLocaleChange} />
+          </div>
+
           {copy.legalLinks.length > 0 && (
-            <nav aria-label={copy.legalLabel}>
-              <ul className="site-footer__legal">
+            <nav className="site-footer__column" aria-label={copy.legalLabel}>
+              <p className="site-footer__heading">{copy.legalLabel}</p>
+              <ul>
                 {copy.legalLinks.map((link) => (
                   <li key={link.path}>
                     <Link to={localePath(link.path)}>{link.label}</Link>
@@ -72,6 +83,13 @@ export function SiteFooter({ copy, navLinks, highlights, homeLabel, localePath, 
               </ul>
             </nav>
           )}
+        </div>
+
+        <div className="site-footer__bottom">
+          <p>
+            © {year} {copy.copyright}
+          </p>
+          <p>{copy.madeWith}</p>
         </div>
       </Container>
     </footer>

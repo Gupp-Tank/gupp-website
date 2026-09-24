@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter, useLocation } from 'react-router'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { dictionaries } from '../i18n/dictionaries'
@@ -18,6 +18,7 @@ const renderAt = (path: string) =>
   )
 
 const here = () => screen.getByTestId('location').textContent
+const header = () => within(screen.getByRole('banner'))
 const h1 = () => screen.getByRole('heading', { level: 1 }).textContent
 
 describe('AppRoutes', () => {
@@ -82,7 +83,7 @@ describe('AppRoutes', () => {
   describe('language switch', () => {
     it('changes the language in the URL and keeps the rest of it', () => {
       renderAt('/es/nope?ref=1#top')
-      fireEvent.click(screen.getByRole('button', { name: 'English' }))
+      fireEvent.click(header().getByRole('button', { name: 'English' }))
       expect(here()).toBe('/en/nope?ref=1#top')
       expect(document.documentElement.lang).toBe('en')
       expect(screen.getByRole('heading', { name: dictionaries.en.notFound.title })).toBeInTheDocument()
@@ -90,15 +91,15 @@ describe('AppRoutes', () => {
 
     it('goes from /es to /en on the home page', () => {
       renderAt('/es')
-      fireEvent.click(screen.getByRole('button', { name: 'English' }))
+      fireEvent.click(header().getByRole('button', { name: 'English' }))
       expect(here()).toBe('/en')
       expect(h1()).toContain('Fishkeeping')
     })
 
     it('marks the active language as pressed', () => {
       renderAt('/en')
-      expect(screen.getByRole('button', { name: 'English' })).toHaveAttribute('aria-pressed', 'true')
-      expect(screen.getByRole('button', { name: 'Español' })).toHaveAttribute('aria-pressed', 'false')
+      expect(header().getByRole('button', { name: 'English' })).toHaveAttribute('aria-pressed', 'true')
+      expect(header().getByRole('button', { name: 'Español' })).toHaveAttribute('aria-pressed', 'false')
     })
   })
 
