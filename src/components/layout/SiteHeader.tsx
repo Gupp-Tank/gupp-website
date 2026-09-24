@@ -1,9 +1,15 @@
+import { useRef } from 'react'
 import { Link } from 'react-router'
+import { useFocusTrap } from '../../hooks/useFocusTrap'
+import type { MobileMenu } from '../../hooks/useMobileMenu'
 import { useScrolled } from '../../hooks/useScrolled'
+import { cx } from '../../lib/classNames'
 import type { Locale } from '../../i18n/locales'
 import type { HeaderCopy } from '../../types/content'
 import { Logo } from '../ui/Logo'
 import { PreferenceControls } from '../ui/PreferenceControls'
+import { MenuButton } from './MenuButton'
+import { SiteNav } from './SiteNav'
 import './SiteHeader.css'
 
 interface SiteHeaderProps {
@@ -11,35 +17,48 @@ interface SiteHeaderProps {
   homeHref: string
   locale: Locale
   onLocaleChange: (locale: Locale) => void
+  activeSection: string | null
+  menu: MobileMenu
 }
 
-export function SiteHeader({ copy, homeHref, locale, onLocaleChange }: SiteHeaderProps) {
+export function SiteHeader({ copy, homeHref, locale, onLocaleChange, activeSection, menu }: SiteHeaderProps) {
   const scrolled = useScrolled()
+  const headerRef = useRef<HTMLElement>(null)
+  useFocusTrap(headerRef, menu.open)
 
   return (
-    <header className={['site-header', scrolled && 'is-scrolled'].filter(Boolean).join(' ')}>
+    <header ref={headerRef} className={cx('site-header', scrolled && 'is-scrolled', menu.open && 'is-menu-open')}>
       <div className="site-header__inner">
-        <Link to={homeHref} className="site-header__brand" aria-label={copy.homeLabel}>
+        <Link to={homeHref} className="site-header__brand" aria-label={copy.homeLabel} onClick={() => menu.close()}>
           <Logo height={44} />
         </Link>
 
-        <nav className="site-header__nav" aria-label={copy.navLabel}>
-          {copy.links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="site-header__link"
-              {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        <SiteNav className="site-nav--bar" links={copy.links} label={copy.navLabel} activeId={activeSection} />
 
         <div className="site-header__actions">
           <PreferenceControls copy={copy} locale={locale} onLocaleChange={onLocaleChange} />
+          <MenuButton
+            ref={menu.buttonRef}
+            open={menu.open}
+            controls={menu.panelId}
+            openLabel={copy.menuOpen}
+            closeLabel={copy.menuClose}
+            onClick={menu.toggle}
+          />
         </div>
       </div>
+
+      {menu.open && <div className="site-header__scrim" aria-hidden onClick={() => menu.close()} />}
+      <SiteNav
+        ref={menu.panelRef}
+        id={menu.panelId}
+        hidden={!menu.open}
+        className="site-nav--panel"
+        links={copy.links}
+        label={copy.navLabel}
+        activeId={activeSection}
+        onNavigate={() => menu.close()}
+      />
     </header>
   )
 }

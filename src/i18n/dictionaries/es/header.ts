@@ -6,6 +6,8 @@ export const header: Dictionary['header'] = {
     { label: 'Cómo funciona', href: links.modules },
   ],
   homeLabel: 'Gupp Tank, inicio',
+  menuOpen: 'Abrir menú',
+  menuClose: 'Cerrar menú',
   navLabel: 'Principal',
   preferencesLabel: 'Preferencias',
   languageLabel: 'Idioma',

@@ -30,6 +30,7 @@
   --nav-active-bg: #eef6f2;
   --nav-active-fg: #0e7c5a;
   --device-bezel: #132322;
+  --scrim: rgba(19, 35, 34, 0.4);
   --caustic-color: #0d5c73;
   --caustic-strength: 0.34;
 
@@ -98,6 +99,7 @@
   --nav-active-bg: #173832;
   --nav-active-fg: #3fe0c4;
   --device-bezel: #0d1210;
+  --scrim: rgba(0, 0, 0, 0.6);
   --caustic-color: #4fa8db;
   --caustic-strength: 0.24;
 

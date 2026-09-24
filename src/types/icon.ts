@@ -15,6 +15,8 @@ export type IconName =
   | 'flask'
   | 'home'
   | 'plus'
+  | 'menu'
+  | 'close'
   | 'moon'
   | 'search'
   | 'sparkle'
