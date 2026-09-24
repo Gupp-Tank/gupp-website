@@ -25,11 +25,13 @@
   max-width: var(--page-max);
   height: var(--header-height);
   margin: 0 auto;
-  padding: 0 var(--space-xl);
+  padding-inline: max(var(--space-xl), env(safe-area-inset-left)) max(var(--space-xl), env(safe-area-inset-right));
 }
 
 .site-header__brand {
   display: flex;
+  align-items: center;
+  min-height: 48px;
   margin-left: -12px;
 }
 
@@ -96,7 +98,11 @@
   outline-offset: 2px;
 }
 
-.site-nav--panel {
+.site-panel {
+  display: none;
+}
+
+.site-panel__prefs {
   display: none;
 }
 
@@ -124,7 +130,7 @@
     animation: menu-fade 200ms ease-out both;
   }
 
-  .site-nav--panel {
+  .site-panel {
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
@@ -139,11 +145,17 @@
     animation: menu-drop 200ms ease-out both;
   }
 
-  .site-nav--panel[hidden] {
+  .site-panel[hidden] {
     display: none;
   }
 
-  .site-nav--panel .site-nav__link {
+  .site-panel .site-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .site-panel .site-nav__link {
     display: flex;
     align-items: center;
     min-height: 48px;
@@ -155,7 +167,21 @@
 
 @media (max-width: 560px) {
   .site-header__inner {
-    padding: 0 var(--space-md);
+    padding-inline: max(var(--space-md), env(safe-area-inset-left)) max(var(--space-md), env(safe-area-inset-right));
+  }
+}
+
+/* At 320px the logo, the controls and the menu button cannot share one row at
+   48px targets, so the controls move into the menu. */
+@media (max-width: 340px) {
+  .site-header__prefs {
+    display: none;
+  }
+
+  .site-panel__prefs {
+    display: inline-flex;
+    align-self: flex-start;
+    margin-top: var(--space-sm);
   }
 }
 

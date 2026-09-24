@@ -36,7 +36,7 @@ export function SiteHeader({ copy, homeHref, locale, onLocaleChange, activeSecti
         <SiteNav className="site-nav--bar" links={copy.links} label={copy.navLabel} activeId={activeSection} />
 
         <div className="site-header__actions">
-          <PreferenceControls copy={copy} locale={locale} onLocaleChange={onLocaleChange} />
+          <PreferenceControls className="site-header__prefs" copy={copy} locale={locale} onLocaleChange={onLocaleChange} />
           <MenuButton
             ref={menu.buttonRef}
             open={menu.open}
@@ -49,16 +49,11 @@ export function SiteHeader({ copy, homeHref, locale, onLocaleChange, activeSecti
       </div>
 
       {menu.open && <div className="site-header__scrim" aria-hidden onClick={() => menu.close()} />}
-      <SiteNav
-        ref={menu.panelRef}
-        id={menu.panelId}
-        hidden={!menu.open}
-        className="site-nav--panel"
-        links={copy.links}
-        label={copy.navLabel}
-        activeId={activeSection}
-        onNavigate={() => menu.close()}
-      />
+      <div ref={menu.panelRef} id={menu.panelId} hidden={!menu.open} className="site-panel">
+        <SiteNav links={copy.links} label={copy.navLabel} activeId={activeSection} onNavigate={() => menu.close()} />
+        {/* Screens too narrow for the header to hold them (<= 340px) get the controls here instead. */}
+        <PreferenceControls className="site-panel__prefs" copy={copy} locale={locale} onLocaleChange={onLocaleChange} />
+      </div>
     </header>
   )
 }

@@ -36,6 +36,8 @@ Routing: the language is the first URL segment (`/es`, `/en`); `/` redirects to 
 
 Header: below 860px the links move into a disclosure menu (`useMobileMenu`: Escape closes and restores focus, `main` becomes `inert`, scroll is locked, `useFocusTrap` keeps Tab inside the header). `useActiveSection` highlights the in-page section in view with `aria-current`, changing color only so nothing shifts.
 
+Responsive: audited from 320px to 1280px in both themes and languages (no overflow, no overlap, headline never orphaned, 48px targets on touch widths, contrast over the caustics). At 320px the language/theme controls move into the menu and the hero mockup scales down. Safe-area insets are respected (`viewport-fit=cover`).
+
 Footer: `SiteFooter` is part of `SiteLayout`. Legal links are data (`footer.legalLinks` in the dictionaries) and the group is not rendered while the list is empty, so there are no dead links; add an entry (path without the language prefix) when its page exists.
 
 Errors: services throw only `AppError` (`src/errors/`); the UI shows copy from the dictionary keyed by `ErrorCode`, never the raw message. Adding a code means adding its copy in both languages (a missing entry is a type error).

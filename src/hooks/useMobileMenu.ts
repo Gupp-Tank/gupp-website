@@ -9,7 +9,7 @@ const DESKTOP = '(min-width: 861px)'
 export function useMobileMenu() {
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const panelRef = useRef<HTMLElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
   const panelId = useId()
 
   const close = useCallback((restoreFocus = false) => {
