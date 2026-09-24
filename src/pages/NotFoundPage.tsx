@@ -1,13 +1,13 @@
 import { StatusScreen } from '../components/feedback/StatusScreen'
 import { ButtonLink } from '../components/ui/Button'
-import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { useI18n } from '../hooks/useI18n'
+import { useSeo } from '../hooks/useSeo'
 import { useLocalePath } from '../hooks/useLocalePath'
 
 export function NotFoundPage() {
-  const { t } = useI18n()
+  const { locale, t } = useI18n()
   const localePath = useLocalePath()
-  useDocumentMeta(t.notFound.title, t.notFound.message)
+  useSeo({ locale, path: '/404', title: t.notFound.title, description: t.notFound.message, noindex: true })
 
   return (
     <StatusScreen title={t.notFound.title} message={t.notFound.message}>

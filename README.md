@@ -62,6 +62,17 @@ No file over 500 lines (also enforced by lint). Colors come from tokens in `src/
 - End-to-end tests will join as their own job with the Playwright suite (issue #33).
 - Installs are cached by `actions/setup-node`; the CI job takes about 30 s.
 
+## SEO and prerendering
+
+`npm run build` = type-check, `vite build` (client), `vite build --ssr` (server bundle) and `scripts/prerender.ts`, which renders `/es` and `/en` to static HTML with `react-dom/server` (plain Node, **no browser**, so it runs on Vercel's build machine). Output in `dist/`: `es/index.html`, `en/index.html` (real content, `lang`, title, description, canonical, `hreflang` es/en/x-default, Open Graph, Twitter card, JSON-LD), `404.html` (`noindex`; Vercel serves it with a real 404 for unknown paths), `sitemap.xml` and `robots.txt`. The browser **hydrates** the markup (`hydrateRoot`), so nothing is redrawn; `/` and unknown paths still render on the client.
+
+- `src/lib/seo.ts` builds every tag (and the sitemap) from one function used by both the prerender and `useSeo`, which keeps them in step on navigation and language switches. `src/content/site.ts` holds the canonical origin (`https://gupp.app`) and share images.
+- To add a page: give it a `useSeo` call and add its path to `buildSitemap([...])` and to the loop in `scripts/prerender.ts`.
+- Structured data is limited to what is true today (Organization, WebSite). Add MobileApplication with the store listings, and FAQPage with the FAQ.
+- `npm run check:seo` (CI, after the build) fails on a wrong canonical/hreflang, missing prerender, missing or broken share image, invalid JSON-LD, or a sitemap/robots/404 problem.
+- Share images (`public/og/og-es.jpg`, `og-en.jpg`, 1200x630) come from `scripts/generate-og.mjs`; rerun it when the headline copy changes (it needs Playwright).
+- Server render rules: the stores read `<html lang>`/`data-theme`, so the prerender gives them a minimal fake `document`; hooks touch `window` only in effects; anything the first render shows must not depend on the browser (that is why the logo variants are switched by CSS, not by a hook).
+
 ## Performance budget
 
 `npm run check:budget` (runs in CI after the build) fails if the production build exceeds: entry JS 120 kB gzip, all JS 135 kB, CSS 12 kB, any font subset 40 kB (120 kB total), any image 60 kB. Today: 92 / 95 / 6 / 105 (fonts) / 32 kB. Raise a number only deliberately, in its own PR.

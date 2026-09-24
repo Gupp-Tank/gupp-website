@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for errors/AppError.ts</title>
+    <title>Code coverage report for hooks/useSeo.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">errors</a> AppError.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">hooks</a> useSeo.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>20/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -87,53 +87,77 @@
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">547x</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-yes">621x</span>
+<span class="cline-any cline-yes">1356x</span>
+<span class="cline-any cline-yes">621x</span>
+<span class="cline-any cline-yes">621x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">38x</span>
+<span class="cline-any cline-yes">50x</span>
+<span class="cline-any cline-yes">50x</span>
+<span class="cline-any cline-yes">50x</span>
+<span class="cline-any cline-yes">50x</span>
+<span class="cline-any cline-yes">50x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ErrorCode, isErrorCode } from './errorCodes'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect } from 'react'
+import { buildSeo, type SeoInput } from '../lib/seo'
 &nbsp;
-// The `{ code, message }` contract. `message` is English and for logs only;
-// what the user reads comes from the dictionary, keyed by `code`, because
-// only the UI knows the active language.
-export class AppError extends Error {
-  readonly code: ErrorCode
+const MARK = 'data-seo'
 &nbsp;
-  constructor(code: ErrorCode, message?: string, options?: { cause?: unknown }) {
-    super(message ?? code, options)
-    this.name = 'AppError'
-    this.code = code
-  }
-}
+// Keeps &lt;title&gt;, the description and the SEO tags in step with the current page.
+// The prerendered HTML already carries the same tags (from the same buildSeo); this
+// replaces them when the visitor navigates, and after a language switch.
+export function useSeo(input: SeoInput) {
+  const { locale, path, title, description, noindex } = input
 &nbsp;
-// Anything thrown anywhere becomes an AppError, so callers handle one shape.
-export function toAppError(error: unknown): AppError {
-  if (error instanceof AppError) return error
-  if (error instanceof Error) return new AppError(ErrorCode.UNKNOWN, error.message, { cause: error })
-  if (isErrorCode((error as { code?: unknown } | null)?.code)) {
-    return new AppError((error as { code: ErrorCode }).code, undefined, { cause: error })
-  }
-  return new AppError(ErrorCode.UNKNOWN, undefined, { cause: error })
+  useEffect(() =&gt; {
+    const seo = buildSeo({ locale, path, title, description, noindex })
+    document.title = seo.title
+    document.querySelector('meta[name="description"]')?.setAttribute('content', seo.description)
+&nbsp;
+    document.head.querySelectorAll(`[${MARK}]`).forEach((node) =&gt; node.remove())
+    for (const { tag, attrs } of seo.tags) {
+      const el = document.createElement(tag)
+      for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v)
+      el.setAttribute(MARK, '')
+      document.head.append(el)
+    }
+    for (const data of seo.jsonLd) {
+      const el = document.createElement('script')
+      el.type = 'application/ld+json'
+      el.setAttribute(MARK, '')
+      el.textContent = JSON.stringify(data)
+      document.head.append(el)
+    }
+  }, [locale, path, title, description, noindex])
 }
 &nbsp;</pre></td></tr></table></pre>
 

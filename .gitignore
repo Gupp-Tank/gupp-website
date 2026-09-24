@@ -27,3 +27,6 @@ dist-ssr
 
 # Lighthouse CI reports
 .lighthouseci
+
+# Server bundle used only by the prerender step
+dist-ssr
