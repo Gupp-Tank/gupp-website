@@ -23,6 +23,14 @@ for (const file of walk('src')) {
   }
 }
 
+// Third-party font hosts see every visitor's IP before any consent (fonts are self-hosted, src/fonts.css).
+for (const file of [...walk('src'), 'index.html']) {
+  if (!/\.(ts|tsx|css|html)$/.test(file)) continue
+  if (/fonts\.(googleapis|gstatic)\.com|use\.typekit\.net|fonts\.bunny\.net/.test(readFileSync(file, 'utf8'))) {
+    problems.push(`${file}: third-party font host; self-host the font in src/fonts.css instead`)
+  }
+}
+
 if (problems.length) {
   console.error(problems.join('\n'))
   process.exit(1)
