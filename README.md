@@ -48,6 +48,10 @@ Network: only `src/services/http` calls `fetch` (lint enforces it). Feature serv
 
 No file over 500 lines (also enforced by lint). Colors come from tokens in `src/index.css`, never from literals: `npm run lint` fails on a hex/rgb/hsl/named color anywhere else, and on a token missing its dark value.
 
+## Security headers
+
+`vercel.json` sets a strict Content-Security-Policy and the baseline headers (see `SECURITY.md`); `src/security.test.ts` checks them. The only inline script (theme/language pre-paint in `index.html`) is allowed by SHA-256 hash: **if you edit it, update the hash in `vercel.json`** (the test tells you the new one). Anything else that loads from another origin needs a deliberate CSP change, e.g. the early-access form must add the API origin to `connect-src`.
+
 ## Fonts
 
 Karla and Baloo 2 are self-hosted (`src/fonts.css`, variable fonts from Fontsource, latin + latin-ext), so no third-party host sees visitors' IPs; `npm run lint` fails if a font CDN appears. For another language, copy its subset from `node_modules/@fontsource-variable/<font>/wght.css`.
