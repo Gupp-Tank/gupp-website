@@ -12,7 +12,7 @@ export function CompatibilityCard({ compatibility, className }: CompatibilityCar
   return (
     <Card as="article" elevation="float" className={['insight-card compat-card', className].filter(Boolean).join(' ')}>
       <p className="insight-card__eyebrow compat-card__eyebrow">
-        <Icon name="search" size={12} strokeWidth={2.4} />
+        <Icon name="search" size={12} />
         {compatibility.label}
       </p>
       <div className="compat-card__head">
@@ -22,7 +22,7 @@ export function CompatibilityCard({ compatibility, className }: CompatibilityCar
       <ul className="compat-card__checks">
         {compatibility.checks.map((check) => (
           <li key={check}>
-            <Icon name="check" size={14} strokeWidth={2.4} />
+            <Icon name="check" size={14} />
             {check}
           </li>
         ))}

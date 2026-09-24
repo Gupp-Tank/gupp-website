@@ -14,7 +14,7 @@ export function ReadingTicker({ tankName, parameters }: ReadingTickerProps) {
         <span key={p.id} className={`reading-ticker__item reading-ticker__item--${p.status}`}>
           {p.label} {p.value}
           {p.unit && ` ${p.unit}`}
-          {p.trendLabel && <Icon name="arrowUp" size={13} strokeWidth={2.4} label={p.trendLabel} />}
+          {p.trendLabel && <Icon name="arrowUp" size={13} label={p.trendLabel} />}
         </span>
       ))}
     </p>

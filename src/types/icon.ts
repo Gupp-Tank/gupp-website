@@ -28,7 +28,6 @@ export type IconName =
   | 'user'
   | 'fish'
   | 'leaf'
-  | 'fishBody'
   | 'shell'
   | 'alert'
   | 'list'

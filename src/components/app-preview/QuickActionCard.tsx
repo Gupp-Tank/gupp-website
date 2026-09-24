@@ -9,7 +9,7 @@ export function QuickActionCard({ action }: QuickActionCardProps) {
   return (
     <span className={`quick-card quick-card--${action.tone}`}>
       <span className="quick-card__label">{action.label}</span>
-      <Icon name={action.icon} size={40} strokeWidth={1.6} className="quick-card__icon" />
+      <Icon name={action.icon} size={40} className="quick-card__icon" />
     </span>
   )
 }

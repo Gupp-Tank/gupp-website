@@ -10,7 +10,7 @@ export function AppBottomNav({ items }: AppBottomNavProps) {
     <nav className="app-nav" aria-hidden>
       {items.map((item) => (
         <span key={item.label} className={['app-nav__item', item.active && 'is-active'].filter(Boolean).join(' ')}>
-          <Icon name={item.icon} size={17} strokeWidth={2.2} />
+          <Icon name={item.icon} size={17} />
           {item.label}
         </span>
       ))}

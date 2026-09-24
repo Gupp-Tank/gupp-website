@@ -15,6 +15,7 @@ Public marketing/landing site for Gupp Tank. React + TypeScript + Vite, deployed
 ## Brand and design tokens
 
 - `gupp-docs/design/` (`colors`, `typography`, `icons`, `components`) is the source of truth. Never hardcode a color or font here that isn't documented there — reuse the same tokens defined in `src/index.css` (`--primary-green`, `--secondary-blue`, `--coral`, `--bg`, `--surface`, `--text-primary`, `--text-secondary`).
+- Icons on the website are Phosphor (MIT): duotone for objects, bold for UI glyphs. Add one by editing the map in `scripts/build-icons.mjs` and running it; never hand-edit `src/components/ui/iconData.ts` and never draw ad-hoc SVG icons.
 - Brand assets (logo, favicon) live in `public/branding/`. Don't drop loose image files elsewhere.
 - Website titles and body text use Karla (`--font-title` / `--font-body`); Baloo 2 (`--font-heading`) is only for the wordmark and the app mockup UI. See `gupp-docs/design/typography` ("Website") for why.
 

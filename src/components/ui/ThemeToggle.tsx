@@ -18,7 +18,7 @@ export function ThemeToggle({ toDarkLabel, toLightLabel }: ThemeToggleProps) {
       aria-label={isDark ? toLightLabel : toDarkLabel}
       title={isDark ? toLightLabel : toDarkLabel}
     >
-      <Icon name={isDark ? 'sun' : 'moon'} size={17} strokeWidth={2.2} />
+      <Icon name={isDark ? 'sun' : 'moon'} size={17} />
     </button>
   )
 }

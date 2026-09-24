@@ -31,7 +31,7 @@ export function SpeciesCheckScreen({ view }: { view: SpeciesCheckView }) {
         </Card>
 
         <div className="dv-verdict">
-          <Icon name="check" size={14} strokeWidth={2.6} />
+          <Icon name="check" size={14} />
           {view.verdict}
         </div>
 
@@ -41,7 +41,7 @@ export function SpeciesCheckScreen({ view }: { view: SpeciesCheckView }) {
             {view.residents.map((resident) => (
               <li key={resident.id} className="dv-resident">
                 <span>{resident.name}</span>
-                <Icon name="check" size={13} strokeWidth={2.6} />
+                <Icon name="check" size={13} />
               </li>
             ))}
           </ul>

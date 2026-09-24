@@ -32,7 +32,7 @@ export function AppHomeScreen({
           Gupp
         </span>
         <span className="app-home__score">
-          <Icon name="fish" size={14} strokeWidth={2.2} />
+          <Icon name="fish" size={14} />
           {tank.scoreBadgeLabel}
         </span>
         <span className="app-home__bell">

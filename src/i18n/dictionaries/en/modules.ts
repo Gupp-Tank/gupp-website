@@ -8,7 +8,7 @@ export const modules: Dictionary['modules'] = {
       index: '01',
       title: 'Tank profile',
       description: 'Real net volume, equipment and every inhabitant — the record everything else reads from.',
-      icon: 'tank',
+      icon: 'fish',
       view: 'tank-detail',
     },
     {

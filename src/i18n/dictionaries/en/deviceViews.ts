@@ -18,7 +18,7 @@ export const deviceViews: Dictionary['deviceViews'] = {
     ],
     filters: [
       { id: 'all', label: 'All', count: 5, active: true },
-      { id: 'fish', icon: 'fishBody', count: 3 },
+      { id: 'fish', icon: 'fish', count: 3 },
       { id: 'plant', icon: 'leaf', count: 1 },
       { id: 'invertebrate', icon: 'shell', count: 1 },
     ],
@@ -29,9 +29,9 @@ export const deviceViews: Dictionary['deviceViews'] = {
         label: 'Fish',
         summary: '3 species',
         rows: [
-          { id: 'tetra', name: 'Neon tetra', quantity: '×2', icon: 'fishBody', tone: 'blue' },
-          { id: 'betta', name: 'Betta', quantity: '×1', icon: 'fishBody', tone: 'blue' },
-          { id: 'corydora', name: 'Corydoras', quantity: '×3', icon: 'fishBody', tone: 'blue' },
+          { id: 'tetra', name: 'Neon tetra', quantity: '×2', icon: 'fish', tone: 'blue' },
+          { id: 'betta', name: 'Betta', quantity: '×1', icon: 'fish', tone: 'blue' },
+          { id: 'corydora', name: 'Corydoras', quantity: '×3', icon: 'fish', tone: 'blue' },
         ],
       },
       {
@@ -75,7 +75,7 @@ export const deviceViews: Dictionary['deviceViews'] = {
         trend: [0.02, 0.03, 0.02, 0.05, 0.22, 0.38, 0.5],
         trendLabel: 'NH₃ · last 7 days',
       },
-      { id: 'others', icon: 'fishBody', tone: 'green', title: '4 other fish show no symptoms', detail: 'Still time to contain it' },
+      { id: 'others', icon: 'fish', tone: 'green', title: '4 other fish show no symptoms', detail: 'Still time to contain it' },
     ],
     stepsTitle: 'What to do',
     steps: [
@@ -91,7 +91,7 @@ export const deviceViews: Dictionary['deviceViews'] = {
     subtitle: 'Add to Sala',
     name: 'Neon tetra',
     scientific: 'Paracheirodon innesi',
-    icon: 'fishBody',
+    icon: 'fish',
     stats: [
       { label: 'Adult size', value: '4 cm' },
       { label: 'Temperature', value: '20–26 °C' },
