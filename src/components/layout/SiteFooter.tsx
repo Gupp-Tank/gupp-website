@@ -1,10 +1,10 @@
 import { Link } from 'react-router'
+import { useScrollToTop } from '../../hooks/useScrollToTop'
 import { cx } from '../../lib/classNames'
 import type { FooterCopy, NavLink } from '../../types/content'
-import { Logo } from '../ui/Logo'
-import { Text } from '../ui/Text'
+import { Icon } from '../ui/Icon'
+import { Heading } from '../ui/Heading'
 import { Container } from './Container'
-import { FooterFunFact } from './FooterFunFact'
 import './SiteFooter.css'
 
 interface SiteFooterProps {
@@ -22,17 +22,19 @@ interface SiteFooterProps {
 
 export function SiteFooter({ copy, navLinks, highlights, homeLabel, localePath, inert, className }: SiteFooterProps) {
   const year = new Date().getFullYear()
+  const scrollToTop = useScrollToTop()
 
   return (
     <footer className={cx('site-footer', className)} inert={inert}>
       <Container className="site-footer__inner">
         <div className="site-footer__brand">
-          <Link to={localePath()} aria-label={homeLabel}>
-            <Logo height={40} />
+          {/* The fish mark alone; the name is carried by the link's accessible label and the tagline. */}
+          <Link to={localePath()} aria-label={homeLabel} className="site-footer__mark">
+            <img src="/branding/icon.png" alt="" width={56} height={56} />
           </Link>
-          <Text tone="body" className="site-footer__tagline">
+          <Heading level={2} size="section" className="site-footer__tagline">
             {copy.tagline}
-          </Text>
+          </Heading>
           <ul className="site-footer__highlights">
             {highlights.map((item) => (
               <li key={item}>{item}</li>
@@ -40,22 +42,28 @@ export function SiteFooter({ copy, navLinks, highlights, homeLabel, localePath, 
           </ul>
         </div>
 
-        <FooterFunFact label={copy.funFactLabel} actionLabel={copy.funFactAction} facts={copy.funFacts} />
+        <nav className="site-footer__nav" aria-label={copy.navLabel}>
+          <p className="site-footer__heading">{copy.exploreLabel}</p>
+          <ul>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+          <button type="button" className="site-footer__top" onClick={scrollToTop}>
+            {copy.backToTopLabel}
+            <Icon name="arrowUp" size={16} strokeWidth={2.4} />
+          </button>
+        </nav>
 
-        <div className="site-footer__links">
-          <nav className="site-footer__nav" aria-label={copy.navLabel}>
-            <ul>
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href}>{link.label}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
+        <div className="site-footer__bottom">
+          <p className="site-footer__copyright">
+            © {year} {copy.copyright}
+          </p>
           {copy.legalLinks.length > 0 && (
-            <nav className="site-footer__legal" aria-label={copy.legalLabel}>
-              <ul>
+            <nav aria-label={copy.legalLabel}>
+              <ul className="site-footer__legal">
                 {copy.legalLinks.map((link) => (
                   <li key={link.path}>
                     <Link to={localePath(link.path)}>{link.label}</Link>
@@ -64,10 +72,6 @@ export function SiteFooter({ copy, navLinks, highlights, homeLabel, localePath, 
               </ul>
             </nav>
           )}
-
-          <Text tone="body" className="site-footer__copyright">
-            © {year} {copy.copyright}
-          </Text>
         </div>
       </Container>
     </footer>

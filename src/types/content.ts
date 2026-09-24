@@ -46,11 +46,9 @@ export interface LegalLink {
 
 export interface FooterCopy {
   navLabel: string
-  /** Heading of the fun-fact card, e.g. "Did you know?". */
-  funFactLabel: string
-  funFactAction: string
-  /** Verifiable, evergreen facts; one is shown per day and visitors can page through. */
-  funFacts: string[]
+  /** Heading above the section links. */
+  exploreLabel: string
+  backToTopLabel: string
   legalLabel: string
   tagline: string
   /** Shown after "© {year} ". */
