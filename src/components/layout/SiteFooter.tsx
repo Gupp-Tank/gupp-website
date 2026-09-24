@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { cx } from '../../lib/classNames'
 import type { Locale } from '../../i18n/locales'
 import type { FooterCopy, HeaderCopy, ProductModule } from '../../types/content'
+import { BrandIcon } from '../ui/BrandIcon'
 import { PreferenceControls } from '../ui/PreferenceControls'
 import { Container } from './Container'
 import './SiteFooter.css'
@@ -52,6 +53,17 @@ export function SiteFooter({
               <li key={item}>{item}</li>
             ))}
           </ul>
+          <div className="site-footer__stores">
+            <p>{copy.storesLabel}</p>
+            <ul>
+              <li>
+                <BrandIcon name="apple" />
+              </li>
+              <li>
+                <BrandIcon name="googlePlay" />
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="site-footer__columns">

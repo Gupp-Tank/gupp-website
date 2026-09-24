@@ -48,6 +48,8 @@ export interface FooterCopy {
   navLabel: string
   /** Heading of the product links column. */
   productLabel: string
+  /** Label before the store marks, e.g. "Coming soon on". */
+  storesLabel: string
   /** Closing line of the bottom bar. */
   madeWith: string
   legalLabel: string
