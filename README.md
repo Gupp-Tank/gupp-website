@@ -36,6 +36,8 @@ Errors: services throw only `AppError` (`src/errors/`); the UI shows copy from t
 
 Configuration: variables are declared in `src/config/variables.ts` and read only through `src/config/env.ts`. A missing or malformed variable fails `npm run build` (and the dev server) with a list of problems; there are no defaults. Keep `.env.example` in sync.
 
+Network: only `src/services/http` calls `fetch` (lint enforces it). Feature services use the shared `http` client, pass a `parse` function that validates the response shape, and get `AppError` on every failure (network, timeout, HTTP status, invalid body).
+
 No file over 500 lines (also enforced by lint). Colors come from tokens in `src/index.css`, never from literals: `npm run lint` fails on a hex/rgb/hsl/named color anywhere else, and on a token missing its dark value.
 
 ## Status
