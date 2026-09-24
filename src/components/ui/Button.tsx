@@ -1,4 +1,4 @@
-import type { AnchorHTMLAttributes, ReactNode } from 'react'
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 import type { IconName } from '../../types/icon'
 import { Icon } from './Icon'
 import './Button.css'
@@ -6,12 +6,27 @@ import './Button.css'
 export type ButtonVariant = 'primary' | 'ghost'
 export type ButtonSize = 'md' | 'sm'
 
-interface ButtonLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+interface ButtonStyleProps {
   variant?: ButtonVariant
   size?: ButtonSize
   trailingIcon?: IconName
-  external?: boolean
   children: ReactNode
+}
+
+const buttonClasses = (variant: ButtonVariant, size: ButtonSize, className?: string) =>
+  ['btn', `btn--${variant}`, `btn--${size}`, className].filter(Boolean).join(' ')
+
+function ButtonContent({ trailingIcon, children }: Pick<ButtonStyleProps, 'trailingIcon' | 'children'>) {
+  return (
+    <>
+      <span>{children}</span>
+      {trailingIcon && <Icon name={trailingIcon} size={18} className="btn__icon" />}
+    </>
+  )
+}
+
+interface ButtonLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'>, ButtonStyleProps {
+  external?: boolean
 }
 
 export function ButtonLink({
@@ -23,16 +38,23 @@ export function ButtonLink({
   children,
   ...rest
 }: ButtonLinkProps) {
-  const classes = ['btn', `btn--${variant}`, `btn--${size}`, className].filter(Boolean).join(' ')
-
   return (
     <a
-      className={classes}
+      className={buttonClasses(variant, size, className)}
       {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
       {...rest}
     >
-      <span>{children}</span>
-      {trailingIcon && <Icon name={trailingIcon} size={18} className="btn__icon" />}
+      <ButtonContent trailingIcon={trailingIcon}>{children}</ButtonContent>
     </a>
+  )
+}
+
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'>, ButtonStyleProps {}
+
+export function Button({ variant = 'primary', size = 'md', trailingIcon, className, children, type = 'button', ...rest }: ButtonProps) {
+  return (
+    <button type={type} className={buttonClasses(variant, size, className)} {...rest}>
+      <ButtonContent trailingIcon={trailingIcon}>{children}</ButtonContent>
+    </button>
   )
 }

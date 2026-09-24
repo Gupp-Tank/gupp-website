@@ -6,6 +6,20 @@ export const es: Dictionary = {
     title: 'Gupp Tank — El acuarismo nunca fue tan fácil de cuidar',
     description: 'Agua, peces y dosis, todo en un solo lugar.',
   },
+  errors: {
+    UNKNOWN: 'Algo salió mal. Intenta de nuevo.',
+    NETWORK_ERROR: 'No pudimos conectar con el servidor. Revisa tu conexión e intenta de nuevo.',
+    REQUEST_TIMEOUT: 'La solicitud tardó demasiado. Intenta de nuevo.',
+    INVALID_RESPONSE: 'Recibimos una respuesta inesperada. Intenta más tarde.',
+    SERVER_ERROR: 'Nuestros servidores tuvieron un problema. Intenta más tarde.',
+    RATE_LIMITED: 'Demasiados intentos. Espera un momento e intenta de nuevo.',
+    VALIDATION_FAILED: 'Alguno de los datos no es válido. Revísalos.',
+    RENDER_FAILED: 'No pudimos mostrar esta página.',
+  },
+  errorFallback: {
+    title: 'Tuvimos un problema al cargar la página',
+    actionLabel: 'Recargar página',
+  },
   header: {
     links: [
       { label: 'Cómo funciona', href: links.modules },

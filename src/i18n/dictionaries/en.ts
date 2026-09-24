@@ -6,6 +6,20 @@ export const en: Dictionary = {
     title: 'Gupp Tank — Fishkeeping has never been this easy',
     description: 'Water, fish and dosing, all in one place.',
   },
+  errors: {
+    UNKNOWN: 'Something went wrong. Please try again.',
+    NETWORK_ERROR: "We couldn't reach the server. Check your connection and try again.",
+    REQUEST_TIMEOUT: 'The request took too long. Please try again.',
+    INVALID_RESPONSE: 'We got an unexpected response. Please try again later.',
+    SERVER_ERROR: 'Our servers had a problem. Please try again later.',
+    RATE_LIMITED: 'Too many attempts. Please wait a moment and try again.',
+    VALIDATION_FAILED: 'Some of the information is not valid. Please review it.',
+    RENDER_FAILED: 'This page could not be displayed.',
+  },
+  errorFallback: {
+    title: 'We hit a problem loading the page',
+    actionLabel: 'Reload page',
+  },
   header: {
     links: [
       { label: 'How it works', href: links.modules },
