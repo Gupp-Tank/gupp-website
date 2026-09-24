@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 import { ButtonLink } from '../../components/ui/Button'
+import { Heading } from '../../components/ui/Heading'
+import { Text } from '../../components/ui/Text'
 import type { HeroContent } from '../../types/content'
 
 interface HeroCopyProps {
@@ -14,7 +16,7 @@ export function HeroCopy({ content, eyebrow }: HeroCopyProps) {
     <div className="hero-copy">
       {eyebrow}
 
-      <h1 id="hero-title" className="hero-copy__title">
+      <Heading level={1} size="display" id="hero-title">
         <span className="hero-copy__main">
           {headline.lead}{' '}
           <span className="hero-copy__nowrap">
@@ -33,9 +35,11 @@ export function HeroCopy({ content, eyebrow }: HeroCopyProps) {
             <span className="hero-copy__tail">{headline.tail}</span>
           </>
         )}
-      </h1>
+      </Heading>
 
-      <p className="hero-copy__description">{description}</p>
+      <Text size="lead" className="hero-copy__description">
+        {description}
+      </Text>
 
       <div className="hero-copy__actions">
         {actions.map((action) => (

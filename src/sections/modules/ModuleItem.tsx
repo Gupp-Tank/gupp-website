@@ -1,4 +1,6 @@
+import { Heading } from '../../components/ui/Heading'
 import { Icon } from '../../components/ui/Icon'
+import { Text } from '../../components/ui/Text'
 import type { ProductModule } from '../../types/content'
 
 interface ModuleItemProps {
@@ -14,8 +16,10 @@ export function ModuleItem({ module }: ModuleItemProps) {
         </span>
         <span className="module-item__index">{module.index}</span>
       </div>
-      <h3 className="module-item__title">{module.title}</h3>
-      <p className="module-item__description">{module.description}</p>
+      <Heading level={3} size="card">
+        {module.title}
+      </Heading>
+      <Text className="module-item__description">{module.description}</Text>
     </li>
   )
 }

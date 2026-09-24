@@ -17,10 +17,9 @@
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   align-items: center;
   gap: 48px;
-  max-width: var(--page-max);
   min-height: min(calc(100svh - var(--header-height)), 860px);
-  margin: 0 auto;
-  padding: 40px var(--space-xl) 72px;
+  /* 40px = xl + md, 72px = 3 * xl: the spacing scale, no loose values. */
+  padding-block: calc(var(--space-xl) + var(--space-md)) calc(var(--space-xl) * 3);
 }
 
 /* ---------- Copy ---------- */
@@ -59,16 +58,6 @@
 .reading-ticker__item--warning {
   color: var(--warning);
   font-weight: 700;
-}
-
-.hero-copy__title {
-  font-weight: 800;
-  font-size: clamp(38px, 4.1vw, 58px);
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  color: var(--text-primary);
-  /* Spanish runs ~20% longer than English; balancing avoids a one-word last line. */
-  text-wrap: balance;
 }
 
 .hero-copy__nowrap {
@@ -113,10 +102,6 @@
 .hero-copy__description {
   max-width: 34em;
   margin-top: 28px;
-  font-size: clamp(17px, 1.35vw, 19px);
-  line-height: 1.6;
-  color: var(--text-body);
-  text-wrap: pretty;
 }
 
 .hero-copy__actions {
@@ -280,10 +265,6 @@
 }
 
 @media (max-width: 600px) {
-  .hero__inner {
-    padding-inline: var(--space-md);
-  }
-
   .reading-ticker__tank {
     display: none;
   }

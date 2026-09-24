@@ -1,4 +1,6 @@
 import { WaterCaustics } from '../../components/effects/WaterCaustics'
+import { Container } from '../../components/layout/Container'
+import { Section } from '../../components/layout/Section'
 import type { AppPreviewData } from '../../types/appPreview'
 import type { HeroContent, HeroVisualCopy } from '../../types/content'
 import { HeroCopy } from './HeroCopy'
@@ -14,15 +16,15 @@ interface HeroProps {
 
 export function Hero({ content, preview, visualCopy }: HeroProps) {
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <Section className="hero" labelledBy="hero-title">
       <WaterCaustics className="hero__caustics" />
-      <div className="hero__inner">
+      <Container className="hero__inner">
         <HeroCopy
           content={content}
           eyebrow={<ReadingTicker tankName={preview.tank.name} parameters={preview.parameters} />}
         />
         <HeroVisual preview={preview} copy={visualCopy} />
-      </div>
-    </section>
+      </Container>
+    </Section>
   )
 }
