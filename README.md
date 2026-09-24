@@ -34,6 +34,8 @@ Dependencies point downward only; `npm run lint` fails on an upward import (`.ox
 
 Errors: services throw only `AppError` (`src/errors/`); the UI shows copy from the dictionary keyed by `ErrorCode`, never the raw message. Adding a code means adding its copy in both languages (a missing entry is a type error).
 
+Configuration: variables are declared in `src/config/variables.ts` and read only through `src/config/env.ts`. A missing or malformed variable fails `npm run build` (and the dev server) with a list of problems; there are no defaults. Keep `.env.example` in sync.
+
 No file over 500 lines (also enforced by lint). Colors come from tokens in `src/index.css`, never from literals: `npm run lint` fails on a hex/rgb/hsl/named color anywhere else, and on a token missing its dark value.
 
 ## Status

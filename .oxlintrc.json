@@ -142,7 +142,8 @@
         "src/services/**",
         "src/types/**",
         "src/errors/**",
-        "src/i18n/**"
+        "src/i18n/**",
+        "src/config/**"
       ],
       "rules": {
         "no-restricted-imports": [
