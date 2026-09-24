@@ -27,6 +27,11 @@ export interface SiteMeta {
   description: string
 }
 
+export interface ErrorFallbackCopy {
+  title: string
+  actionLabel: string
+}
+
 export interface HeaderCopy {
   links: NavLink[]
   homeLabel: string
