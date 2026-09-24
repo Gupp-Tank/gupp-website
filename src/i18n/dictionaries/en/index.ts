@@ -7,5 +7,6 @@ import { footer } from './footer'
 import { hero, heroVisual } from './hero'
 import { modules } from './modules'
 import { appPreview } from './appPreview'
+import { deviceViews } from './deviceViews'
 
-export const en: Dictionary = { meta, errors, errorFallback, notFound, header, footer, hero, heroVisual, modules, appPreview }
+export const en: Dictionary = { meta, errors, errorFallback, notFound, header, footer, hero, heroVisual, modules, appPreview, deviceViews }

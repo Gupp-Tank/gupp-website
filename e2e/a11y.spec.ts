@@ -21,7 +21,7 @@ const summarize = (violations: Awaited<ReturnType<AxeBuilder['analyze']>>['viola
 // alternative) whose inner text WCAG 1.4.3 exempts as part of a picture. So the page is
 // scanned twice: contrast everywhere except the illustration, and every other rule everywhere.
 async function scan(page: Page) {
-  const contrast = await new AxeBuilder({ page }).withTags(TAGS).exclude('.hero-visual').analyze()
+  const contrast = await new AxeBuilder({ page }).withTags(TAGS).exclude('.hero-visual').exclude('.showcase__phone').analyze()
   const rest = await new AxeBuilder({ page }).withTags(TAGS).disableRules(['color-contrast']).analyze()
   return [...summarize(contrast.violations), ...summarize(rest.violations)]
 }

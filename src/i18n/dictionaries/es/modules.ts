@@ -9,6 +9,7 @@ export const modules: Dictionary['modules'] = {
       title: 'Perfil del acuario',
       description: 'Volumen neto real, equipo y cada habitante: el registro del que parte todo lo demás.',
       icon: 'tank',
+      view: 'tank-detail',
     },
     {
       slug: 'water-diagnosis',
@@ -16,6 +17,7 @@ export const modules: Dictionary['modules'] = {
       title: 'Agua + diagnóstico',
       description: 'Diagnóstico por foto que ve tus últimas mediciones, no solo la foto.',
       icon: 'camera',
+      view: 'diagnosis-result',
     },
     {
       slug: 'dosing-feeding',
@@ -23,6 +25,7 @@ export const modules: Dictionary['modules'] = {
       title: 'Dosis y alimentación',
       description: 'Dosis calculadas para el agua que realmente tienes, con un historial que evita tratamientos duplicados.',
       icon: 'flask',
+      view: 'home',
     },
     {
       slug: 'pre-purchase-check',
@@ -30,6 +33,7 @@ export const modules: Dictionary['modules'] = {
       title: 'Chequeo antes de comprar',
       description: 'Sabe si ese pez encaja en tu acuario antes de pagarlo.',
       icon: 'search',
+      view: 'species-check',
     },
   ],
 }

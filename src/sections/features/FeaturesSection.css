@@ -1,0 +1,123 @@
+.features__inner {
+  /* 24px, 96px = xl, 4 * xl (the scale; 4 * xl is the section rhythm). */
+  padding-block: var(--space-xl) calc(var(--space-xl) * 4);
+}
+
+.features__title {
+  max-width: 18em;
+}
+
+.showcase {
+  display: grid;
+  gap: var(--space-xl);
+  margin-top: calc(var(--space-xl) + var(--space-md));
+}
+
+.showcase__tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.feature-tab {
+  /* Footer links jump straight to a tab: keep it clear of the sticky header. */
+  scroll-margin-top: calc(var(--header-height) + var(--space-md));
+  border-radius: var(--radius-lg);
+}
+
+.feature-tab.is-selected {
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.feature-tab__button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  min-height: var(--touch-comfortable);
+  padding: var(--space-sm) var(--space-md);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.feature-tab__button:focus-visible {
+  outline: 3px solid var(--secondary-blue);
+  outline-offset: -3px;
+}
+
+.feature-tab__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--nav-active-bg);
+  color: var(--nav-active-fg);
+}
+
+.feature-tab__title {
+  flex: 1;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.feature-tab__index {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-body);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Only the selected tab explains itself. No height animation: a footer link scrolls to the tab and the layout must already be final. */
+.feature-tab__more {
+  display: none;
+}
+
+.feature-tab.is-selected .feature-tab__more {
+  display: block;
+}
+
+.feature-tab__description {
+  padding: 0 var(--space-lg) var(--space-md) calc(var(--space-md) + 40px + var(--space-md));
+}
+
+.showcase__stage {
+  display: grid;
+  place-items: center;
+  padding: var(--space-md);
+}
+
+.showcase__phone {
+  animation: showcase-in 0.35s ease both;
+}
+
+@keyframes showcase-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (min-width: 900px) {
+  .showcase {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+    gap: calc(var(--space-xl) * 2);
+  }
+
+}
+
+@media (max-width: 600px) {
+  .features__inner {
+    padding-block: var(--space-sm) calc(var(--space-md) * 4);
+  }
+}

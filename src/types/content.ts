@@ -1,3 +1,4 @@
+import type { DeviceViewId } from './deviceViews'
 import type { IconName } from './icon'
 
 export interface NavLink {
@@ -102,6 +103,8 @@ export interface ProductModule {
   title: string
   description: string
   icon: IconName
+  /** Which device view illustrates it; omitted when no approved app screen exists yet. */
+  view?: DeviceViewId
 }
 
 export interface ModulesCopy {

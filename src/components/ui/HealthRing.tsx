@@ -7,16 +7,17 @@ interface HealthRingProps {
   strokeWidth?: number
   label: string
   showScale?: boolean
+  tone?: 'primary' | 'coral'
 }
 
-export function HealthRing({ score, size = 72, strokeWidth = 7, label, showScale = false }: HealthRingProps) {
+export function HealthRing({ score, size = 72, strokeWidth = 7, label, showScale = false, tone = 'primary' }: HealthRingProps) {
   const value = useCountUp(score, 1600, 400)
   const radius = (size - strokeWidth) / 2
   const circumference = 2 * Math.PI * radius
   const offset = circumference * (1 - value / 100)
 
   return (
-    <div className="health-ring" style={{ width: size, height: size }} role="img" aria-label={label}>
+    <div className={`health-ring health-ring--${tone}`} style={{ width: size, height: size }} role="img" aria-label={label}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden>
         <circle className="health-ring__track" cx={size / 2} cy={size / 2} r={radius} strokeWidth={strokeWidth} />
         <circle
