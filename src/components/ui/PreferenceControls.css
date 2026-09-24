@@ -30,7 +30,7 @@
   border: 0;
   border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--text-body);
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 700;

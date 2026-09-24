@@ -33,7 +33,7 @@
 /* Glow in the button's own tone, never a gray shadow: gupp-docs/design/components. */
 .btn--primary {
   background: var(--primary-green);
-  color: var(--on-solid);
+  color: var(--on-primary);
   box-shadow: 0 12px 24px -10px var(--glow-green);
 }
 

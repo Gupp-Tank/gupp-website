@@ -53,12 +53,13 @@ export function useWaterCaustics(canvasRef: RefObject<HTMLCanvasElement | null>)
     }
 
     const resize = () => {
+      // The strength token changes with the breakpoint, so re-read it whenever the size does.
+      renderer.setAppearance(readAppearance(canvas))
       const { width, height } = canvas.getBoundingClientRect()
       renderer.resize(Math.max(1, Math.round(width * RESOLUTION_SCALE)), Math.max(1, Math.round(height * RESOLUTION_SCALE)))
       drawNow()
     }
 
-    renderer.setAppearance(readAppearance(canvas))
     resize()
     play()
 

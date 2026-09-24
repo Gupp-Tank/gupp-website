@@ -23,13 +23,14 @@ interface SiteHeaderProps {
 
 export function SiteHeader({ copy, homeHref, locale, onLocaleChange, activeSection, menu }: SiteHeaderProps) {
   const scrolled = useScrolled()
+  const { open, toggle, close, buttonRef, panelRef, panelId } = menu
   const headerRef = useRef<HTMLElement>(null)
-  useFocusTrap(headerRef, menu.open)
+  useFocusTrap(headerRef, open)
 
   return (
-    <header ref={headerRef} className={cx('site-header', scrolled && 'is-scrolled', menu.open && 'is-menu-open')}>
+    <header ref={headerRef} className={cx('site-header', scrolled && 'is-scrolled', open && 'is-menu-open')}>
       <div className="site-header__inner">
-        <Link to={homeHref} className="site-header__brand" aria-label={copy.homeLabel} onClick={() => menu.close()}>
+        <Link to={homeHref} className="site-header__brand" aria-label={copy.homeLabel} onClick={() => close()}>
           <Logo height={44} />
         </Link>
 
@@ -38,19 +39,19 @@ export function SiteHeader({ copy, homeHref, locale, onLocaleChange, activeSecti
         <div className="site-header__actions">
           <PreferenceControls className="site-header__prefs" copy={copy} locale={locale} onLocaleChange={onLocaleChange} />
           <MenuButton
-            ref={menu.buttonRef}
-            open={menu.open}
-            controls={menu.panelId}
+            ref={buttonRef}
+            open={open}
+            controls={panelId}
             openLabel={copy.menuOpen}
             closeLabel={copy.menuClose}
-            onClick={menu.toggle}
+            onClick={toggle}
           />
         </div>
       </div>
 
-      {menu.open && <div className="site-header__scrim" aria-hidden onClick={() => menu.close()} />}
-      <div ref={menu.panelRef} id={menu.panelId} hidden={!menu.open} className="site-panel">
-        <SiteNav links={copy.links} label={copy.navLabel} activeId={activeSection} onNavigate={() => menu.close()} />
+      {open && <div className="site-header__scrim" aria-hidden onClick={() => close()} />}
+      <div ref={panelRef} id={panelId} hidden={!open} className="site-panel">
+        <SiteNav links={copy.links} label={copy.navLabel} activeId={activeSection} onNavigate={() => close()} />
         {/* Screens too narrow for the header to hold them (<= 340px) get the controls here instead. */}
         <PreferenceControls className="site-panel__prefs" copy={copy} locale={locale} onLocaleChange={onLocaleChange} />
       </div>
