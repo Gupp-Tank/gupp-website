@@ -1,4 +1,13 @@
-/* Every value here comes from gupp-docs/design (colors, components, spacing). */
+/*
+ * The only file allowed to define colors (enforced by scripts/check-colors.mjs).
+ * Every value comes from gupp-docs/design (colors, components, spacing); brand
+ * token names (--primary-green, --secondary-blue, --coral) are kept as documented there.
+ *
+ * Deliberate exceptions to "no literal colors elsewhere": none. The WebGL
+ * background reads --caustic-color at runtime instead of hard-coding a hue.
+ * Every color token needs a dark value, unless it is listed as theme-invariant
+ * in scripts/check-colors.mjs.
+ */
 :root {
   --primary-green: #0e7c5a;
   --secondary-blue: #0d5c73;

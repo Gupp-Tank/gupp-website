@@ -31,7 +31,7 @@ Dependencies point downward only; `npm run lint` fails on an upward import (`.ox
 | Services | `src/services/` | I/O (HTTP, storage). Only layer that touches the network. |
 | Domain | `src/lib/`, `src/i18n/`, `src/errors/`, `src/types/` | Pure logic, copy and shapes. Never import UI or hooks. |
 
-No file over 500 lines (also enforced by lint). Colors come from tokens in `src/index.css`, never from literals.
+No file over 500 lines (also enforced by lint). Colors come from tokens in `src/index.css`, never from literals: `npm run lint` fails on a hex/rgb/hsl/named color anywhere else, and on a token missing its dark value.
 
 ## Status
 
