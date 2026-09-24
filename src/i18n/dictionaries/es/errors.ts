@@ -7,6 +7,8 @@ export const errors: Dictionary['errors'] = {
   INVALID_RESPONSE: 'Recibimos una respuesta inesperada. Intenta más tarde.',
   SERVER_ERROR: 'Nuestros servidores tuvieron un problema. Intenta más tarde.',
   RATE_LIMITED: 'Demasiados intentos. Espera un momento e intenta de nuevo.',
+  CONSENT_REQUIRED: 'Para registrarte debes aceptar los términos y la política de privacidad.',
+  INVALID_UNSUBSCRIBE_TOKEN: 'Este enlace de baja no es válido o ya venció.',
   VALIDATION_FAILED: 'Alguno de los datos no es válido. Revísalos.',
   RENDER_FAILED: 'No pudimos mostrar esta página.',
 }

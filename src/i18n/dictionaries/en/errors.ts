@@ -7,6 +7,8 @@ export const errors: Dictionary['errors'] = {
   INVALID_RESPONSE: 'We got an unexpected response. Please try again later.',
   SERVER_ERROR: 'Our servers had a problem. Please try again later.',
   RATE_LIMITED: 'Too many attempts. Please wait a moment and try again.',
+  CONSENT_REQUIRED: 'To sign up you need to accept the terms and the privacy policy.',
+  INVALID_UNSUBSCRIBE_TOKEN: 'This unsubscribe link is not valid or has expired.',
   VALIDATION_FAILED: 'Some of the information is not valid. Please review it.',
   RENDER_FAILED: 'This page could not be displayed.',
 }
