@@ -11,7 +11,7 @@ export const LOCALE_NAMES: Record<Locale, string> = {
   en: 'English',
 }
 
-const isLocale = (value: string): value is Locale => (LOCALES as readonly string[]).includes(value)
+export const isLocale = (value: string | undefined): value is Locale => value !== undefined && (LOCALES as readonly string[]).includes(value)
 
 // Storage key must match the inline pre-paint script in index.html.
 export const localeStore = createPreferenceStore<Locale>({

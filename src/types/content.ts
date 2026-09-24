@@ -32,6 +32,12 @@ export interface ErrorFallbackCopy {
   actionLabel: string
 }
 
+export interface NotFoundCopy {
+  title: string
+  message: string
+  homeLabel: string
+}
+
 export interface HeaderCopy {
   links: NavLink[]
   homeLabel: string

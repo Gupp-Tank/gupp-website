@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 import type { IconName } from '../../types/icon'
 import { Icon } from './Icon'
@@ -27,6 +28,8 @@ function ButtonContent({ trailingIcon, children }: Pick<ButtonStyleProps, 'trail
 
 interface ButtonLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'>, ButtonStyleProps {
   external?: boolean
+  /** In-app route (client-side navigation). Use `href` for anchors and external URLs. */
+  to?: string
 }
 
 export function ButtonLink({
@@ -34,10 +37,19 @@ export function ButtonLink({
   size = 'md',
   trailingIcon,
   external = false,
+  to,
   className,
   children,
   ...rest
 }: ButtonLinkProps) {
+  if (to !== undefined) {
+    return (
+      <Link to={to} className={buttonClasses(variant, size, className)} {...rest}>
+        <ButtonContent trailingIcon={trailingIcon}>{children}</ButtonContent>
+      </Link>
+    )
+  }
+
   return (
     <a
       className={buttonClasses(variant, size, className)}

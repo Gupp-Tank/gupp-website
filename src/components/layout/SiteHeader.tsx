@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { useScrolled } from '../../hooks/useScrolled'
 import type { Locale } from '../../i18n/locales'
 import type { HeaderCopy } from '../../types/content'
@@ -7,19 +8,20 @@ import './SiteHeader.css'
 
 interface SiteHeaderProps {
   copy: HeaderCopy
+  homeHref: string
   locale: Locale
   onLocaleChange: (locale: Locale) => void
 }
 
-export function SiteHeader({ copy, locale, onLocaleChange }: SiteHeaderProps) {
+export function SiteHeader({ copy, homeHref, locale, onLocaleChange }: SiteHeaderProps) {
   const scrolled = useScrolled()
 
   return (
     <header className={['site-header', scrolled && 'is-scrolled'].filter(Boolean).join(' ')}>
       <div className="site-header__inner">
-        <a href="/" className="site-header__brand" aria-label={copy.homeLabel}>
+        <Link to={homeHref} className="site-header__brand" aria-label={copy.homeLabel}>
           <Logo height={44} />
-        </a>
+        </Link>
 
         <nav className="site-header__nav" aria-label={copy.navLabel}>
           {copy.links.map((link) => (

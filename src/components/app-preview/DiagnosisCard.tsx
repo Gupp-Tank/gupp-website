@@ -11,7 +11,7 @@ interface DiagnosisCardProps {
 export function DiagnosisCard({ diagnosis, className }: DiagnosisCardProps) {
   return (
     <Card as="article" elevation="float" className={['insight-card diagnosis-card', className].filter(Boolean).join(' ')}>
-      <header className="insight-card__header">
+      <div className="insight-card__header">
         <span className="diagnosis-card__thumb" aria-hidden>
           <img src="/branding/icon.png" alt="" width={34} height={34} />
           <svg className="diagnosis-card__spots" viewBox="0 0 52 52">
@@ -24,7 +24,7 @@ export function DiagnosisCard({ diagnosis, className }: DiagnosisCardProps) {
           <p className="insight-card__eyebrow">{diagnosis.timestamp}</p>
           <h3 className="insight-card__title">{diagnosis.condition}</h3>
         </div>
-      </header>
+      </div>
 
       <div className="diagnosis-card__cause">
         <div>

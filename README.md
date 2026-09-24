@@ -32,6 +32,8 @@ Dependencies point downward only; `npm run lint` fails on an upward import (`.ox
 | Services | `src/services/` | I/O (HTTP, storage). Only layer that touches the network. |
 | Domain | `src/lib/`, `src/i18n/`, `src/errors/`, `src/types/` | Pure logic, copy and shapes. Never import UI or hooks. |
 
+Routing: the language is the first URL segment (`/es`, `/en`); `/` redirects to the resolved language and unknown paths render a localized 404. The route table is `src/routes/AppRoutes.tsx`; shared chrome (header) lives in `SiteLayout`, pages only render their own content. Use `useLocalePath()` for internal links and `useSwitchLocale()` to change language. `vercel.json` rewrites every path to `index.html` so deep links work.
+
 Errors: services throw only `AppError` (`src/errors/`); the UI shows copy from the dictionary keyed by `ErrorCode`, never the raw message. Adding a code means adding its copy in both languages (a missing entry is a type error).
 
 Configuration: variables are declared in `src/config/variables.ts` and read only through `src/config/env.ts`. A missing or malformed variable fails `npm run build` (and the dev server) with a list of problems; there are no defaults. Keep `.env.example` in sync.

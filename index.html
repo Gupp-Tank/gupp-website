@@ -18,14 +18,16 @@
     <!--
       Runs before first paint so a saved theme or language never flashes the default.
       Storage keys must match src/lib/theme.ts and src/i18n/locales.ts.
-      Language rule mirrors the app: saved choice, else browser language if es/en, else es.
+      Language rule: URL, else saved choice (mirrors the app), else browser language if es/en, else es.
     -->
     <script>
       ;(function () {
         var root = document.documentElement
         try {
           if (localStorage.getItem('gupp-theme') === 'dark') root.dataset.theme = 'dark'
-          var locale = localStorage.getItem('gupp-locale')
+          // The URL wins (/en, /es); otherwise saved choice, else browser es/en, else es.
+          var locale = location.pathname.split('/')[1]
+          if (locale !== 'es' && locale !== 'en') locale = localStorage.getItem('gupp-locale')
           if (locale !== 'es' && locale !== 'en') {
             locale = (navigator.language || '').slice(0, 2).toLowerCase() === 'en' ? 'en' : 'es'
           }
