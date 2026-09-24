@@ -1,7 +1,7 @@
 import type { Dictionary } from '../../../types/i18n'
 
 export const howItWorks: Dictionary['howItWorks'] = {
-  heading: 'From your tank to a diagnosis, in three steps.',
+  heading: 'How it works',
   steps: [
     { id: 'profile', title: 'Set up your tank', description: 'Net volume, equipment and inhabitants: the profile everything else reads from.', icon: 'tank' },
     { id: 'measure', title: 'Measure and photograph', description: 'Log your parameters and upload a photo when something looks off.', icon: 'camera' },
@@ -46,7 +46,7 @@ export const faq: Dictionary['faq'] = {
 }
 
 export const cta: Dictionary['cta'] = {
-  heading: 'Care for your tank with data.',
-  description: 'Gupp Tank is coming soon to iOS and Android. Meanwhile, see how it works.',
+  heading: 'Coming soon to iOS and Android',
+  description: 'We are getting the app ready. Meanwhile, see how it works.',
   fallbackLabel: 'See how it works',
 }

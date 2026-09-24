@@ -1,7 +1,7 @@
 import type { Dictionary } from '../../../types/i18n'
 
 export const howItWorks: Dictionary['howItWorks'] = {
-  heading: 'De tu acuario a un diagnóstico, en tres pasos.',
+  heading: 'Cómo funciona',
   steps: [
     { id: 'profile', title: 'Registra tu acuario', description: 'Volumen neto, equipo y habitantes: el perfil del que parte todo lo demás.', icon: 'tank' },
     { id: 'measure', title: 'Mide y fotografía', description: 'Anota tus parámetros y sube una foto cuando algo no se vea bien.', icon: 'camera' },
@@ -46,7 +46,7 @@ export const faq: Dictionary['faq'] = {
 }
 
 export const cta: Dictionary['cta'] = {
-  heading: 'Cuida tu acuario con datos.',
-  description: 'Gupp Tank llegará pronto a iOS y Android. Mientras tanto, mira cómo funciona.',
+  heading: 'Próximamente en iOS y Android',
+  description: 'Estamos preparando la app. Mientras tanto, mira cómo funciona.',
   fallbackLabel: 'Ver cómo funciona',
 }

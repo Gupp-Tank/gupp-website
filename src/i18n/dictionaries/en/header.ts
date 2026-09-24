@@ -3,7 +3,7 @@ import type { Dictionary } from '../../../types/i18n'
 
 export const header: Dictionary['header'] = {
   links: [
-    { label: 'How it works', href: links.modules },
+    { label: 'How it works', href: links.howItWorks },
   ],
   homeLabel: 'Gupp Tank home',
   skipLabel: 'Skip to content',
