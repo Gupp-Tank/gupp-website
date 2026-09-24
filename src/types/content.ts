@@ -46,6 +46,13 @@ export interface LegalLink {
 
 export interface FooterCopy {
   navLabel: string
+  /** Heading of the product links column. */
+  productLabel: string
+  socialLabel: string
+  instagramLabel: string
+  xLabel: string
+  /** Label before the store marks, e.g. "Coming soon on". */
+  storesLabel: string
   legalLabel: string
   tagline: string
   /** Shown after "© {year} ". */
@@ -88,6 +95,8 @@ export interface HeroVisualCopy {
 }
 
 export interface ProductModule {
+  /** Stable anchor: the card gets id "module-<slug>" so other sections can link to it. */
+  slug: string
   index: string
   title: string
   description: string

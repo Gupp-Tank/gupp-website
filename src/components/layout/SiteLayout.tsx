@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from 'react-router'
+import { links } from '../../content/links'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { useI18n } from '../../hooks/useI18n'
 import { useLocalePath } from '../../hooks/useLocalePath'
@@ -33,7 +34,21 @@ export function SiteLayout() {
       <main inert={menu.open}>
         <Outlet />
       </main>
-      <SiteFooter copy={t.footer} navLinks={t.header.links} homeLabel={t.header.homeLabel} localePath={localePath} inert={menu.open} />
+      <SiteFooter
+        copy={t.footer}
+        socials={[
+          { name: 'instagram', label: t.footer.instagramLabel, href: links.instagram },
+          { name: 'x', label: t.footer.xLabel, href: links.x },
+        ]}
+        modules={t.modules.items}
+        highlights={t.hero.facts}
+        preferencesCopy={t.header}
+        locale={locale}
+        onLocaleChange={switchLocale}
+        homeLabel={t.header.homeLabel}
+        localePath={localePath}
+        inert={menu.open}
+      />
     </>
   )
 }
