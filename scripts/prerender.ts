@@ -29,8 +29,8 @@ function fakeDocument(locale: Locale) {
 const { render } = (await import(pathToFileURL(join('dist-ssr', 'entry-server.js')).href)) as { render: (url: string) => Promise<string> }
 
 function page(locale: Locale, body: string): string {
-  const { meta } = dictionaries[locale]
-  const seo = buildSeo({ locale, path: '', title: meta.title, description: meta.description })
+  const { meta, faq } = dictionaries[locale]
+  const seo = buildSeo({ locale, path: '', title: meta.title, description: meta.description, faq: faq.items })
   const head = [...seo.tags.map(tag), ...seo.jsonLd.map((d) => `    <script type="application/ld+json" data-seo>${JSON.stringify(d).replace(/</g, '\\u003c')}</script>`)].join('\n')
 
   return template

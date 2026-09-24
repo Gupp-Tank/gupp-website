@@ -8,9 +8,9 @@ test.describe('desktop navigation', () => {
     const link = page.getByRole('banner').getByRole('link', { name: 'Cómo funciona' })
     await expect(link).not.toHaveAttribute('aria-current', 'location')
     await link.click()
-    await expect(page).toHaveURL(/#modules$/)
+    await expect(page).toHaveURL(/#how-it-works$/)
     await expect(link).toHaveAttribute('aria-current', 'location')
-    const top = await page.locator('#modules').evaluate((el) => el.getBoundingClientRect().top)
+    const top = await page.locator('#how-it-works').evaluate((el) => el.getBoundingClientRect().top)
     expect(top, 'the section is not hidden under the sticky header').toBeGreaterThanOrEqual(70)
   })
 })
@@ -73,7 +73,7 @@ test.describe('mobile menu', () => {
     await page.getByRole('button', { name: 'Abrir menú' }).click()
     await page.locator('.site-panel').getByRole('link', { name: 'Cómo funciona' }).click()
     await expect(page.getByRole('button', { name: 'Abrir menú' })).toHaveAttribute('aria-expanded', 'false')
-    await expect(page).toHaveURL(/#modules$/)
+    await expect(page).toHaveURL(/#how-it-works$/)
   })
 
   test('language and theme stay reachable without opening the menu', async ({ page }) => {

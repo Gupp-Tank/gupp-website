@@ -111,3 +111,33 @@ export interface ModulesCopy {
   heading: string
   items: ProductModule[]
 }
+
+export interface HowItWorksStep {
+  id: string
+  title: string
+  description: string
+  icon: IconName
+}
+
+export interface HowItWorksCopy {
+  heading: string
+  steps: HowItWorksStep[]
+}
+
+export interface FaqItem {
+  id: string
+  question: string
+  answer: string
+}
+
+export interface FaqCopy {
+  heading: string
+  items: FaqItem[]
+}
+
+export interface CtaCopy {
+  heading: string
+  description: string
+  /** Shown until the early-access form exists: a link to the section that explains the product. */
+  fallbackLabel: string
+}

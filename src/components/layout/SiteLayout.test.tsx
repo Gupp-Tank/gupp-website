@@ -125,9 +125,9 @@ describe('active section', () => {
     renderHome()
     const link = screen.getAllByRole('link', { name: copy.links[0].label })[0]
     expect(link).not.toHaveAttribute('aria-current')
-    trigger('modules', true)
+    trigger('how-it-works', true)
     expect(link).toHaveAttribute('aria-current', 'location')
-    trigger('modules', false)
+    trigger('how-it-works', false)
     expect(link).not.toHaveAttribute('aria-current')
   })
 })

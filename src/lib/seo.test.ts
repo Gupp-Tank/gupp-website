@@ -53,4 +53,15 @@ describe('sitemap and robots', () => {
     expect(buildRobots()).toContain('Allow: /')
     expect(buildRobots()).toContain('Sitemap: https://gupp.app/sitemap.xml')
   })
+
+  it('adds FAQPage structured data only when questions are given and the page is indexable', () => {
+    const faq = [{ question: 'Q1?', answer: 'A1' }]
+    const types = (input: Parameters<typeof buildSeo>[0]) => buildSeo(input).jsonLd.map((d) => (d as { '@type': string })['@type'])
+    const base = { locale: 'es' as const, path: '', title: 'T', description: 'D' }
+    expect(types(base)).not.toContain('FAQPage')
+    expect(types({ ...base, faq })).toContain('FAQPage')
+    expect(types({ ...base, faq, noindex: true })).toEqual([])
+    const page = buildSeo({ ...base, faq }).jsonLd.find((d) => (d as { '@type': string })['@type'] === 'FAQPage') as { mainEntity: { name: string; acceptedAnswer: { text: string } }[] }
+    expect(page.mainEntity[0]).toMatchObject({ name: 'Q1?', acceptedAnswer: { text: 'A1' } })
+  })
 })

@@ -1,0 +1,30 @@
+.cta-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  padding: calc(var(--space-xl) * 2);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.cta-band__copy {
+  max-width: 34em;
+}
+
+.cta-band__description {
+  margin-top: var(--space-sm);
+}
+
+.cta-band__action {
+  flex-shrink: 0;
+}
+
+@media (max-width: 800px) {
+  .cta-band {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-xl);
+  }
+}
