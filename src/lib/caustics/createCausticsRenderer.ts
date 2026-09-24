@@ -1,3 +1,4 @@
+import { isSoftwareRenderer } from '../lowPower'
 import { FRAGMENT_SHADER, VERTEX_SHADER } from './causticsShader'
 
 export interface CausticsAppearance {
@@ -25,7 +26,7 @@ function compile(gl: WebGLRenderingContext, type: number, source: string): WebGL
 // Returns null when WebGL is unavailable; callers treat that as "no effect".
 export function createCausticsRenderer(canvas: HTMLCanvasElement): CausticsRenderer | null {
   const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false })
-  if (!gl) return null
+  if (!gl || isSoftwareRenderer(gl)) return null
 
   const vertex = compile(gl, gl.VERTEX_SHADER, VERTEX_SHADER)
   const fragment = compile(gl, gl.FRAGMENT_SHADER, FRAGMENT_SHADER)

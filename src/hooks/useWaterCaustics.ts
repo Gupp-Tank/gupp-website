@@ -1,6 +1,7 @@
 import { useEffect, type RefObject } from 'react'
 import { createCausticsRenderer } from '../lib/caustics/createCausticsRenderer'
 import { hexToRgbUnit } from '../lib/color'
+import { isLowPowerDevice, whenIdle } from '../lib/lowPower'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 import { useTheme } from './useTheme'
 
@@ -18,6 +19,67 @@ function readAppearance(canvas: HTMLCanvasElement) {
   }
 }
 
+function startCaustics(canvas: HTMLCanvasElement, reducedMotion: boolean): (() => void) | undefined {
+  const renderer = createCausticsRenderer(canvas)
+  if (!renderer) return
+
+  let frame = 0
+  let lastDraw = 0
+  let visible = true
+  const startedAt = performance.now()
+
+  const drawNow = () => renderer.draw(reducedMotion ? STATIC_FRAME_TIME : (performance.now() - startedAt) / 1000)
+
+  const loop = (now: number) => {
+    frame = requestAnimationFrame(loop)
+    if (now - lastDraw < FRAME_INTERVAL_MS) return
+    lastDraw = now
+    drawNow()
+  }
+
+  const play = () => {
+    if (reducedMotion || !visible || document.hidden || frame) return
+    frame = requestAnimationFrame(loop)
+  }
+
+  const pause = () => {
+    cancelAnimationFrame(frame)
+    frame = 0
+  }
+
+  const resize = () => {
+    // The strength token changes with the breakpoint, so re-read it whenever the size does.
+    renderer.setAppearance(readAppearance(canvas))
+    const { width, height } = canvas.getBoundingClientRect()
+    renderer.resize(Math.max(1, Math.round(width * RESOLUTION_SCALE)), Math.max(1, Math.round(height * RESOLUTION_SCALE)))
+    drawNow()
+  }
+
+  resize()
+  play()
+
+  const resizeObserver = new ResizeObserver(resize)
+  resizeObserver.observe(canvas)
+
+  const visibilityObserver = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting
+    if (visible) play()
+    else pause()
+  })
+  visibilityObserver.observe(canvas)
+
+  const onVisibilityChange = () => (document.hidden ? pause() : play())
+  document.addEventListener('visibilitychange', onVisibilityChange)
+
+  return () => {
+    pause()
+    resizeObserver.disconnect()
+    visibilityObserver.disconnect()
+    document.removeEventListener('visibilitychange', onVisibilityChange)
+    renderer.destroy()
+  }
+}
+
 export function useWaterCaustics(canvasRef: RefObject<HTMLCanvasElement | null>) {
   const reducedMotion = usePrefersReducedMotion()
   const { theme } = useTheme()
@@ -25,63 +87,16 @@ export function useWaterCaustics(canvasRef: RefObject<HTMLCanvasElement | null>)
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const renderer = createCausticsRenderer(canvas)
-    if (!renderer) return
+    if (isLowPowerDevice(undefined, window.matchMedia('(prefers-reduced-data: reduce)').matches)) return
 
-    let frame = 0
-    let lastDraw = 0
-    let visible = true
-    const start = performance.now()
-
-    const drawNow = () => renderer.draw(reducedMotion ? STATIC_FRAME_TIME : (performance.now() - start) / 1000)
-
-    const loop = (now: number) => {
-      frame = requestAnimationFrame(loop)
-      if (now - lastDraw < FRAME_INTERVAL_MS) return
-      lastDraw = now
-      drawNow()
-    }
-
-    const play = () => {
-      if (reducedMotion || !visible || document.hidden || frame) return
-      frame = requestAnimationFrame(loop)
-    }
-
-    const pause = () => {
-      cancelAnimationFrame(frame)
-      frame = 0
-    }
-
-    const resize = () => {
-      // The strength token changes with the breakpoint, so re-read it whenever the size does.
-      renderer.setAppearance(readAppearance(canvas))
-      const { width, height } = canvas.getBoundingClientRect()
-      renderer.resize(Math.max(1, Math.round(width * RESOLUTION_SCALE)), Math.max(1, Math.round(height * RESOLUTION_SCALE)))
-      drawNow()
-    }
-
-    resize()
-    play()
-
-    const resizeObserver = new ResizeObserver(resize)
-    resizeObserver.observe(canvas)
-
-    const visibilityObserver = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting
-      if (visible) play()
-      else pause()
+    let teardown: (() => void) | undefined
+    // Compiling shaders is the expensive part; wait for idle so first paint is never blocked.
+    const cancelIdle = whenIdle(() => {
+      teardown = startCaustics(canvas, reducedMotion)
     })
-    visibilityObserver.observe(canvas)
-
-    const onVisibilityChange = () => (document.hidden ? pause() : play())
-    document.addEventListener('visibilitychange', onVisibilityChange)
-
     return () => {
-      pause()
-      resizeObserver.disconnect()
-      visibilityObserver.disconnect()
-      document.removeEventListener('visibilitychange', onVisibilityChange)
-      renderer.destroy()
+      cancelIdle()
+      teardown?.()
     }
     // theme is a dependency only to re-read the color tokens after a switch.
   }, [canvasRef, reducedMotion, theme])

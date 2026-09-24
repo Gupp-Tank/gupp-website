@@ -13,7 +13,7 @@ export function DiagnosisCard({ diagnosis, className }: DiagnosisCardProps) {
     <Card as="article" elevation="float" className={['insight-card diagnosis-card', className].filter(Boolean).join(' ')}>
       <div className="insight-card__header">
         <span className="diagnosis-card__thumb" aria-hidden>
-          <img src="/branding/icon.png" alt="" width={34} height={34} />
+          <img src="/branding/icon.png" alt="" width={34} height={34} decoding="async" />
           <svg className="diagnosis-card__spots" viewBox="0 0 52 52">
             <circle cx="23" cy="21" r="1.8" />
             <circle cx="30" cy="29" r="1.5" />

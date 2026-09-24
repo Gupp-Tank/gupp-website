@@ -53,7 +53,7 @@ export function SiteFooter({
         <div className="site-footer__brand">
           {/* The fish mark alone; the name is carried by the link's accessible label and the tagline. */}
           <Link to={localePath()} aria-label={homeLabel} className="site-footer__mark">
-            <img src="/branding/icon.png" alt="" width={56} height={56} />
+            <img src="/branding/icon.png" alt="" width={56} height={56} loading="lazy" decoding="async" />
           </Link>
           <p className="site-footer__tagline">{copy.tagline}</p>
           <nav aria-label={copy.socialLabel}>

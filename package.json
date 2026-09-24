@@ -9,7 +9,8 @@
     "lint": "oxlint && node scripts/check-colors.mjs && node scripts/check-conventions.mjs",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "check:budget": "node scripts/check-budget.mjs"
   },
   "dependencies": {
     "@fontsource-variable/baloo-2": "^5.3.0",
