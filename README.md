@@ -49,6 +49,13 @@ Network: only `src/services/http` calls `fetch` (lint enforces it). Feature serv
 
 No file over 500 lines (also enforced by lint). Colors come from tokens in `src/index.css`, never from literals: `npm run lint` fails on a hex/rgb/hsl/named color anywhere else, and on a token missing its dark value.
 
+## CI
+
+- **CI** (every PR and push to `main`): type-check, lint (layers, tokens, conventions), tests **with coverage thresholds**, `npm audit` of production dependencies, build, and the size budget. `main` requires it to be green.
+- **Lighthouse** (PRs that touch `src/`, `index.html`, `public/`, `vercel.json`, `package.json` or the budgets): builds, serves the production build and runs Lighthouse CI 3 times against `/es` with the mobile emulation; fails if a budget in `lighthouserc.json` is exceeded. Reports are uploaded as an artifact. To run it locally: `npm run build && npx @lhci/cli autorun`.
+- End-to-end tests will join as their own job with the Playwright suite (issue #33).
+- Installs are cached by `actions/setup-node`; the CI job takes about 30 s.
+
 ## Performance budget
 
 `npm run check:budget` (runs in CI after the build) fails if the production build exceeds: entry JS 120 kB gzip, all JS 135 kB, CSS 12 kB, any font subset 40 kB (120 kB total), any image 60 kB. Today: 92 / 95 / 6 / 105 (fonts) / 32 kB. Raise a number only deliberately, in its own PR.

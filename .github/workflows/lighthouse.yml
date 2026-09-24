@@ -1,0 +1,42 @@
+name: Lighthouse
+
+# Only when the shipped code or the budgets change, so docs-only PRs skip it.
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'index.html'
+      - 'public/**'
+      - 'vercel.json'
+      - 'package.json'
+      - 'lighthouserc.json'
+      - '.github/workflows/lighthouse.yml'
+
+concurrency:
+  group: lighthouse-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    name: Lighthouse budgets
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      # Budgets live in lighthouserc.json; this fails the job when one is exceeded.
+      - run: npx --yes @lhci/cli@0.14 autorun
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci
+          retention-days: 7
