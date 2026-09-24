@@ -42,3 +42,12 @@
   font-weight: 700;
   color: var(--text-secondary);
 }
+
+/* Coral variant: a finding to act on, not a health score. It sits on a coral tint, so the track is the surface. */
+.health-ring--coral .health-ring__track {
+  stroke: var(--surface);
+}
+
+.health-ring--coral .health-ring__value {
+  stroke: var(--coral);
+}

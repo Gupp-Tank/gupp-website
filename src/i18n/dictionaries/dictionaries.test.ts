@@ -11,3 +11,26 @@ describe.each(Object.entries(dictionaries))('%s dictionary', (_locale, dictionar
     for (const message of Object.values(dictionary.errors)) expect(message.trim()).not.toBe('')
   })
 })
+
+describe('device views', () => {
+  const shape = (value: unknown): unknown =>
+    Array.isArray(value) ? value.map(shape) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([k, v]) => [k, shape(v)])) : typeof value
+
+  it('has the same structure in every locale (ids, keys, value types)', () => {
+    const [first, ...rest] = Object.values(dictionaries).map((d) => shape(d.deviceViews))
+    for (const other of rest) expect(other).toEqual(first)
+  })
+
+  it('references a real view from every module that declares one', () => {
+    const known = new Set(['home', 'tank-detail', 'diagnosis-result', 'species-check'])
+    for (const dictionary of Object.values(dictionaries)) {
+      for (const module of dictionary.modules.items) if (module.view) expect(known.has(module.view)).toBe(true)
+    }
+  })
+
+  it('gives every screen a text alternative', () => {
+    for (const dictionary of Object.values(dictionaries)) {
+      for (const view of Object.values(dictionary.deviceViews)) expect(view.alt.trim()).not.toBe('')
+    }
+  })
+})

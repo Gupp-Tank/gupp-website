@@ -50,6 +50,8 @@
   --quick-coral-fg: color-mix(in srgb, var(--coral) 55%, var(--text-primary));
   --quick-blue-bg: color-mix(in srgb, var(--secondary-blue) 14%, var(--surface));
   --quick-blue-fg: var(--secondary-blue);
+  --quick-amber-bg: color-mix(in srgb, var(--warning) 14%, var(--surface));
+  --quick-amber-fg: var(--warning);
 
   --shadow-card: 0 1px 2px rgba(19, 35, 34, 0.04), 0 16px 32px -16px rgba(19, 35, 34, 0.16);
   --shadow-float: 0 1px 2px rgba(19, 35, 34, 0.04), 0 32px 64px -24px rgba(19, 35, 34, 0.28);
@@ -125,6 +127,8 @@
   --quick-coral-fg: var(--coral);
   --quick-blue-bg: color-mix(in srgb, var(--secondary-blue) 22%, var(--surface));
   --quick-blue-fg: var(--secondary-blue);
+  --quick-amber-bg: color-mix(in srgb, var(--warning) 22%, var(--surface));
+  --quick-amber-fg: var(--warning);
 
   --shadow-card: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 16px 32px -16px rgba(0, 0, 0, 0.6);
   --shadow-float: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 32px 64px -24px rgba(0, 0, 0, 0.65);
