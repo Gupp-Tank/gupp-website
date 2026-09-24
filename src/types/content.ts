@@ -38,6 +38,22 @@ export interface NotFoundCopy {
   homeLabel: string
 }
 
+export interface LegalLink {
+  label: string
+  /** Path without the language prefix, e.g. '/privacy'. */
+  path: string
+}
+
+export interface FooterCopy {
+  navLabel: string
+  legalLabel: string
+  tagline: string
+  /** Shown after "© {year} ". */
+  copyright: string
+  /** Empty until the legal pages exist; the group is not rendered without links. */
+  legalLinks: LegalLink[]
+}
+
 export interface HeaderCopy {
   links: NavLink[]
   homeLabel: string

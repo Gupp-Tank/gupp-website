@@ -36,6 +36,8 @@ Routing: the language is the first URL segment (`/es`, `/en`); `/` redirects to 
 
 Header: below 860px the links move into a disclosure menu (`useMobileMenu`: Escape closes and restores focus, `main` becomes `inert`, scroll is locked, `useFocusTrap` keeps Tab inside the header). `useActiveSection` highlights the in-page section in view with `aria-current`, changing color only so nothing shifts.
 
+Footer: `SiteFooter` is part of `SiteLayout`. Legal links are data (`footer.legalLinks` in the dictionaries) and the group is not rendered while the list is empty, so there are no dead links; add an entry (path without the language prefix) when its page exists.
+
 Errors: services throw only `AppError` (`src/errors/`); the UI shows copy from the dictionary keyed by `ErrorCode`, never the raw message. Adding a code means adding its copy in both languages (a missing entry is a type error).
 
 Configuration: variables are declared in `src/config/variables.ts` and read only through `src/config/env.ts`. A missing or malformed variable fails `npm run build` (and the dev server) with a list of problems; there are no defaults. Keep `.env.example` in sync.

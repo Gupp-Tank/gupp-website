@@ -102,8 +102,10 @@ describe('AppRoutes', () => {
     })
   })
 
-  it('points the logo at the home page of the active language', () => {
+  it('points every logo (header and footer) at the home page of the active language', () => {
     renderAt('/en/nope')
-    expect(screen.getByRole('link', { name: dictionaries.en.header.homeLabel })).toHaveAttribute('href', '/en')
+    const logos = screen.getAllByRole('link', { name: dictionaries.en.header.homeLabel })
+    expect(logos).toHaveLength(2)
+    for (const logo of logos) expect(logo).toHaveAttribute('href', '/en')
   })
 })

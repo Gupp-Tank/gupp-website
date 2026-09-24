@@ -4,9 +4,10 @@ import { useI18n } from '../../hooks/useI18n'
 import { useLocalePath } from '../../hooks/useLocalePath'
 import { useMobileMenu } from '../../hooks/useMobileMenu'
 import { useSwitchLocale } from '../../hooks/useSwitchLocale'
+import { SiteFooter } from './SiteFooter'
 import { SiteHeader } from './SiteHeader'
 
-// Chrome shared by every page (header today; footer joins here). Pages render
+// Chrome shared by every page (header and footer). Pages render
 // only their own content into the Outlet.
 export function SiteLayout() {
   const { locale, t } = useI18n()
@@ -32,6 +33,7 @@ export function SiteLayout() {
       <main inert={menu.open}>
         <Outlet />
       </main>
+      <SiteFooter copy={t.footer} navLinks={t.header.links} homeLabel={t.header.homeLabel} localePath={localePath} inert={menu.open} />
     </>
   )
 }
