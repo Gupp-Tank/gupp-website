@@ -15,6 +15,14 @@ export default defineConfig(({ mode }) => {
     test: {
       environment: 'jsdom',
       setupFiles: ['./src/test/setup.ts'],
+      coverage: {
+        provider: 'v8',
+        // The logic layers: behavior, I/O, pure helpers and the error model.
+        include: ['src/hooks/**', 'src/services/**', 'src/lib/**', 'src/errors/**'],
+        // GLSL source is a string constant; tests, barrels and type-only files carry no logic.
+        exclude: ['src/**/*.test.*', 'src/lib/caustics/causticsShader.ts', 'src/errors/index.ts'],
+        thresholds: { statements: 90, branches: 80, functions: 90, lines: 90 },
+      },
     },
   }
 })
