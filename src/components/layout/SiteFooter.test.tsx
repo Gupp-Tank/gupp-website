@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { dictionaries } from '../../i18n/dictionaries'
 import { withLocale } from '../../i18n/paths'
 import { AppRoutes } from '../../routes/AppRoutes'
@@ -12,7 +12,7 @@ const es = dictionaries.es
 const renderFooter = (copy: FooterCopy = es.footer) =>
   render(
     <MemoryRouter>
-      <SiteFooter copy={copy} navLinks={es.header.links} homeLabel={es.header.homeLabel} localePath={(p) => withLocale('es', p)} />
+      <SiteFooter copy={copy} navLinks={es.header.links} highlights={es.hero.facts} homeLabel={es.header.homeLabel} localePath={(p) => withLocale('es', p)} />
     </MemoryRouter>,
   )
 
@@ -44,6 +44,56 @@ describe('SiteFooter', () => {
     renderFooter({ ...es.footer, legalLinks: [{ label: 'Privacidad', path: '/privacy' }] })
     const legal = screen.getByRole('navigation', { name: es.footer.legalLabel })
     expect(within(legal).getByRole('link', { name: 'Privacidad' })).toHaveAttribute('href', '/es/privacy')
+  })
+})
+
+describe('footer content', () => {
+  afterEach(() => vi.useRealTimers())
+
+  it('shows the product highlights', () => {
+    renderFooter()
+    for (const item of es.hero.facts) expect(screen.getByText(item)).toBeInTheDocument()
+  })
+
+  it('shows one fun fact under a labelled aside', () => {
+    renderFooter()
+    const aside = screen.getByRole('complementary', { name: es.footer.funFactLabel })
+    const shown = es.footer.funFacts.filter((fact) => within(aside).queryByText(fact))
+    expect(shown).toHaveLength(1)
+  })
+
+  it('starts on the fact of the day, which changes with the date', () => {
+    vi.useFakeTimers()
+    const seen = new Set<string>()
+    for (const day of [1, 2, 3, 4, 5]) {
+      vi.setSystemTime(new Date(2026, 0, day, 12))
+      const { unmount } = renderFooter()
+      seen.add(es.footer.funFacts.find((f) => screen.queryByText(f))!)
+      unmount()
+    }
+    expect(seen.size).toBe(es.footer.funFacts.length)
+  })
+
+  it('pages to another fact and wraps around after the last one', async () => {
+    const user = userEvent.setup()
+    renderFooter()
+    const current = () => es.footer.funFacts.findIndex((f) => screen.queryByText(f))
+    const first = current()
+    await user.click(screen.getByRole('button', { name: es.footer.funFactAction }))
+    expect(current()).toBe((first + 1) % es.footer.funFacts.length)
+    for (let i = 0; i < es.footer.funFacts.length - 1; i++) await user.click(screen.getByRole('button', { name: es.footer.funFactAction }))
+    expect(current()).toBe(first)
+  })
+
+  it('hides the button when there is nothing else to show', () => {
+    renderFooter({ ...es.footer, funFacts: ['Solo uno'] })
+    expect(screen.getByText('Solo uno')).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: es.footer.funFactAction })).not.toBeInTheDocument()
+  })
+
+  it('renders no card when there are no facts', () => {
+    renderFooter({ ...es.footer, funFacts: [] })
+    expect(screen.queryByRole('complementary')).not.toBeInTheDocument()
   })
 })
 
