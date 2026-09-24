@@ -27,3 +27,7 @@ dist-ssr
 
 # Lighthouse CI reports
 .lighthouseci
+
+# Playwright output
+playwright-report
+test-results

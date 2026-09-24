@@ -87,6 +87,19 @@ describe('mobile menu', () => {
   })
 })
 
+describe('skip link', () => {
+  it('is the first focusable element and targets the main landmark', async () => {
+    const user = userEvent.setup()
+    renderHome()
+    const skip = screen.getByRole('link', { name: copy.skipLabel })
+    expect(skip).toHaveAttribute('href', '#main')
+    await user.tab()
+    expect(skip).toHaveFocus()
+    expect(document.getElementById('main')).toBe(document.querySelector('main'))
+    expect(document.getElementById('main')).toHaveAttribute('tabindex', '-1')
+  })
+})
+
 describe('active section', () => {
   let trigger: (id: string, intersecting: boolean) => void
 

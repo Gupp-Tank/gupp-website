@@ -15,6 +15,8 @@ export default defineConfig(({ mode }) => {
     test: {
       environment: 'jsdom',
       setupFiles: ['./src/test/setup.ts'],
+      // Playwright specs live in e2e/ and run with `npx playwright test`.
+      include: ['src/**/*.test.{ts,tsx}'],
       coverage: {
         provider: 'v8',
         // The logic layers: behavior, I/O, pure helpers and the error model.
