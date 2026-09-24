@@ -17,6 +17,7 @@ npm run dev
 - `npm run build` — type-check and build to `dist/`
 - `npm run lint` — Oxlint and the color-token check
 - `npm test` — Vitest
+- `npm run test:coverage` — Vitest with coverage; fails below 90% statements/lines/functions and 80% branches on `hooks/`, `services/`, `lib/` and `errors/`
 - `npm run preview` — preview the production build locally
 
 ## Architecture
@@ -70,6 +71,10 @@ New sections compose these instead of restating layout and type CSS (extend by c
 ```
 
 Spacing and radius come from the documented scale (`--space-*`, `--radius-*`); combine tokens with `calc()` instead of adding loose pixel values.
+
+## Tests
+
+Hooks and services are tested in isolation (fake `fetch`, fake WebGL context, controllable `matchMedia`); components are tested through behavior with Testing Library. `src/test/setup.ts` empties storage before every test and makes any real `fetch` throw, so tests never depend on the network or on leftover state.
 
 ## Themes and contrast
 
