@@ -26,11 +26,10 @@ const renderFooter = (copy: FooterCopy = es.footer, onLocaleChange = vi.fn()) =>
   )
 
 describe('SiteFooter', () => {
-  it('is the contentinfo landmark with the copyright and closing line', () => {
+  it('is the contentinfo landmark with the copyright and tagline', () => {
     renderFooter()
     const footer = screen.getByRole('contentinfo')
     expect(footer).toHaveTextContent(`© ${new Date().getFullYear()} ${es.footer.copyright}`)
-    expect(within(footer).getByText(es.footer.madeWith)).toBeInTheDocument()
     expect(within(footer).getByText(es.footer.tagline)).toBeInTheDocument()
   })
 

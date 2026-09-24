@@ -50,8 +50,6 @@ export interface FooterCopy {
   productLabel: string
   /** Label before the store marks, e.g. "Coming soon on". */
   storesLabel: string
-  /** Closing line of the bottom bar. */
-  madeWith: string
   legalLabel: string
   tagline: string
   /** Shown after "© {year} ". */
