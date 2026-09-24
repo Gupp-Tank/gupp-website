@@ -40,6 +40,16 @@ Network: only `src/services/http` calls `fetch` (lint enforces it). Feature serv
 
 No file over 500 lines (also enforced by lint). Colors come from tokens in `src/index.css`, never from literals: `npm run lint` fails on a hex/rgb/hsl/named color anywhere else, and on a token missing its dark value.
 
+## Copy and languages
+
+All user-facing text lives in `src/i18n/dictionaries/<locale>/`, one file per section (`hero.ts`, `header.ts`, ...). Both locales implement the same `Dictionary` type, so a string added to one language and not the other fails type-check. Use `useFormat()` (or `src/i18n/format.ts`) for numbers, dates, lists and plurals instead of building them by hand.
+
+Adding a language:
+1. Add it to `LOCALES` and `LOCALE_NAMES` in `src/i18n/locales.ts`.
+2. Copy an existing `dictionaries/<locale>/` folder, translate it and register it in `dictionaries/index.ts` (type-check lists anything missing).
+3. Add the locale to the pre-paint script in `index.html` (`locales.test.ts` fails if you forget).
+4. Add its error copy (`errors.ts`), then review the CI run.
+
 ## Status
 
 Landing page with a bilingual (es/en) hero, light/dark theme and an app mockup that mirrors the real Home screen. Copy lives in `src/i18n/dictionaries/`; pages in `src/pages/` only compose sections. See `gupp-docs` (`product/roadmap`) for what's planned next.
