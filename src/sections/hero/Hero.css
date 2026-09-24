@@ -1,0 +1,310 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  /* Slides under the transparent header so the caustics start at the page's top edge. */
+  margin-top: calc(-1 * var(--header-height));
+  padding-top: var(--header-height);
+}
+
+.hero__caustics {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  max-width: var(--page-max);
+  min-height: min(calc(100svh - var(--header-height)), 860px);
+  margin: 0 auto;
+  padding: 40px var(--space-xl) 72px;
+}
+
+/* ---------- Copy ---------- */
+
+.hero-copy {
+  animation: hero-rise 700ms 100ms ease-out both;
+}
+
+.reading-ticker {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin-bottom: 28px;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-body);
+  font-variant-numeric: tabular-nums;
+}
+
+.reading-ticker__tank {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.reading-ticker__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.reading-ticker__item--warning {
+  color: var(--warning);
+  font-weight: 700;
+}
+
+.hero-copy__title {
+  font-weight: 800;
+  font-size: clamp(38px, 4.1vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  /* Spanish runs ~20% longer than English; balancing avoids a one-word last line. */
+  text-wrap: balance;
+}
+
+.hero-copy__nowrap {
+  white-space: nowrap;
+}
+
+.hero-copy__main,
+.hero-copy__tail {
+  display: block;
+}
+
+.hero-copy__tail {
+  color: var(--headline-muted);
+}
+
+.hero-copy__emphasis {
+  position: relative;
+  display: inline-block;
+  font-style: normal;
+  color: var(--primary-green);
+}
+
+.hero-copy__underline {
+  position: absolute;
+  left: -2%;
+  bottom: -0.08em;
+  width: 104%;
+  height: 0.22em;
+  overflow: visible;
+}
+
+.hero-copy__underline path {
+  fill: none;
+  stroke: var(--primary-green);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: underline-draw 700ms 900ms ease-out forwards;
+}
+
+.hero-copy__description {
+  max-width: 34em;
+  margin-top: 28px;
+  font-size: clamp(17px, 1.35vw, 19px);
+  line-height: 1.6;
+  color: var(--text-body);
+  text-wrap: pretty;
+}
+
+.hero-copy__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: 36px;
+}
+
+.hero-copy__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-xl);
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-body);
+}
+
+.hero-copy__facts li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.hero-copy__facts li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary-green);
+}
+
+/* ---------- Visual ---------- */
+
+.hero-visual {
+  position: relative;
+  height: 660px;
+}
+
+/* Floating cards only overlap the phone's outer edge, so the health ring and
+   the parameter row — the product's first read — stay visible. */
+.hero-visual__phone {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  translate: calc(-50% - 16px) 0;
+  animation: hero-rise 800ms 200ms ease-out both;
+}
+
+.hero-visual__compat {
+  position: absolute;
+  top: 392px;
+  left: -8px;
+  width: 232px;
+  animation: hero-rise 700ms 700ms ease-out both;
+}
+
+.hero-visual__compat .insight-card__title {
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+.hero-visual__diagnosis {
+  position: absolute;
+  right: 0;
+  bottom: 24px;
+  width: 290px;
+  animation: hero-rise 700ms 500ms ease-out both;
+}
+
+.hero-visual__note {
+  position: absolute;
+  top: 56px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  width: 128px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-body);
+  animation: hero-fade 600ms 1400ms ease-out both;
+}
+
+.hero-visual__note-value {
+  font-family: var(--font-title);
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--secondary-blue);
+}
+
+.hero-visual__leader {
+  width: 72px;
+  height: 44px;
+  margin: 6px 0 0 -40px;
+  overflow: visible;
+}
+
+.hero-visual__leader path {
+  fill: none;
+  stroke: var(--secondary-blue);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 3 6;
+}
+
+.hero-visual__leader circle {
+  fill: var(--secondary-blue);
+}
+
+/* ---------- Motion ---------- */
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes underline-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1180px) {
+  .hero-visual__note {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 56px;
+    min-height: 0;
+    padding-top: 32px;
+  }
+
+  .hero-copy {
+    max-width: 640px;
+  }
+
+  .hero-visual {
+    width: min(100%, 600px);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero__inner {
+    padding-inline: var(--space-md);
+  }
+
+  .reading-ticker__tank {
+    display: none;
+  }
+
+  .hero-copy__actions .btn--primary {
+    flex: 1;
+  }
+
+  .hero-visual {
+    height: 700px;
+  }
+
+  .hero-visual__compat {
+    display: none;
+  }
+
+  .hero-visual__diagnosis {
+    left: 50%;
+    right: auto;
+    bottom: 0;
+    width: min(100%, 320px);
+    translate: -50% 0;
+  }
+}

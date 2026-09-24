@@ -1,0 +1,61 @@
+.pref-control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  height: 44px;
+  padding: var(--space-xs);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.pref-control__segment {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.pref-control__divider {
+  width: 1px;
+  height: 18px;
+  margin: 0 2px;
+  background: var(--nav-border);
+}
+
+.pref-control__button {
+  display: grid;
+  place-items: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.pref-control__button--icon {
+  width: 36px;
+  padding: 0;
+}
+
+.pref-control__button:hover {
+  color: var(--text-primary);
+}
+
+.pref-control__button[aria-pressed='true'] {
+  background: var(--nav-active-bg);
+  color: var(--nav-active-fg);
+}
+
+.pref-control__button:focus-visible {
+  outline: 2px solid var(--secondary-blue);
+  outline-offset: 1px;
+}
