@@ -1,3 +1,6 @@
+import { Container } from '../../components/layout/Container'
+import { Section } from '../../components/layout/Section'
+import { Heading } from '../../components/ui/Heading'
 import type { ProductModule } from '../../types/content'
 import { ModuleItem } from './ModuleItem'
 import './ModulesSection.css'
@@ -9,17 +12,17 @@ interface ModulesSectionProps {
 
 export function ModulesSection({ heading, modules }: ModulesSectionProps) {
   return (
-    <section id="modules" className="modules" aria-labelledby="modules-title">
-      <div className="modules__inner">
-        <h2 id="modules-title" className="modules__title">
+    <Section id="modules" labelledBy="modules-title">
+      <Container className="modules__inner">
+        <Heading level={2} size="section" id="modules-title" className="modules__title">
           {heading}
-        </h2>
+        </Heading>
         <ol className="modules__list">
           {modules.map((module) => (
             <ModuleItem key={module.index} module={module} />
           ))}
         </ol>
-      </div>
-    </section>
+      </Container>
+    </Section>
   )
 }

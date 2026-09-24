@@ -1,0 +1,22 @@
+.text--size-lead {
+  font-size: clamp(17px, 1.35vw, 19px);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.text--size-body {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.text--tone-body {
+  color: var(--text-body);
+}
+
+.text--tone-muted {
+  color: var(--text-secondary);
+}
+
+.text--tone-default {
+  color: var(--text-primary);
+}

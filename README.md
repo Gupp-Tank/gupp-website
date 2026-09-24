@@ -42,6 +42,21 @@ Network: only `src/services/http` calls `fetch` (lint enforces it). Feature serv
 
 No file over 500 lines (also enforced by lint). Colors come from tokens in `src/index.css`, never from literals: `npm run lint` fails on a hex/rgb/hsl/named color anywhere else, and on a token missing its dark value.
 
+## UI primitives
+
+New sections compose these instead of restating layout and type CSS (extend by composition, never by editing a primitive for one caller):
+
+```tsx
+<Section id="features" labelledBy="features-title">      {/* labelled landmark, anchor-safe under the sticky header */}
+  <Container className="features__inner">                {/* centered column + gutter; you set padding-block */}
+    <Heading level={2} size="section" id="features-title">…</Heading>   {/* level = outline, size = looks */}
+    <Text tone="muted">…</Text>                          {/* size: lead | body, tone: body | muted | default */}
+  </Container>
+</Section>
+```
+
+Spacing and radius come from the documented scale (`--space-*`, `--radius-*`); combine tokens with `calc()` instead of adding loose pixel values.
+
 ## Copy and languages
 
 All user-facing text lives in `src/i18n/dictionaries/<locale>/`, one file per section (`hero.ts`, `header.ts`, ...). Both locales implement the same `Dictionary` type, so a string added to one language and not the other fails type-check. Use `useFormat()` (or `src/i18n/format.ts`) for numbers, dates, lists and plurals instead of building them by hand.
