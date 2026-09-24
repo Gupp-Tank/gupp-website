@@ -1,6 +1,6 @@
 import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { dictionaries } from '../../i18n/dictionaries'
 import { FeaturesSection } from './FeaturesSection'
 
@@ -8,8 +8,16 @@ describe.each(Object.entries(dictionaries))('FeaturesSection (%s)', (_locale, di
   const renderSection = () =>
     render(<FeaturesSection heading={dictionary.modules.heading} modules={dictionary.modules.items} views={dictionary.deviceViews} preview={dictionary.appPreview} />)
 
+  const scrollIntoView = vi.fn()
+
+  beforeEach(() => {
+    // jsdom has no layout; the hook scrolls the tab into view after a hash selection.
+    Element.prototype.scrollIntoView = scrollIntoView
+  })
+
   afterEach(() => {
     window.location.hash = ''
+    scrollIntoView.mockClear()
   })
 
   it('keeps the section anchor and its accessible name', () => {
@@ -58,5 +66,6 @@ describe.each(Object.entries(dictionaries))('FeaturesSection (%s)', (_locale, di
       window.location.hash = `#module-${dictionary.modules.items[3].slug}`
     })
     expect(screen.getAllByRole('tab')[3]).toHaveAttribute('aria-selected', 'true')
+    await vi.waitFor(() => expect(scrollIntoView).toHaveBeenCalled())
   })
 })
