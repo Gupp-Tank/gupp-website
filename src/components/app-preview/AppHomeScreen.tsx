@@ -26,7 +26,7 @@ export function AppHomeScreen({
 }: AppHomeScreenProps) {
   return (
     <div className="app-home">
-      <header className="app-home__header">
+      <div className="app-home__header">
         <span className="app-home__brand">
           <img src="/branding/icon.png" alt="" width={20} height={20} />
           Gupp
@@ -39,7 +39,7 @@ export function AppHomeScreen({
           <Icon name="bell" size={18} />
           <span className="app-home__dot" />
         </span>
-      </header>
+      </div>
 
       <div className="app-home__body">
         <div className="app-home__quick-actions">

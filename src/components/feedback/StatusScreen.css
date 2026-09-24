@@ -1,5 +1,5 @@
-.error-fallback {
-  min-height: 100svh;
+.status-screen {
+  min-height: 70svh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,13 +9,13 @@
   text-align: center;
 }
 
-.error-fallback__title {
+.status-screen__title {
   font-weight: 800;
   font-size: clamp(24px, 4vw, 36px);
   letter-spacing: -0.03em;
 }
 
-.error-fallback__message {
+.status-screen__message {
   max-width: 32em;
   color: var(--text-body);
 }
