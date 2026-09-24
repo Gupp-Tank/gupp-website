@@ -73,6 +73,12 @@ No file over 500 lines (also enforced by lint). Colors come from tokens in `src/
 - Share images (`public/og/og-es.jpg`, `og-en.jpg`, 1200x630) come from `scripts/generate-og.mjs`; rerun it when the headline copy changes (it needs Playwright).
 - Server render rules: the stores read `<html lang>`/`data-theme`, so the prerender gives them a minimal fake `document`; hooks touch `window` only in effects; anything the first render shows must not depend on the browser (that is why the logo variants are switched by CSS, not by a hook).
 
+## Accessibility and end-to-end tests
+
+`npx playwright test` builds and serves the production build and runs `e2e/`: **axe (WCAG 2.1 A + AA) on every route in both languages and themes**, with the mobile menu open, plus structure checks (one banner/main/contentinfo, labelled navs, one `h1`, no skipped heading levels), a skip link that moves focus into `main`, a visible focus outline on every keyboard stop in both themes, and no infinite animations under reduced motion. Desktop and mobile (Pixel 7) projects. The `E2E and accessibility` workflow runs it on PRs that touch shipped code.
+
+The phone mockup in the hero is an illustration (an image with a text alternative), so its inner text is excluded from the color-contrast rule only; every other rule still scans it. What automation cannot do is a screen-reader pass: check VoiceOver/NVDA by hand before a launch.
+
 ## Performance budget
 
 `npm run check:budget` (runs in CI after the build) fails if the production build exceeds: entry JS 120 kB gzip, all JS 135 kB, CSS 12 kB, any font subset 40 kB (120 kB total), any image 60 kB. Today: 92 / 95 / 6 / 105 (fonts) / 32 kB. Raise a number only deliberately, in its own PR.

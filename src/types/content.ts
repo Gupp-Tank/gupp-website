@@ -64,6 +64,7 @@ export interface FooterCopy {
 export interface HeaderCopy {
   links: NavLink[]
   homeLabel: string
+  skipLabel: string
   navLabel: string
   menuOpen: string
   menuClose: string
