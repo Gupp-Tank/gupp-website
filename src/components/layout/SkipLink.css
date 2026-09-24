@@ -1,0 +1,28 @@
+.skip-link {
+  position: fixed;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  z-index: 100;
+  padding: 12px var(--space-lg);
+  border-radius: var(--radius-pill);
+  background: var(--primary-green);
+  color: var(--on-primary);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow-float);
+  /* Off-screen until it receives keyboard focus; still the first tab stop. */
+  transform: translateY(calc(-100% - var(--space-md)));
+  transition: transform 150ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: none;
+  outline: 3px solid var(--secondary-blue);
+  outline-offset: 3px;
+}
+
+/* The target only takes programmatic focus: no ring around the whole page. */
+main:focus {
+  outline: none;
+}

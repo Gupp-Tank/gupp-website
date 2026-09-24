@@ -6,6 +6,7 @@ import { useLocalePath } from '../../hooks/useLocalePath'
 import { useMobileMenu } from '../../hooks/useMobileMenu'
 import { useSwitchLocale } from '../../hooks/useSwitchLocale'
 import { SiteFooter } from './SiteFooter'
+import './SkipLink.css'
 import { SiteHeader } from './SiteHeader'
 
 // Chrome shared by every page (header and footer). Pages render
@@ -22,6 +23,9 @@ export function SiteLayout() {
 
   return (
     <>
+      <a className="skip-link" href="#main">
+        {t.header.skipLabel}
+      </a>
       <SiteHeader
         copy={t.header}
         homeHref={localePath()}
@@ -31,7 +35,8 @@ export function SiteLayout() {
         menu={menu}
       />
       {/* While the menu is open the page behind it is inert: no focus, no clicks, hidden from assistive tech. */}
-      <main inert={menu.open}>
+      {/* tabIndex -1: the skip link can move focus here, so the next Tab starts inside the content. */}
+      <main id="main" tabIndex={-1} inert={menu.open}>
         <Outlet />
       </main>
       <SiteFooter
