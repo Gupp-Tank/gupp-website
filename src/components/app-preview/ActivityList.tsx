@@ -12,7 +12,7 @@ export function ActivityList({ items }: ActivityListProps) {
       {items.map((item) => (
         <Card key={item.id} radius="md" className={`activity-card activity-card--${item.kind}`}>
           <span className="activity-card__icon">
-            <Icon name={item.kind === 'done' ? 'check' : 'plus'} size={14} strokeWidth={2.6} />
+            <Icon name={item.kind === 'done' ? 'check' : 'plus'} size={14} />
           </span>
           <span className="activity-card__title">{item.title}</span>
           <span className="app-caption">{item.when}</span>

@@ -20,7 +20,7 @@ export function MenuButton({ open, controls, openLabel, closeLabel, onClick, ref
       aria-label={open ? closeLabel : openLabel}
       onClick={onClick}
     >
-      <Icon name={open ? 'close' : 'menu'} size={22} strokeWidth={2.2} />
+      <Icon name={open ? 'close' : 'menu'} size={22} />
     </button>
   )
 }

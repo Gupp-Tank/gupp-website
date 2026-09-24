@@ -71,7 +71,7 @@ export function TankDetailScreen({ view }: { view: TankDetailView }) {
       </div>
 
       <span className="dv-fab">
-        <Icon name="plus" size={15} strokeWidth={2.4} />
+        <Icon name="plus" size={15} />
         {view.addLabel}
       </span>
 

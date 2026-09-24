@@ -8,7 +8,7 @@ export const modules: Dictionary['modules'] = {
       index: '01',
       title: 'Perfil del acuario',
       description: 'Volumen neto real, equipo y cada habitante: el registro del que parte todo lo demás.',
-      icon: 'tank',
+      icon: 'fish',
       view: 'tank-detail',
     },
     {
