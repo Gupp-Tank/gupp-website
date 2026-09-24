@@ -42,6 +42,8 @@ export interface HeaderCopy {
   links: NavLink[]
   homeLabel: string
   navLabel: string
+  menuOpen: string
+  menuClose: string
   preferencesLabel: string
   languageLabel: string
   themeToDark: string
