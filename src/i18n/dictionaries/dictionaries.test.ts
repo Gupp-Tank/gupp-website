@@ -34,3 +34,15 @@ describe('device views', () => {
     }
   })
 })
+
+describe('page section copy', () => {
+  it('has the same steps and questions (by id) in every locale', () => {
+    const ids = (d: (typeof dictionaries)['es']) => ({ steps: d.howItWorks.steps.map((x) => x.id), faq: d.faq.items.map((x) => x.id) })
+    const [first, ...rest] = Object.values(dictionaries).map(ids)
+    for (const other of rest) expect(other).toEqual(first)
+  })
+
+  it('has no empty question or answer', () => {
+    for (const d of Object.values(dictionaries)) for (const item of d.faq.items) expect(item.question.trim() && item.answer.trim()).toBeTruthy()
+  })
+})

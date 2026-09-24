@@ -1,0 +1,9 @@
+.cta__inner {
+  padding-block: var(--space-xl) calc(var(--space-xl) * 4);
+}
+
+@media (max-width: 600px) {
+  .cta__inner {
+    padding-block: var(--space-sm) calc(var(--space-md) * 4);
+  }
+}

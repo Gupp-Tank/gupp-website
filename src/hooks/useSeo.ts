@@ -7,10 +7,10 @@ const MARK = 'data-seo'
 // The prerendered HTML already carries the same tags (from the same buildSeo); this
 // replaces them when the visitor navigates, and after a language switch.
 export function useSeo(input: SeoInput) {
-  const { locale, path, title, description, noindex } = input
+  const { locale, path, title, description, noindex, faq } = input
 
   useEffect(() => {
-    const seo = buildSeo({ locale, path, title, description, noindex })
+    const seo = buildSeo({ locale, path, title, description, noindex, faq })
     document.title = seo.title
     document.querySelector('meta[name="description"]')?.setAttribute('content', seo.description)
 
@@ -28,5 +28,5 @@ export function useSeo(input: SeoInput) {
       el.textContent = JSON.stringify(data)
       document.head.append(el)
     }
-  }, [locale, path, title, description, noindex])
+  }, [locale, path, title, description, noindex, faq])
 }

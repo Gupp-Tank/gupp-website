@@ -1,0 +1,14 @@
+.faq__inner {
+  padding-block: var(--space-xl) calc(var(--space-xl) * 4);
+}
+
+.faq__list {
+  max-width: 48em;
+  margin-top: calc(var(--space-xl) + var(--space-md));
+}
+
+@media (max-width: 600px) {
+  .faq__inner {
+    padding-block: var(--space-sm) calc(var(--space-md) * 4);
+  }
+}

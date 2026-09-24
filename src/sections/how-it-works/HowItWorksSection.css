@@ -1,0 +1,65 @@
+.how__inner {
+  padding-block: var(--space-xl) calc(var(--space-xl) * 4);
+}
+
+.how__title {
+  max-width: 18em;
+}
+
+.how__steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-xl);
+  margin: calc(var(--space-xl) + var(--space-md)) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.how__step {
+  position: relative;
+}
+
+.how__badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-lg);
+  border-radius: var(--radius-md);
+  background: var(--nav-active-bg);
+  color: var(--nav-active-fg);
+}
+
+.how__number {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary-green);
+  color: var(--on-primary);
+  font-family: var(--font-title);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.how__description {
+  margin-top: var(--space-sm);
+  max-width: 24em;
+}
+
+@media (max-width: 900px) {
+  .how__steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .how__inner {
+    padding-block: var(--space-sm) calc(var(--space-md) * 4);
+  }
+}

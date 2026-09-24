@@ -10,6 +10,8 @@ export interface SeoInput {
   description: string
   /** Keep the page out of search results (404s, utility pages). */
   noindex?: boolean
+  /** Questions shown on the page; emitted as FAQPage structured data. */
+  faq?: { question: string; answer: string }[]
 }
 
 export interface SeoTag {
@@ -29,7 +31,7 @@ const meta = (key: 'name' | 'property', name: string, content: string): SeoTag =
 
 // One function builds every SEO tag, so the prerendered HTML and the client-side
 // updates on navigation can never disagree.
-export function buildSeo({ locale, path, title, description, noindex }: SeoInput): Seo {
+export function buildSeo({ locale, path, title, description, noindex, faq }: SeoInput): Seo {
   const url = abs(withLocale(locale, path))
   const image = abs(site.ogImage[locale])
   const others = LOCALES.filter((l) => l !== locale)
@@ -60,6 +62,15 @@ export function buildSeo({ locale, path, title, description, noindex }: SeoInput
     : [
         { '@context': 'https://schema.org', '@type': 'Organization', name: site.name, url: site.url, logo: abs(site.logo) },
         { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url, inLanguage: locale },
+        ...(faq?.length
+          ? [
+              {
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                mainEntity: faq.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })),
+              },
+            ]
+          : []),
       ]
 
   return { title, description, tags, jsonLd }

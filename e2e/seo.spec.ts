@@ -25,7 +25,7 @@ test('the head has hreflang alternates, Open Graph, a Twitter card and valid JSO
   expect(shared.status()).toBe(200)
   expect(shared.headers()['content-type']).toBe('image/jpeg')
   const types = await page.locator('script[type="application/ld+json"]').evaluateAll((els) => els.map((e) => JSON.parse(e.textContent!)['@type']))
-  expect(types).toEqual(['Organization', 'WebSite'])
+  expect(types).toEqual(['Organization', 'WebSite', 'FAQPage'])
 })
 
 test('sitemap, robots and the security headers are served', async ({ request }) => {

@@ -40,6 +40,7 @@ for (const locale of ['es', 'en']) {
     }
   })
   check(types.includes('Organization') && types.includes('WebSite'), `${file}: JSON-LD must include Organization and WebSite`)
+  check(types.includes('FAQPage'), `${file}: JSON-LD must include FAQPage`)
 }
 
 const sitemap = read('sitemap.xml')

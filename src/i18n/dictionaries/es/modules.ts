@@ -1,7 +1,7 @@
 import type { Dictionary } from '../../../types/i18n'
 
 export const modules: Dictionary['modules'] = {
-  heading: 'Un perfil de acuario. Cuatro módulos que hablan entre sí.',
+  heading: 'Qué hace Gupp Tank',
   items: [
     {
       slug: 'tank-profile',
