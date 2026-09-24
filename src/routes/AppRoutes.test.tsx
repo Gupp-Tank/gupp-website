@@ -56,6 +56,13 @@ describe('AppRoutes', () => {
     expect(localStorage.getItem('gupp-locale')).toBe('en')
   })
 
+  it('saves the language even when <html lang> already matches the URL (the pre-paint script sets it)', () => {
+    document.documentElement.lang = 'en'
+    localStorage.setItem('gupp-locale', 'es')
+    renderAt('/en')
+    expect(localStorage.getItem('gupp-locale')).toBe('en')
+  })
+
   it('shows a localized 404, without the site header, for an unsupported language', () => {
     renderAt('/fr')
     expect(screen.getByRole('heading', { name: dictionaries.es.notFound.title })).toBeInTheDocument()

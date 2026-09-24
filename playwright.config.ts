@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 
 // End-to-end and accessibility checks run against the production build served by
-// `vite preview`, the same artifact that ships.
+// scripts/serve-dist.mjs, which serves dist/ with Vercel's routing and headers.
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
@@ -19,7 +19,7 @@ export default defineConfig({
     { name: 'mobile', use: { ...devices['Pixel 7'] } },
   ],
   webServer: {
-    command: 'npm run build && npm run preview -- --port 4173 --strictPort',
+    command: 'npm run build && node scripts/serve-dist.mjs --port 4173',
     url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

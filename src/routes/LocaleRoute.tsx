@@ -9,8 +9,10 @@ export function LocaleRoute() {
   const { locale } = useParams()
   const valid = isLocale(locale)
 
+  // Always write it, even when <html lang> already matches: the pre-paint script sets
+  // the attribute from the URL, so "already matches" says nothing about what is saved.
   useLayoutEffect(() => {
-    if (isLocale(locale) && localeStore.get() !== locale) localeStore.set(locale)
+    if (isLocale(locale)) localeStore.set(locale)
   }, [locale])
 
   return valid ? <Outlet /> : <NotFoundPage />
