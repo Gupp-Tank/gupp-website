@@ -33,7 +33,7 @@ export function SiteLayout() {
       <main inert={menu.open}>
         <Outlet />
       </main>
-      <SiteFooter copy={t.footer} navLinks={t.header.links} homeLabel={t.header.homeLabel} localePath={localePath} inert={menu.open} />
+      <SiteFooter copy={t.footer} navLinks={t.header.links} highlights={t.hero.facts} homeLabel={t.header.homeLabel} localePath={localePath} inert={menu.open} />
     </>
   )
 }

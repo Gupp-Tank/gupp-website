@@ -1,14 +1,17 @@
 import { Link } from 'react-router'
 import { cx } from '../../lib/classNames'
 import type { FooterCopy, NavLink } from '../../types/content'
-import { Text } from '../ui/Text'
 import { Logo } from '../ui/Logo'
+import { Text } from '../ui/Text'
 import { Container } from './Container'
+import { FooterFunFact } from './FooterFunFact'
 import './SiteFooter.css'
 
 interface SiteFooterProps {
   copy: FooterCopy
   navLinks: NavLink[]
+  /** Short key facts about the product, reused from the hero. */
+  highlights: string[]
   /** Accessible name of the logo link (same as the header's). */
   homeLabel: string
   /** Resolves a language-less path to the active language: '/privacy' -> '/es/privacy'. */
@@ -17,7 +20,7 @@ interface SiteFooterProps {
   className?: string
 }
 
-export function SiteFooter({ copy, navLinks, homeLabel, localePath, inert, className }: SiteFooterProps) {
+export function SiteFooter({ copy, navLinks, highlights, homeLabel, localePath, inert, className }: SiteFooterProps) {
   const year = new Date().getFullYear()
 
   return (
@@ -30,33 +33,42 @@ export function SiteFooter({ copy, navLinks, homeLabel, localePath, inert, class
           <Text tone="body" className="site-footer__tagline">
             {copy.tagline}
           </Text>
-        </div>
-
-        <nav className="site-footer__nav" aria-label={copy.navLabel}>
-          <ul>
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a href={link.href}>{link.label}</a>
-              </li>
+          <ul className="site-footer__highlights">
+            {highlights.map((item) => (
+              <li key={item}>{item}</li>
             ))}
           </ul>
-        </nav>
+        </div>
 
-        {copy.legalLinks.length > 0 && (
-          <nav className="site-footer__legal" aria-label={copy.legalLabel}>
+        <FooterFunFact label={copy.funFactLabel} actionLabel={copy.funFactAction} facts={copy.funFacts} />
+
+        <div className="site-footer__links">
+          <nav className="site-footer__nav" aria-label={copy.navLabel}>
             <ul>
-              {copy.legalLinks.map((link) => (
-                <li key={link.path}>
-                  <Link to={localePath(link.path)}>{link.label}</Link>
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href}>{link.label}</a>
                 </li>
               ))}
             </ul>
           </nav>
-        )}
 
-        <Text tone="muted" className="site-footer__copyright">
-          © {year} {copy.copyright}
-        </Text>
+          {copy.legalLinks.length > 0 && (
+            <nav className="site-footer__legal" aria-label={copy.legalLabel}>
+              <ul>
+                {copy.legalLinks.map((link) => (
+                  <li key={link.path}>
+                    <Link to={localePath(link.path)}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
+
+          <Text tone="body" className="site-footer__copyright">
+            © {year} {copy.copyright}
+          </Text>
+        </div>
       </Container>
     </footer>
   )
