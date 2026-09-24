@@ -4,6 +4,10 @@ Gupp Tank public website — React + TypeScript + Vite. Deployed on Vercel.
 
 Live at [gupp.app](https://gupp.app).
 
+## Contents
+
+[Local setup](#local-setup) · [Scripts](#scripts) · [Architecture](#architecture) · [CI](#ci) · [Performance budget](#performance-budget) · [Security headers](#security-headers) · [Fonts](#fonts) · [UI primitives](#ui-primitives) · [Tests](#tests) · [Themes and contrast](#themes-and-contrast) · [Copy and languages](#copy-and-languages) · [Status](#status) · [Contributing](CONTRIBUTING.md)
+
 ## Local setup
 
 ```bash
@@ -15,7 +19,9 @@ npm run dev
 
 - `npm run dev` — dev server
 - `npm run build` — type-check and build to `dist/`
-- `npm run lint` — Oxlint and the color-token check
+- `npm run lint` — Oxlint (layer boundaries, 500-line cap) plus the token and convention checks
+- `npx tsc -b` — type-check
+- `npm run check:budget` — size budget of the production build (run after `build`)
 - `npm test` — Vitest
 - `npm run test:coverage` — Vitest with coverage; fails below 90% statements/lines/functions and 80% branches on `hooks/`, `services/`, `lib/` and `errors/`
 - `npm run preview` — preview the production build locally
@@ -119,4 +125,4 @@ Adding a language:
 
 ## Status
 
-Landing page with a bilingual (es/en) hero, light/dark theme and an app mockup that mirrors the real Home screen. Copy lives in `src/i18n/dictionaries/`; pages in `src/pages/` only compose sections. See `gupp-docs` (`product/roadmap`) for what's planned next.
+Landing page: bilingual (es/en) hero with the app mockup, four product modules, footer, light/dark theme and localized 404. The foundations (layering, tokens, errors, config, HTTP client, routing, i18n, security headers, budgets, CI) are in place. Still to build: the early-access form and consent, legal pages, cookie banner, more sections and device views, SEO/prerender and end-to-end tests; see the open issues and milestones. Architecture summary and the reasons behind these rules: `gupp-docs` (`architecture/website`).
