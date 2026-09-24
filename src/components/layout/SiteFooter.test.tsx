@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { dictionaries } from '../../i18n/dictionaries'
 import { withLocale } from '../../i18n/paths'
 import { AppRoutes } from '../../routes/AppRoutes'
@@ -9,46 +9,30 @@ import type { FooterCopy } from '../../types/content'
 import { SiteFooter } from './SiteFooter'
 
 const es = dictionaries.es
-const renderFooter = (copy: FooterCopy = es.footer) =>
+const renderFooter = (copy: FooterCopy = es.footer, onLocaleChange = vi.fn()) =>
   render(
     <MemoryRouter>
-      <SiteFooter copy={copy} navLinks={es.header.links} highlights={es.hero.facts} homeLabel={es.header.homeLabel} localePath={(p) => withLocale('es', p)} />
+      <SiteFooter
+        copy={copy}
+        modules={es.modules.items}
+        highlights={es.hero.facts}
+        preferencesCopy={es.header}
+        locale="es"
+        onLocaleChange={onLocaleChange}
+        homeLabel={es.header.homeLabel}
+        localePath={(p) => withLocale('es', p)}
+      />
     </MemoryRouter>,
   )
 
 describe('SiteFooter', () => {
-  it('is the contentinfo landmark with the copyright and tagline', () => {
+  it('is the contentinfo landmark with the copyright and closing line', () => {
     renderFooter()
     const footer = screen.getByRole('contentinfo')
-    expect(within(footer).getByText(es.footer.tagline)).toBeInTheDocument()
     expect(footer).toHaveTextContent(`© ${new Date().getFullYear()} ${es.footer.copyright}`)
+    expect(within(footer).getByText(es.footer.madeWith)).toBeInTheDocument()
+    expect(within(footer).getByText(es.footer.tagline)).toBeInTheDocument()
   })
-
-  it('lists the site sections in a labelled nav', () => {
-    renderFooter()
-    const nav = screen.getByRole('navigation', { name: es.footer.navLabel })
-    expect(within(nav).getByRole('link', { name: es.header.links[0].label })).toHaveAttribute('href', es.header.links[0].href)
-  })
-
-  it('links the mark to the home page of the active language', () => {
-    renderFooter()
-    expect(screen.getByRole('link', { name: es.header.homeLabel })).toHaveAttribute('href', '/es')
-  })
-
-  it('renders no legal group (and no dead links) until legal pages are configured', () => {
-    renderFooter()
-    expect(screen.queryByRole('navigation', { name: es.footer.legalLabel })).not.toBeInTheDocument()
-  })
-
-  it('renders legal links in the active language once configured', () => {
-    renderFooter({ ...es.footer, legalLinks: [{ label: 'Privacidad', path: '/privacy' }] })
-    const legal = screen.getByRole('navigation', { name: es.footer.legalLabel })
-    expect(within(legal).getByRole('link', { name: 'Privacidad' })).toHaveAttribute('href', '/es/privacy')
-  })
-})
-
-describe('footer content', () => {
-  afterEach(() => vi.restoreAllMocks())
 
   it('shows the product highlights', () => {
     renderFooter()
@@ -62,20 +46,36 @@ describe('footer content', () => {
     expect(img.getAttribute('src')).toBe('/branding/icon.png')
     expect(img).toHaveAttribute('alt', '')
     expect(document.querySelector('img[src*="logotype"]')).toBeNull()
+    expect(home).toHaveAttribute('href', '/es')
   })
 
-  it('names the tagline as a heading and labels the links block', () => {
+  it('lists every module as a link to its own card', () => {
     renderFooter()
-    expect(screen.getByRole('heading', { level: 2, name: es.footer.tagline })).toBeInTheDocument()
-    expect(screen.getByText(es.footer.exploreLabel)).toBeInTheDocument()
+    const nav = screen.getByRole('navigation', { name: es.footer.productLabel })
+    for (const module of es.modules.items) {
+      expect(within(nav).getByRole('link', { name: module.title })).toHaveAttribute('href', `#module-${module.slug}`)
+    }
   })
 
-  it('scrolls back to the top when asked', async () => {
-    const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {})
+  it('offers language and theme controls that work', async () => {
+    const onLocaleChange = vi.fn()
     const user = userEvent.setup()
+    renderFooter(es.footer, onLocaleChange)
+    const controls = screen.getByRole('group', { name: es.header.preferencesLabel })
+    await user.click(within(controls).getByRole('button', { name: 'English' }))
+    expect(onLocaleChange).toHaveBeenCalledWith('en')
+    expect(within(controls).getByRole('button', { name: es.header.themeToDark })).toBeInTheDocument()
+  })
+
+  it('renders no legal column (and no dead links) until legal pages are configured', () => {
     renderFooter()
-    await user.click(screen.getByRole('button', { name: es.footer.backToTopLabel }))
-    expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' })
+    expect(screen.queryByRole('navigation', { name: es.footer.legalLabel })).not.toBeInTheDocument()
+  })
+
+  it('renders legal links in the active language once configured', () => {
+    renderFooter({ ...es.footer, legalLinks: [{ label: 'Privacidad', path: '/privacy' }] })
+    const legal = screen.getByRole('navigation', { name: es.footer.legalLabel })
+    expect(within(legal).getByRole('link', { name: 'Privacidad' })).toHaveAttribute('href', '/es/privacy')
   })
 })
 
@@ -93,6 +93,18 @@ describe('footer in the layout', () => {
     )
     expect(screen.getAllByRole('contentinfo')).toHaveLength(1)
     expect(screen.getByRole('contentinfo')).toHaveTextContent(dictionaries.en.footer.tagline)
+  })
+
+  it('has module cards to land on: every footer link points at an existing id', () => {
+    render(
+      <MemoryRouter initialEntries={['/es']}>
+        <AppRoutes />
+      </MemoryRouter>,
+    )
+    const nav = screen.getByRole('navigation', { name: es.footer.productLabel })
+    for (const link of within(nav).getAllByRole('link')) {
+      expect(document.getElementById(link.getAttribute('href')!.slice(1))).not.toBeNull()
+    }
   })
 
   it('becomes inert together with the page while the mobile menu is open', async () => {

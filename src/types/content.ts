@@ -46,9 +46,10 @@ export interface LegalLink {
 
 export interface FooterCopy {
   navLabel: string
-  /** Heading above the section links. */
-  exploreLabel: string
-  backToTopLabel: string
+  /** Heading of the product links column. */
+  productLabel: string
+  /** Closing line of the bottom bar. */
+  madeWith: string
   legalLabel: string
   tagline: string
   /** Shown after "© {year} ". */
@@ -91,6 +92,8 @@ export interface HeroVisualCopy {
 }
 
 export interface ProductModule {
+  /** Stable anchor: the card gets id "module-<slug>" so other sections can link to it. */
+  slug: string
   index: string
   title: string
   description: string

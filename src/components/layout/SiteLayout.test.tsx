@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react'
+import { act, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
@@ -81,8 +81,9 @@ describe('mobile menu', () => {
 
   it('offers the language and theme controls with the menu closed', () => {
     renderHome()
-    expect(screen.getByRole('button', { name: 'English' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: dictionaries.es.header.themeToDark })).toBeInTheDocument()
+    const header = within(screen.getByRole('banner'))
+    expect(header.getByRole('button', { name: 'English' })).toBeInTheDocument()
+    expect(header.getByRole('button', { name: dictionaries.es.header.themeToDark })).toBeInTheDocument()
   })
 })
 
