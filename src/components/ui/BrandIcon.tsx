@@ -1,15 +1,13 @@
-import { siApple, siGoogleplay, siInstagram, siX } from 'simple-icons'
+import { siApple, siGoogleplay } from 'simple-icons'
 import type { SVGProps } from 'react'
 
 // Third-party marks (glyphs from simple-icons, CC0). They are the store owners'
 // trademarks and the one place the icon rule "stroke only" does not apply: a
 // brand mark has to look like the brand. Store marks only signal platform
-// support (never a download button); social marks sit inside real links.
+// support, never as a download button.
 const marks = {
   apple: { title: 'App Store', path: siApple.path },
   googlePlay: { title: 'Google Play', path: siGoogleplay.path },
-  instagram: { title: 'Instagram', path: siInstagram.path },
-  x: { title: 'X', path: siX.path },
 } as const
 
 export type BrandName = keyof typeof marks

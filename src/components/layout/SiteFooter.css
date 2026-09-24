@@ -55,40 +55,6 @@
   color: var(--text-body);
 }
 
-/* Social buttons: square tiles, as in the reference. */
-.site-footer__social {
-  display: flex;
-  gap: var(--space-sm);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.site-footer__social a {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-md);
-  background: var(--bg);
-  color: var(--text-primary);
-  transition:
-    background-color 150ms ease,
-    color 150ms ease,
-    transform 200ms ease;
-}
-
-.site-footer__social a:hover {
-  background: var(--nav-active-bg);
-  color: var(--nav-active-fg);
-  transform: translateY(-2px);
-}
-
-.site-footer__social a:focus-visible {
-  outline: 2px solid var(--secondary-blue);
-  outline-offset: 2px;
-}
-
 /* Store marks: an announcement, not buttons (no link, no hover). */
 .site-footer__stores {
   display: flex;

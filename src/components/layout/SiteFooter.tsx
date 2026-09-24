@@ -7,15 +7,8 @@ import { PreferenceControls } from '../ui/PreferenceControls'
 import { Container } from './Container'
 import './SiteFooter.css'
 
-export interface SocialLink {
-  name: 'instagram' | 'x'
-  label: string
-  href: string
-}
-
 interface SiteFooterProps {
   copy: FooterCopy
-  socials: SocialLink[]
   /** Each module becomes a link to its own card. */
   modules: ProductModule[]
   /** Short key facts about the product, reused from the hero. */
@@ -34,7 +27,6 @@ interface SiteFooterProps {
 
 export function SiteFooter({
   copy,
-  socials,
   modules,
   highlights,
   preferencesCopy,
@@ -56,17 +48,6 @@ export function SiteFooter({
             <img src="/branding/icon.png" alt="" width={56} height={56} loading="lazy" decoding="async" />
           </Link>
           <p className="site-footer__tagline">{copy.tagline}</p>
-          <nav aria-label={copy.socialLabel}>
-            <ul className="site-footer__social">
-              {socials.map((social) => (
-                <li key={social.name}>
-                  <a href={social.href} target="_blank" rel="noreferrer noopener" aria-label={social.label}>
-                    <BrandIcon name={social.name} size={20} decorative />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
           <ul className="site-footer__highlights">
             {highlights.map((item) => (
               <li key={item}>{item}</li>

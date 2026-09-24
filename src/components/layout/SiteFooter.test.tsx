@@ -9,16 +9,11 @@ import type { FooterCopy } from '../../types/content'
 import { SiteFooter } from './SiteFooter'
 
 const es = dictionaries.es
-const socials = [
-  { name: 'instagram' as const, label: es.footer.instagramLabel, href: 'https://www.instagram.com/example' },
-  { name: 'x' as const, label: es.footer.xLabel, href: 'https://x.com/example' },
-]
 const renderFooter = (copy: FooterCopy = es.footer, onLocaleChange = vi.fn()) =>
   render(
     <MemoryRouter>
       <SiteFooter
         copy={copy}
-        socials={socials}
         modules={es.modules.items}
         highlights={es.hero.facts}
         preferencesCopy={es.header}
@@ -51,18 +46,6 @@ describe('SiteFooter', () => {
     expect(img).toHaveAttribute('alt', '')
     expect(document.querySelector('img[src*="logotype"]')).toBeNull()
     expect(home).toHaveAttribute('href', '/es')
-  })
-
-  it('links the social profiles in a new tab, safely, with accessible names', () => {
-    renderFooter()
-    const nav = screen.getByRole('navigation', { name: es.footer.socialLabel })
-    for (const social of socials) {
-      const link = within(nav).getByRole('link', { name: social.label })
-      expect(link).toHaveAttribute('href', social.href)
-      expect(link).toHaveAttribute('target', '_blank')
-      expect(link.getAttribute('rel')).toContain('noreferrer')
-      expect(link.querySelector('svg')).toHaveAttribute('aria-hidden', 'true')
-    }
   })
 
   it('announces the stores with marks that are not links or buttons', () => {
