@@ -88,9 +88,7 @@
 .showcase__stage {
   display: grid;
   place-items: center;
-  padding: var(--space-xl) var(--space-md);
-  border-radius: var(--radius-lg);
-  background: color-mix(in srgb, var(--nav-active-bg) 55%, var(--bg));
+  padding: var(--space-md);
 }
 
 .showcase__phone {
@@ -111,9 +109,6 @@
     gap: calc(var(--space-xl) * 2);
   }
 
-  .showcase__stage {
-    padding-block: calc(var(--space-xl) * 2);
-  }
 }
 
 @media (max-width: 600px) {
