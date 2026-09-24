@@ -48,6 +48,9 @@ export interface FooterCopy {
   navLabel: string
   /** Heading of the product links column. */
   productLabel: string
+  socialLabel: string
+  instagramLabel: string
+  xLabel: string
   /** Label before the store marks, e.g. "Coming soon on". */
   storesLabel: string
   legalLabel: string
