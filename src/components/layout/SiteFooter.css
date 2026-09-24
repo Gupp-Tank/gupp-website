@@ -8,7 +8,7 @@
   grid-template-columns: 1fr auto;
   align-items: start;
   gap: var(--space-xl) calc(var(--space-xl) * 2);
-  padding-block: calc(var(--space-xl) * 2) var(--space-xl);
+  padding-block: calc(var(--space-xl) * 2) calc(var(--space-xl) + env(safe-area-inset-bottom));
 }
 
 .site-footer__brand {
@@ -19,6 +19,8 @@
 
 .site-footer__brand a {
   display: flex;
+  align-items: center;
+  min-height: 48px;
   margin-left: -8px;
 }
 
@@ -64,14 +66,16 @@
   font-size: 13px;
 }
 
-@media (max-width: 600px) {
-  .site-footer__inner {
-    grid-template-columns: 1fr;
-  }
-
-  /* Touch: 48px targets on phones (gupp-docs/design/spacing). */
+/* Touch widths: 48px targets (gupp-docs/design/spacing). */
+@media (max-width: 860px) {
   .site-footer__nav a,
   .site-footer__legal a {
     min-height: 48px;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-footer__inner {
+    grid-template-columns: 1fr;
   }
 }

@@ -289,3 +289,13 @@
     translate: -50% 0;
   }
 }
+
+/* At 320px the column (288px) is narrower than the 300px phone: scale the whole
+   composition down instead of clipping it. */
+@media (max-width: 340px) {
+  .hero-visual {
+    transform: scale(0.9);
+    transform-origin: top center;
+    margin-bottom: calc(700px * -0.1);
+  }
+}

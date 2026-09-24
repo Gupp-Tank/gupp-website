@@ -7,16 +7,13 @@ interface SiteNavProps {
   /** id of the in-page section currently in view, without the '#'. */
   activeId: string | null
   className?: string
-  id?: string
-  hidden?: boolean
   onNavigate?: () => void
-  ref?: React.Ref<HTMLElement>
 }
 
 // The primary links. The same component renders the desktop bar and the mobile panel.
-export function SiteNav({ links, label, activeId, className, id, hidden, onNavigate, ref }: SiteNavProps) {
+export function SiteNav({ links, label, activeId, className, onNavigate }: SiteNavProps) {
   return (
-    <nav ref={ref} id={id} hidden={hidden} aria-label={label} className={cx('site-nav', className)}>
+    <nav aria-label={label} className={cx('site-nav', className)}>
       {links.map((link) => {
         const current = link.href === `#${activeId}`
         return (
