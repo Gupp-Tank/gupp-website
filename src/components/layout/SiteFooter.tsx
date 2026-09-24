@@ -101,7 +101,6 @@ export function SiteFooter({
           <p>
             © {year} {copy.copyright}
           </p>
-          <p>{copy.madeWith}</p>
         </div>
       </Container>
     </footer>
