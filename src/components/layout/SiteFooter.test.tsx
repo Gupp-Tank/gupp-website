@@ -49,6 +49,16 @@ describe('SiteFooter', () => {
     expect(home).toHaveAttribute('href', '/es')
   })
 
+  it('announces the stores with marks that are not links or buttons', () => {
+    renderFooter()
+    const footer = screen.getByRole('contentinfo')
+    expect(within(footer).getByText(es.footer.storesLabel)).toBeInTheDocument()
+    for (const store of ['App Store', 'Google Play']) {
+      const mark = within(footer).getByRole('img', { name: store })
+      expect(mark.closest('a, button')).toBeNull()
+    }
+  })
+
   it('lists every module as a link to its own card', () => {
     renderFooter()
     const nav = screen.getByRole('navigation', { name: es.footer.productLabel })
