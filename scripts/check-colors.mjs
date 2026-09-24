@@ -27,7 +27,8 @@ const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(
 const problems = []
 
 for (const file of walk(SRC)) {
-  if (file === TOKEN_FILE || !/\.(css|ts|tsx)$/.test(file)) continue
+  // Tests feed colors in as data (e.g. hex inputs to a parser); only shipped code must use tokens.
+  if (file === TOKEN_FILE || !/\.(css|ts|tsx)$/.test(file) || /\.test\.tsx?$/.test(file)) continue
   stripComments(readFileSync(file, 'utf8')).split('\n').forEach((line, i) => {
     if (LITERAL.test(line) || NAMED.test(line)) {
       problems.push(`${file}:${i + 1}  raw color "${line.trim()}" — use a token from src/index.css`)
