@@ -72,17 +72,6 @@ export function SiteFooter({
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <div className="site-footer__stores">
-            <p>{copy.storesLabel}</p>
-            <ul>
-              <li>
-                <BrandIcon name="apple" />
-              </li>
-              <li>
-                <BrandIcon name="googlePlay" />
-              </li>
-            </ul>
-          </div>
         </div>
 
         <div className="site-footer__columns">
@@ -120,6 +109,17 @@ export function SiteFooter({
           <p>
             © {year} {copy.copyright}
           </p>
+          <div className="site-footer__stores">
+            <p>{copy.storesLabel}</p>
+            <ul>
+              <li>
+                <BrandIcon name="apple" />
+              </li>
+              <li>
+                <BrandIcon name="googlePlay" />
+              </li>
+            </ul>
+          </div>
         </div>
       </Container>
     </footer>
