@@ -142,7 +142,7 @@ export interface CtaCopy {
   fallbackLabel: string
 }
 
-export type PlanCellKind = 'included' | 'limited' | 'more' | 'value'
+export type PlanCellKind = 'included' | 'limited' | 'more' | 'value' | 'none'
 
 export interface PlanCell {
   kind: PlanCellKind
@@ -162,6 +162,9 @@ export interface PlansCopy {
   featureHeader: string
   freeHeader: string
   premiumHeader: string
+  /** Group headings: rows included in both plans, and rows where Premium adds something. */
+  bothGroup: string
+  premiumGroup: string
   rows: PlanRow[]
   note: string
 }

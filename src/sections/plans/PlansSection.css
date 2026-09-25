@@ -43,13 +43,23 @@
   color: var(--text-body);
 }
 
+.plans__table .plans__group th {
+  padding-block: var(--space-sm);
+  background: var(--nav-active-bg);
+  color: var(--nav-active-fg);
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
 .plans__table tbody th {
   font-weight: 600;
   color: var(--text-primary);
 }
 
-.plans__table tbody tr:last-child th,
-.plans__table tbody tr:last-child td {
+.plans__table tbody:last-of-type tr:last-child th,
+.plans__table tbody:last-of-type tr:last-child td {
   border-bottom: 0;
 }
 
@@ -66,6 +76,10 @@
 
 .plans__cell--included .plans__cell-content svg {
   color: var(--primary-green);
+}
+
+.plans__cell--none .plans__cell-content svg {
+  color: var(--text-secondary);
 }
 
 .plans__cell--more .plans__cell-content {

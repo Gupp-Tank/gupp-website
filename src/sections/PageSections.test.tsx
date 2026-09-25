@@ -28,7 +28,10 @@ describe.each(Object.entries(dictionaries))('page sections (%s)', (_locale, dict
   it('shows the plan comparison as a table with column and row headers and no price', () => {
     const { container } = render(<PlansSection {...dictionary.plans} />)
     expect(screen.getByRole('region', { name: dictionary.plans.heading })).toBeInTheDocument()
-    expect(screen.getAllByRole('columnheader')).toHaveLength(3)
+    expect(screen.getByRole('columnheader', { name: dictionary.plans.freeHeader })).toBeInTheDocument()
+    expect(screen.getByRole('columnheader', { name: dictionary.plans.premiumHeader })).toBeInTheDocument()
+    expect(container.textContent).toContain(dictionary.plans.bothGroup)
+    expect(container.textContent).toContain(dictionary.plans.premiumGroup)
     expect(screen.getAllByRole('rowheader')).toHaveLength(dictionary.plans.rows.length)
     expect(container.textContent).not.toMatch(/[$€]|USD|\d+\s?\/\s?(mes|month)/i)
   })
