@@ -76,4 +76,5 @@ export const cta: Dictionary['cta'] = {
   heading: 'Coming soon to iOS and Android',
   description: 'We are getting the app ready. Meanwhile, see how it works.',
   fallbackLabel: 'See how it works',
+  formDescription: 'Leave your email and we will tell you when the app is available.',
 }

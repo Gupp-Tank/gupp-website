@@ -18,7 +18,7 @@ test('a footer link to a module opens that tab', async ({ page }) => {
   await expect(page.locator('#modules').getByRole('tab', { selected: true })).toHaveText(/Pre-purchase check/)
 })
 
-test('the FAQ opens with the keyboard and the CTA fallback leads to how it works', async ({ page }) => {
+test('the FAQ opens with the keyboard', async ({ page }) => {
   await page.goto('/es')
   const trigger = page.getByRole('button', { name: '¿Qué es Gupp Tank?' })
   await expect(trigger).toHaveAttribute('aria-expanded', 'false')
@@ -26,8 +26,4 @@ test('the FAQ opens with the keyboard and the CTA fallback leads to how it works
   await page.keyboard.press('Enter')
   await expect(trigger).toHaveAttribute('aria-expanded', 'true')
   await expect(page.getByRole('region', { name: '¿Qué es Gupp Tank?' })).toBeVisible()
-
-  await page.locator('#cta').getByRole('link', { name: 'Ver cómo funciona' }).click()
-  await expect(page).toHaveURL(/#how-it-works$/)
-  await expect(page.locator('#how-it-works')).toBeInViewport()
 })

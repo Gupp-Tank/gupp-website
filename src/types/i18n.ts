@@ -2,6 +2,7 @@ import type { ErrorMessages } from '../errors'
 import type { AppPreviewData } from './appPreview'
 import type { DeviceViewsData } from './deviceViews'
 import type { ConsentCopy } from './consent'
+import type { EarlyAccessCopy } from './earlyAccess'
 import type { LegalCopy } from './legal'
 import type { CtaCopy, PlansCopy, ErrorFallbackCopy, FaqCopy, HowItWorksCopy, FooterCopy, HeaderCopy, NotFoundCopy, HeroContent, HeroVisualCopy, ModulesCopy, SiteMeta } from './content'
 
@@ -23,6 +24,7 @@ export interface Dictionary {
   cta: CtaCopy
   legal: LegalCopy
   consent: ConsentCopy
+  earlyAccess: EarlyAccessCopy
   appPreview: AppPreviewData
   deviceViews: DeviceViewsData
 }
