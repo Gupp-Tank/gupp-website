@@ -28,6 +28,9 @@ interface SiteFooterProps {
   homeLabel: string
   /** Resolves a language-less path to the active language: '/privacy' -> '/es/privacy'. */
   localePath: (path?: string) => string
+  /** Label of the button that reopens the cookie preferences, and what it does. */
+  cookieSettingsLabel: string
+  onOpenCookieSettings: () => void
   inert?: boolean
   className?: string
 }
@@ -42,6 +45,8 @@ export function SiteFooter({
   onLocaleChange,
   homeLabel,
   localePath,
+  cookieSettingsLabel,
+  onOpenCookieSettings,
   inert,
   className,
 }: SiteFooterProps) {
@@ -91,7 +96,7 @@ export function SiteFooter({
             <PreferenceControls copy={preferencesCopy} locale={locale} onLocaleChange={onLocaleChange} />
           </div>
 
-          {copy.legalLinks.length > 0 && (
+          {(copy.legalLinks.length > 0 || cookieSettingsLabel) && (
             <nav className="site-footer__column" aria-label={copy.legalLabel}>
               <p className="site-footer__heading">{copy.legalLabel}</p>
               <ul>
@@ -100,6 +105,11 @@ export function SiteFooter({
                     <Link to={localePath(link.path)}>{link.label}</Link>
                   </li>
                 ))}
+                <li>
+                  <button type="button" className="site-footer__link-button" onClick={onOpenCookieSettings}>
+                    {cookieSettingsLabel}
+                  </button>
+                </li>
               </ul>
             </nav>
           )}

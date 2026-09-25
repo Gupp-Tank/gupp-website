@@ -13,7 +13,7 @@ const socials = [
   { name: 'instagram' as const, label: es.footer.instagramLabel, href: 'https://www.instagram.com/example' },
   { name: 'x' as const, label: es.footer.xLabel, href: 'https://x.com/example' },
 ]
-const renderFooter = (copy: FooterCopy = es.footer, onLocaleChange = vi.fn()) =>
+const renderFooter = (copy: FooterCopy = es.footer, onLocaleChange = vi.fn(), onOpenCookieSettings = vi.fn()) =>
   render(
     <MemoryRouter>
       <SiteFooter
@@ -26,6 +26,8 @@ const renderFooter = (copy: FooterCopy = es.footer, onLocaleChange = vi.fn()) =>
         onLocaleChange={onLocaleChange}
         homeLabel={es.header.homeLabel}
         localePath={(p) => withLocale('es', p)}
+        cookieSettingsLabel={es.consent.footerLabel}
+        onOpenCookieSettings={onOpenCookieSettings}
       />
     </MemoryRouter>,
   )
@@ -93,9 +95,18 @@ describe('SiteFooter', () => {
     expect(within(controls).getByRole('button', { name: es.header.themeToDark })).toBeInTheDocument()
   })
 
-  it('renders no legal column (and no dead links) when no legal links are configured', () => {
+  it('with no legal links configured, the legal column holds only the cookie button (no dead links)', () => {
     renderFooter({ ...es.footer, legalLinks: [] })
-    expect(screen.queryByRole('navigation', { name: es.footer.legalLabel })).not.toBeInTheDocument()
+    const legal = screen.getByRole('navigation', { name: es.footer.legalLabel })
+    expect(within(legal).queryAllByRole('link')).toHaveLength(0)
+    expect(within(legal).getByRole('button', { name: es.consent.footerLabel })).toBeInTheDocument()
+  })
+
+  it('has a button that reopens the cookie preferences', async () => {
+    const onOpen = vi.fn()
+    renderFooter(es.footer, vi.fn(), onOpen)
+    await userEvent.click(screen.getByRole('button', { name: es.consent.footerLabel }))
+    expect(onOpen).toHaveBeenCalledTimes(1)
   })
 
   it('renders legal links in the active language once configured', () => {

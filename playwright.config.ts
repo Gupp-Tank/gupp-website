@@ -13,6 +13,12 @@ export default defineConfig({
     // A fixed browser language, so the language-detection tests are deterministic.
     locale: 'es-CR',
     trace: 'retain-on-failure',
+    // Most checks are about something else, so the cookie choice is already made and the banner stays out of the way.
+    // e2e/consent.spec.ts starts from a clean browser to test the banner itself.
+    storageState: {
+      cookies: [],
+      origins: [{ origin: 'http://localhost:4173', localStorage: [{ name: 'gupp-consent', value: JSON.stringify({ version: '1', analytics: false, decidedAt: '2026-01-01T00:00:00.000Z' }) }] }],
+    },
   },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 } } },
