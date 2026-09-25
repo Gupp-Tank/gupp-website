@@ -37,7 +37,7 @@ describe('device views', () => {
 
 describe('page section copy', () => {
   it('has the same steps and questions (by id) in every locale', () => {
-    const ids = (d: (typeof dictionaries)['es']) => ({ steps: d.howItWorks.steps.map((x) => x.id), faq: d.faq.items.map((x) => x.id) })
+    const ids = (d: (typeof dictionaries)['es']) => ({ steps: d.howItWorks.steps.map((x) => x.id), faq: d.faq.items.map((x) => x.id), plans: d.plans.rows.map((x) => [x.id, x.free.kind, x.premium.kind]) })
     const [first, ...rest] = Object.values(dictionaries).map(ids)
     for (const other of rest) expect(other).toEqual(first)
   })

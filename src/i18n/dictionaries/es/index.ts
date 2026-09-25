@@ -9,6 +9,6 @@ import { modules } from './modules'
 import { appPreview } from './appPreview'
 import { deviceViews } from './deviceViews'
 import { legal } from './legal'
-import { cta, faq, howItWorks } from './pageSections'
+import { cta, faq, howItWorks, plans } from './pageSections'
 
-export const es: Dictionary = { meta, errors, errorFallback, notFound, header, footer, hero, heroVisual, modules, appPreview, deviceViews, howItWorks, faq, cta, legal }
+export const es: Dictionary = { meta, errors, errorFallback, notFound, header, footer, hero, heroVisual, modules, appPreview, deviceViews, howItWorks, plans, faq, cta, legal }
