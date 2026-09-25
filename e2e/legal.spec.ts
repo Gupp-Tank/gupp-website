@@ -47,3 +47,12 @@ test('the header and footer anchors still work from a legal page', async ({ page
   await page.getByRole('banner').getByRole('link', { name: 'How it works' }).click()
   await expect(page).toHaveURL(/\/en#how-it-works$/)
 })
+
+test('opening a legal page from the footer starts at the top of the page', async ({ page }) => {
+  await page.goto('/es')
+  await page.getByRole('contentinfo').scrollIntoViewIfNeeded()
+  expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(500)
+  await page.getByRole('contentinfo').getByRole('link', { name: 'Términos y condiciones' }).click()
+  await expect(page).toHaveURL(/\/es\/terms$/)
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0)
+})
