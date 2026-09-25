@@ -9,6 +9,24 @@ export const howItWorks: Dictionary['howItWorks'] = {
   ],
 }
 
+export const plans: Dictionary['plans'] = {
+  heading: 'Gratis y premium',
+  caption: 'Qué incluye cada plan',
+  featureHeader: 'Función',
+  freeHeader: 'Gratis',
+  premiumHeader: 'Premium',
+  rows: [
+    { id: 'tanks', label: 'Acuarios', free: { kind: 'value', text: '1 acuario' }, premium: { kind: 'more', text: 'Varios acuarios' } },
+    { id: 'profile', label: 'Perfil del acuario y parámetros del agua', free: { kind: 'included', text: 'Incluido' }, premium: { kind: 'included', text: 'Incluido' } },
+    { id: 'reminders', label: 'Recordatorios y calendario', free: { kind: 'included', text: 'Incluido' }, premium: { kind: 'included', text: 'Incluido' } },
+    { id: 'calculators', label: 'Calculadoras: dosis, CO₂, alimentación, volumen y aclimatación', free: { kind: 'included', text: 'Incluido' }, premium: { kind: 'included', text: 'Incluido' } },
+    { id: 'achievements', label: 'Logros', free: { kind: 'included', text: 'Incluido' }, premium: { kind: 'included', text: 'Incluido' } },
+    { id: 'diagnosis', label: 'Diagnóstico por foto', free: { kind: 'limited', text: 'Con límite mensual' }, premium: { kind: 'more', text: 'Más diagnósticos' } },
+    { id: 'photos', label: 'Historial de fotos', free: { kind: 'limited', text: 'Las más recientes' }, premium: { kind: 'more', text: 'Completo' } },
+  ],
+  note: 'El precio del plan premium se anunciará más adelante. Los límites pueden ajustarse antes del lanzamiento.',
+}
+
 export const faq: Dictionary['faq'] = {
   heading: 'Preguntas frecuentes',
   items: [

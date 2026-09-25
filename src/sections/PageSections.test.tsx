@@ -5,6 +5,7 @@ import { dictionaries } from '../i18n/dictionaries'
 import { CtaSection } from './cta/CtaSection'
 import { FaqSection } from './faq/FaqSection'
 import { HowItWorksSection } from './how-it-works/HowItWorksSection'
+import { PlansSection } from './plans/PlansSection'
 
 describe.each(Object.entries(dictionaries))('page sections (%s)', (_locale, dictionary) => {
   it('lists the how-it-works steps in order, as an ordered list', () => {
@@ -22,6 +23,14 @@ describe.each(Object.entries(dictionaries))('page sections (%s)', (_locale, dict
       expect(screen.getByRole('button', { name: item.question })).toHaveAttribute('aria-expanded', 'false')
       expect(container).toHaveTextContent(item.answer)
     }
+  })
+
+  it('shows the plan comparison as a table with column and row headers and no price', () => {
+    const { container } = render(<PlansSection {...dictionary.plans} />)
+    expect(screen.getByRole('region', { name: dictionary.plans.heading })).toBeInTheDocument()
+    expect(screen.getAllByRole('columnheader')).toHaveLength(3)
+    expect(screen.getAllByRole('rowheader')).toHaveLength(dictionary.plans.rows.length)
+    expect(container.textContent).not.toMatch(/[$€]|USD|\d+\s?\/\s?(mes|month)/i)
   })
 
   it('links the CTA fallback to the section that explains the product', () => {

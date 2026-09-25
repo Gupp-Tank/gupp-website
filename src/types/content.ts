@@ -141,3 +141,27 @@ export interface CtaCopy {
   /** Shown until the early-access form exists: a link to the section that explains the product. */
   fallbackLabel: string
 }
+
+export type PlanCellKind = 'included' | 'limited' | 'more' | 'value'
+
+export interface PlanCell {
+  kind: PlanCellKind
+  text: string
+}
+
+export interface PlanRow {
+  id: string
+  label: string
+  free: PlanCell
+  premium: PlanCell
+}
+
+export interface PlansCopy {
+  heading: string
+  caption: string
+  featureHeader: string
+  freeHeader: string
+  premiumHeader: string
+  rows: PlanRow[]
+  note: string
+}

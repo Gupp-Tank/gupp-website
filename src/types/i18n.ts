@@ -1,7 +1,7 @@
 import type { ErrorMessages } from '../errors'
 import type { AppPreviewData } from './appPreview'
 import type { DeviceViewsData } from './deviceViews'
-import type { CtaCopy, ErrorFallbackCopy, FaqCopy, HowItWorksCopy, FooterCopy, HeaderCopy, NotFoundCopy, HeroContent, HeroVisualCopy, ModulesCopy, SiteMeta } from './content'
+import type { CtaCopy, PlansCopy, ErrorFallbackCopy, FaqCopy, HowItWorksCopy, FooterCopy, HeaderCopy, NotFoundCopy, HeroContent, HeroVisualCopy, ModulesCopy, SiteMeta } from './content'
 
 // Every locale implements this whole shape, so a string missing in one
 // language is a type error instead of a blank on the page.
@@ -16,6 +16,7 @@ export interface Dictionary {
   heroVisual: HeroVisualCopy
   modules: ModulesCopy
   howItWorks: HowItWorksCopy
+  plans: PlansCopy
   faq: FaqCopy
   cta: CtaCopy
   appPreview: AppPreviewData

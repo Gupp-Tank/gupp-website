@@ -1,0 +1,94 @@
+.plans__inner {
+  padding-block: var(--space-xl) calc(var(--space-xl) * 4);
+}
+
+.plans__table-wrap {
+  margin-top: calc(var(--space-xl) + var(--space-md));
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.plans__table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.plans__table th:first-child {
+  width: 46%;
+}
+
+.plans__caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.plans__table th,
+.plans__table td {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--nav-border);
+  vertical-align: middle;
+}
+
+.plans__table thead th {
+  font-family: var(--font-title);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-body);
+}
+
+.plans__table tbody th {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.plans__table tbody tr:last-child th,
+.plans__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.plans__table thead th:last-child {
+  color: var(--primary-green);
+}
+
+.plans__cell-content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-body);
+}
+
+.plans__cell--included .plans__cell-content svg {
+  color: var(--primary-green);
+}
+
+.plans__cell--more .plans__cell-content {
+  color: var(--nav-active-fg);
+  font-weight: 700;
+}
+
+.plans__note {
+  margin-top: var(--space-md);
+}
+
+@media (max-width: 600px) {
+  .plans__inner {
+    padding-block: var(--space-sm) calc(var(--space-md) * 4);
+  }
+
+  .plans__table th,
+  .plans__table td {
+    padding: var(--space-sm) var(--space-sm);
+    font-size: 14px;
+  }
+
+  .plans__table th:first-child {
+    width: 40%;
+  }
+}

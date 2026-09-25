@@ -4,6 +4,7 @@ import { Hero } from '../sections/hero/Hero'
 import { CtaSection } from '../sections/cta/CtaSection'
 import { FaqSection } from '../sections/faq/FaqSection'
 import { FeaturesSection } from '../sections/features/FeaturesSection'
+import { PlansSection } from '../sections/plans/PlansSection'
 import { HowItWorksSection } from '../sections/how-it-works/HowItWorksSection'
 
 export function HomePage() {
@@ -15,6 +16,7 @@ export function HomePage() {
       <Hero content={t.hero} preview={t.appPreview} visualCopy={t.heroVisual} />
       <FeaturesSection heading={t.modules.heading} modules={t.modules.items} views={t.deviceViews} preview={t.appPreview} />
       <HowItWorksSection {...t.howItWorks} />
+      <PlansSection {...t.plans} />
       <FaqSection {...t.faq} />
       <CtaSection {...t.cta} />
     </>

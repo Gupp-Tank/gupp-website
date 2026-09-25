@@ -9,6 +9,24 @@ export const howItWorks: Dictionary['howItWorks'] = {
   ],
 }
 
+export const plans: Dictionary['plans'] = {
+  heading: 'Free and premium',
+  caption: 'What each plan includes',
+  featureHeader: 'Feature',
+  freeHeader: 'Free',
+  premiumHeader: 'Premium',
+  rows: [
+    { id: 'tanks', label: 'Tanks', free: { kind: 'value', text: '1 tank' }, premium: { kind: 'more', text: 'Multiple tanks' } },
+    { id: 'profile', label: 'Tank profile and water parameters', free: { kind: 'included', text: 'Included' }, premium: { kind: 'included', text: 'Included' } },
+    { id: 'reminders', label: 'Reminders and calendar', free: { kind: 'included', text: 'Included' }, premium: { kind: 'included', text: 'Included' } },
+    { id: 'calculators', label: 'Calculators: dosing, CO₂, feeding, volume and acclimation', free: { kind: 'included', text: 'Included' }, premium: { kind: 'included', text: 'Included' } },
+    { id: 'achievements', label: 'Achievements', free: { kind: 'included', text: 'Included' }, premium: { kind: 'included', text: 'Included' } },
+    { id: 'diagnosis', label: 'Photo diagnosis', free: { kind: 'limited', text: 'Monthly limit' }, premium: { kind: 'more', text: 'More diagnoses' } },
+    { id: 'photos', label: 'Photo history', free: { kind: 'limited', text: 'Most recent only' }, premium: { kind: 'more', text: 'Full history' } },
+  ],
+  note: 'The premium price will be announced later. Limits may change before launch.',
+}
+
 export const faq: Dictionary['faq'] = {
   heading: 'Frequently asked questions',
   items: [
