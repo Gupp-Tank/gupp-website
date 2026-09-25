@@ -9,6 +9,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { dictionaries } from '../src/i18n/dictionaries'
+import { site } from '../src/content/site'
 import { LOCALES, type Locale } from '../src/i18n/locales'
 import { buildRobots, buildSeo, buildSitemap, type SeoTag } from '../src/lib/seo'
 
@@ -28,9 +29,18 @@ function fakeDocument(locale: Locale) {
 
 const { render } = (await import(pathToFileURL(join('dist-ssr', 'entry-server.js')).href)) as { render: (url: string) => Promise<string> }
 
-function page(locale: Locale, body: string): string {
-  const { meta, faq } = dictionaries[locale]
-  const seo = buildSeo({ locale, path: '', title: meta.title, description: meta.description, faq: faq.items })
+// Pages that get static HTML: the home page plus the legal pages, each with its own title and description.
+const PAGES = ['', '/privacy', '/terms'] as const
+
+function pageMeta(locale: Locale, path: (typeof PAGES)[number]) {
+  const { meta, faq, legal } = dictionaries[locale]
+  if (path === '') return { title: meta.title, description: meta.description, faq: faq.items }
+  const doc = legal[path === '/privacy' ? 'privacy' : 'terms']
+  return { title: `${doc.title} · ${site.name}`, description: doc.intro }
+}
+
+function page(locale: Locale, path: (typeof PAGES)[number], body: string): string {
+  const seo = buildSeo({ locale, path, ...pageMeta(locale, path) })
   const head = [...seo.tags.map(tag), ...seo.jsonLd.map((d) => `    <script type="application/ld+json" data-seo>${JSON.stringify(d).replace(/</g, '\\u003c')}</script>`)].join('\n')
 
   return template
@@ -43,14 +53,17 @@ function page(locale: Locale, body: string): string {
 
 for (const locale of LOCALES) {
   fakeDocument(locale)
-  const body = await render(`/${locale}`)
-  mkdirSync(join(dist, locale), { recursive: true })
-  writeFileSync(join(dist, locale, 'index.html'), page(locale, body))
-  console.log(`prerendered /${locale}  (${(body.length / 1024).toFixed(0)} kB of markup)`)
+  for (const path of PAGES) {
+    const body = await render(`/${locale}${path}`)
+    const dir = join(dist, locale, path)
+    mkdirSync(dir, { recursive: true })
+    writeFileSync(join(dir, 'index.html'), page(locale, path, body))
+    console.log(`prerendered /${locale}${path}  (${(body.length / 1024).toFixed(0)} kB of markup)`)
+  }
 }
 
 // Unknown paths: the client renders the localized 404 (inside the layout for /es/whatever).
 writeFileSync(join(dist, '404.html'), template.replace('</head>', '    <meta name="robots" content="noindex" data-seo />\n  </head>'))
-writeFileSync(join(dist, 'sitemap.xml'), buildSitemap(['']))
+writeFileSync(join(dist, 'sitemap.xml'), buildSitemap([...PAGES]))
 writeFileSync(join(dist, 'robots.txt'), buildRobots())
 console.log('wrote 404.html, sitemap.xml, robots.txt')

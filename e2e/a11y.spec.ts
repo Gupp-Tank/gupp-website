@@ -2,7 +2,7 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test, type Page } from '@playwright/test'
 
 // Every route, in both languages and both themes. WCAG 2.1 A + AA rules.
-const ROUTES = ['/es', '/en', '/es/no-existe', '/fr']
+const ROUTES = ['/es', '/en', '/es/privacy', '/en/terms', '/es/no-existe', '/fr']
 const THEMES = ['light', 'dark'] as const
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
 

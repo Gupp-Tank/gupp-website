@@ -1,5 +1,5 @@
 import { site } from '../content/site'
-import { LOCALES, type Locale } from '../i18n/locales'
+import { DEFAULT_LOCALE, LOCALES, type Locale } from '../i18n/locales'
 import { withLocale } from '../i18n/paths'
 
 export interface SeoInput {
@@ -39,7 +39,7 @@ export function buildSeo({ locale, path, title, description, noindex, faq }: Seo
   const tags: SeoTag[] = [
     { tag: 'link', attrs: { rel: 'canonical', href: url } },
     ...LOCALES.map((l): SeoTag => ({ tag: 'link', attrs: { rel: 'alternate', hreflang: l, href: abs(withLocale(l, path)) } })),
-    { tag: 'link', attrs: { rel: 'alternate', hreflang: 'x-default', href: abs('/') } },
+    { tag: 'link', attrs: { rel: 'alternate', hreflang: 'x-default', href: path === '' ? abs('/') : abs(withLocale(DEFAULT_LOCALE, path)) } },
     meta('property', 'og:type', 'website'),
     meta('property', 'og:site_name', site.name),
     meta('property', 'og:title', title),
