@@ -21,6 +21,7 @@ const MAP = {
   flask: ['flask', 'duotone'],
   home: ['house', 'duotone'],
   plus: ['plus', 'bold'],
+  minus: ['minus', 'bold'],
   menu: ['list', 'bold'],
   close: ['x', 'bold'],
   moon: ['moon', 'duotone'],

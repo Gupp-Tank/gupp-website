@@ -3,7 +3,7 @@ import { Section } from '../../components/layout/Section'
 import { Heading } from '../../components/ui/Heading'
 import { Icon } from '../../components/ui/Icon'
 import { Text } from '../../components/ui/Text'
-import type { PlanCell, PlansCopy } from '../../types/content'
+import type { PlanCell, PlanRow, PlansCopy } from '../../types/content'
 import './PlansSection.css'
 
 // Meaning never rides on color alone: every cell has words, and the icon only repeats them.
@@ -12,13 +12,35 @@ function Cell({ cell }: { cell: PlanCell }) {
     <td className={`plans__cell plans__cell--${cell.kind}`}>
       <span className="plans__cell-content">
         {cell.kind === 'included' && <Icon name="check" size={14} />}
+        {cell.kind === 'none' && <Icon name="minus" size={14} />}
         {cell.text}
       </span>
     </td>
   )
 }
 
-export function PlansSection({ heading, caption, featureHeader, freeHeader, premiumHeader, rows, note }: PlansCopy) {
+const isShared = (row: PlanRow) => row.free.kind === 'included' && row.premium.kind === 'included'
+
+function RowGroup({ label, rows }: { label: string; rows: PlanRow[] }) {
+  return (
+    <tbody>
+      <tr className="plans__group">
+        <th scope="colgroup" colSpan={3}>
+          {label}
+        </th>
+      </tr>
+      {rows.map((row) => (
+        <tr key={row.id}>
+          <th scope="row">{row.label}</th>
+          <Cell cell={row.free} />
+          <Cell cell={row.premium} />
+        </tr>
+      ))}
+    </tbody>
+  )
+}
+
+export function PlansSection({ heading, caption, featureHeader, freeHeader, premiumHeader, bothGroup, premiumGroup, rows, note }: PlansCopy) {
   return (
     <Section id="plans" labelledBy="plans-title">
       <Container className="plans__inner">
@@ -35,15 +57,8 @@ export function PlansSection({ heading, caption, featureHeader, freeHeader, prem
                 <th scope="col">{premiumHeader}</th>
               </tr>
             </thead>
-            <tbody>
-              {rows.map((row) => (
-                <tr key={row.id}>
-                  <th scope="row">{row.label}</th>
-                  <Cell cell={row.free} />
-                  <Cell cell={row.premium} />
-                </tr>
-              ))}
-            </tbody>
+            <RowGroup label={bothGroup} rows={rows.filter(isShared)} />
+            <RowGroup label={premiumGroup} rows={rows.filter((row) => !isShared(row))} />
           </table>
         </div>
         <Text className="plans__note">
