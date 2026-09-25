@@ -1,0 +1,126 @@
+.ea-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: min(26rem, 100%);
+  text-align: left;
+}
+
+.ea-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.ea-field label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ea-field input,
+.ea-field select {
+  min-height: var(--touch-comfortable);
+  padding: 0 var(--space-md);
+  border: 2px solid var(--nav-border);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 16px;
+}
+
+.ea-field input:focus-visible,
+.ea-field select:focus-visible,
+.ea-check input:focus-visible {
+  outline: 3px solid var(--secondary-blue);
+  outline-offset: 2px;
+}
+
+.ea-field input[aria-invalid='true'] {
+  border-color: var(--coral);
+}
+
+/* Off-screen, not display:none: bots still see it, people and screen readers never reach it. */
+.ea-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.ea-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.ea-check input {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin: 1px 0 0;
+  accent-color: var(--primary-green);
+}
+
+.ea-check a,
+.ea-notice a {
+  color: var(--primary-green);
+  text-underline-offset: 3px;
+}
+
+.ea-notice {
+  margin: var(--space-xs) 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-body);
+}
+
+.ea-error {
+  margin: 0;
+  min-height: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--warning);
+}
+
+.ea-error:empty {
+  display: none;
+}
+
+.ea-submit {
+  align-self: flex-start;
+  border: 0;
+  cursor: pointer;
+}
+
+.ea-submit:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.ea-success {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  background: var(--nav-active-bg);
+  color: var(--nav-active-fg);
+}
+
+.ea-success__title {
+  margin: 0;
+  font-family: var(--font-title);
+  font-weight: 700;
+}
+
+.ea-success__text {
+  margin: var(--space-xs) 0 0;
+  font-size: 14px;
+}

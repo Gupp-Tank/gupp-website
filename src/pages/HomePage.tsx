@@ -1,7 +1,9 @@
 import { useI18n } from '../hooks/useI18n'
 import { useSeo } from '../hooks/useSeo'
 import { Hero } from '../sections/hero/Hero'
+import { earlyAccessEnabled } from '../config/features'
 import { CtaSection } from '../sections/cta/CtaSection'
+import { EarlyAccessSlot } from '../sections/cta/EarlyAccessSlot'
 import { FaqSection } from '../sections/faq/FaqSection'
 import { FeaturesSection } from '../sections/features/FeaturesSection'
 import { PlansSection } from '../sections/plans/PlansSection'
@@ -18,7 +20,7 @@ export function HomePage() {
       <HowItWorksSection {...t.howItWorks} />
       <PlansSection {...t.plans} />
       <FaqSection {...t.faq} />
-      <CtaSection {...t.cta} />
+      <CtaSection {...t.cta} form={earlyAccessEnabled ? <EarlyAccessSlot /> : undefined} />
     </>
   )
 }

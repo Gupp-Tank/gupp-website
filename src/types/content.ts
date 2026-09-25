@@ -140,6 +140,8 @@ export interface CtaCopy {
   description: string
   /** Shown until the early-access form exists: a link to the section that explains the product. */
   fallbackLabel: string
+  /** Supporting text when the early-access form is shown instead of the link. */
+  formDescription: string
 }
 
 export type PlanCellKind = 'included' | 'limited' | 'more' | 'value' | 'none'

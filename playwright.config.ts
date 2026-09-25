@@ -27,6 +27,8 @@ export default defineConfig({
   webServer: {
     command: 'npm run build && node scripts/serve-dist.mjs --port 4173',
     url: 'http://localhost:4173',
+    // The build gets an API base URL so the early-access form is rendered; specs answer its requests with mocks.
+    env: { VITE_API_BASE_URL: 'https://api.gupp.app' },
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

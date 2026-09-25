@@ -41,7 +41,9 @@ describe('security headers', () => {
     expect(header('X-Frame-Options')).toBe('DENY')
   })
 
-  it('serves no third-party origin: nothing external is allowed by the CSP', () => {
-    expect(csp).not.toMatch(/https?:\/\//)
+  it('allows one external origin, the API, and only to connect to (the early-access form)', () => {
+    const origins = [...csp.matchAll(/https?:\/\/[^\s;]+/g)].map((m) => m[0])
+    expect(origins).toEqual(['https://api.gupp.app'])
+    expect(/connect-src ([^;]+)/.exec(csp)![1]).toContain('https://api.gupp.app')
   })
 })

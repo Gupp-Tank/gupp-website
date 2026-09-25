@@ -10,6 +10,7 @@
 }
 
 .cta-band__copy {
+  flex: 1 1 0;
   max-width: 34em;
 }
 
@@ -18,7 +19,9 @@
 }
 
 .cta-band__action {
-  flex-shrink: 0;
+  flex: 0 1 28rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media (max-width: 800px) {

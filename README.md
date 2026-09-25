@@ -101,7 +101,7 @@ The phone mockup in the hero is an illustration (an image with a text alternativ
 
 ## Security headers
 
-`vercel.json` sets a strict Content-Security-Policy and the baseline headers (see `SECURITY.md`); `src/security.test.ts` checks them. The only inline script (theme/language pre-paint in `index.html`) is allowed by SHA-256 hash: **if you edit it, update the hash in `vercel.json`** (the test tells you the new one). Anything else that loads from another origin needs a deliberate CSP change, e.g. the early-access form must add the API origin to `connect-src`.
+`vercel.json` sets a strict Content-Security-Policy and the baseline headers (see `SECURITY.md`); `src/security.test.ts` checks them. The only inline script (theme/language pre-paint in `index.html`) is allowed by SHA-256 hash: **if you edit it, update the hash in `vercel.json`** (the test tells you the new one). Anything else that loads from another origin needs a deliberate CSP change, The API origin (`https://api.gupp.app`) is already allowed in `connect-src` for the early-access form, which stays hidden until `VITE_API_BASE_URL` is set.
 
 ## Fonts
 
