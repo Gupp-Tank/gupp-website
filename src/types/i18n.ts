@@ -1,6 +1,7 @@
 import type { ErrorMessages } from '../errors'
 import type { AppPreviewData } from './appPreview'
 import type { DeviceViewsData } from './deviceViews'
+import type { LegalCopy } from './legal'
 import type { CtaCopy, ErrorFallbackCopy, FaqCopy, HowItWorksCopy, FooterCopy, HeaderCopy, NotFoundCopy, HeroContent, HeroVisualCopy, ModulesCopy, SiteMeta } from './content'
 
 // Every locale implements this whole shape, so a string missing in one
@@ -18,6 +19,7 @@ export interface Dictionary {
   howItWorks: HowItWorksCopy
   faq: FaqCopy
   cta: CtaCopy
+  legal: LegalCopy
   appPreview: AppPreviewData
   deviceViews: DeviceViewsData
 }

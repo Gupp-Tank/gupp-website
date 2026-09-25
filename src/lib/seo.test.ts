@@ -64,4 +64,10 @@ describe('sitemap and robots', () => {
     const page = buildSeo({ ...base, faq }).jsonLd.find((d) => (d as { '@type': string })['@type'] === 'FAQPage') as { mainEntity: { name: string; acceptedAnswer: { text: string } }[] }
     expect(page.mainEntity[0]).toMatchObject({ name: 'Q1?', acceptedAnswer: { text: 'A1' } })
   })
+
+  it('points x-default at the root for the home page and at the default language for inner pages', () => {
+    const xDefault = (path: string) => buildSeo({ locale: 'en', path, title: 'T', description: 'D' }).tags.find((t) => t.attrs.hreflang === 'x-default')?.attrs.href
+    expect(xDefault('')).toBe('https://gupp.app/')
+    expect(xDefault('/privacy')).toBe('https://gupp.app/es/privacy')
+  })
 })

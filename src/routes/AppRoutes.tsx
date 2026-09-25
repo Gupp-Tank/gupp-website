@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router'
 import { SiteLayout } from '../components/layout/SiteLayout'
 import { HomePage } from '../pages/HomePage'
+import { LegalPage } from '../pages/LegalPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { LocaleRoute } from './LocaleRoute'
 import { RootRedirect } from './RootRedirect'
@@ -14,6 +15,8 @@ export function AppRoutes() {
       <Route path=":locale" element={<LocaleRoute />}>
         <Route element={<SiteLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="privacy" element={<LegalPage document="privacy" />} />
+          <Route path="terms" element={<LegalPage document="terms" />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>

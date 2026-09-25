@@ -10,6 +10,9 @@ export const footer: Dictionary['footer'] = {
   legalLabel: 'Legal',
   tagline: 'Agua, peces y dosis, todo en un solo lugar.',
   copyright: 'Gupp Tank. Todos los derechos reservados.',
-  // Privacy, terms and cookie settings join here when their pages exist.
-  legalLinks: [],
+  // Cookie settings join here with the consent banner.
+  legalLinks: [
+    { label: 'Política de privacidad', path: '/privacy' },
+    { label: 'Términos y condiciones', path: '/terms' },
+  ],
 }

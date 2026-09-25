@@ -8,8 +8,9 @@ const check = (ok, message) => ok || problems.push(message)
 const read = (f) => readFileSync(`dist/${f}`, 'utf8')
 
 const ORIGIN = 'https://gupp.app'
-for (const locale of ['es', 'en']) {
-  const file = `${locale}/index.html`
+const PAGES = ['', '/privacy', '/terms']
+for (const [locale, path] of ['es', 'en'].flatMap((l) => PAGES.map((p) => [l, p]))) {
+  const file = `${locale}${path}/index.html`
   const html = read(file)
   const other = locale === 'es' ? 'en' : 'es'
   const get = (re) => re.exec(html)?.[1]
@@ -17,10 +18,10 @@ for (const locale of ['es', 'en']) {
   check(new RegExp(`<html lang="${locale}"`).test(html), `${file}: <html lang> is not "${locale}"`)
   check(/<title>[^<]{10,}<\/title>/.test(html), `${file}: missing or too-short <title>`)
   check(/name="description"\s+content="[^"]{20,}"/.test(html), `${file}: missing or too-short meta description`)
-  check(get(/rel="canonical" href="([^"]+)"/) === `${ORIGIN}/${locale}`, `${file}: canonical must be ${ORIGIN}/${locale}`)
-  check(html.includes(`hreflang="${locale}" href="${ORIGIN}/${locale}"`), `${file}: hreflang for itself`)
-  check(html.includes(`hreflang="${other}" href="${ORIGIN}/${other}"`), `${file}: hreflang for ${other}`)
-  check(html.includes(`hreflang="x-default" href="${ORIGIN}/"`), `${file}: hreflang x-default`)
+  check(get(/rel="canonical" href="([^"]+)"/) === `${ORIGIN}/${locale}${path}`, `${file}: canonical must be ${ORIGIN}/${locale}${path}`)
+  check(html.includes(`hreflang="${locale}" href="${ORIGIN}/${locale}${path}"`), `${file}: hreflang for itself`)
+  check(html.includes(`hreflang="${other}" href="${ORIGIN}/${other}${path}"`), `${file}: hreflang for ${other}`)
+  check(html.includes(`hreflang="x-default" href="${ORIGIN}${path === '' ? '/' : `/es${path}`}"`), `${file}: hreflang x-default`)
   check((html.match(/<h1[\s>]/g) ?? []).length === 1, `${file}: expected exactly one <h1> in the prerendered HTML`)
   check(!html.includes('<div id="root"></div>'), `${file}: not prerendered (empty #root)`)
   check(!/name="robots" content="noindex/.test(html), `${file}: an indexable page must not be noindex`)
@@ -40,11 +41,11 @@ for (const locale of ['es', 'en']) {
     }
   })
   check(types.includes('Organization') && types.includes('WebSite'), `${file}: JSON-LD must include Organization and WebSite`)
-  check(types.includes('FAQPage'), `${file}: JSON-LD must include FAQPage`)
+  if (path === '') check(types.includes('FAQPage'), `${file}: JSON-LD must include FAQPage`)
 }
 
 const sitemap = read('sitemap.xml')
-for (const url of [`${ORIGIN}/es`, `${ORIGIN}/en`]) check(sitemap.includes(`<loc>${url}</loc>`), `sitemap.xml: missing ${url}`)
+for (const url of ['es', 'en'].flatMap((l) => PAGES.map((p) => `${ORIGIN}/${l}${p}`))) check(sitemap.includes(`<loc>${url}</loc>`), `sitemap.xml: missing ${url}`)
 const robots = read('robots.txt')
 check(/Allow: \//.test(robots) && robots.includes(`Sitemap: ${ORIGIN}/sitemap.xml`), 'robots.txt: must allow crawling and list the sitemap')
 check(/name="robots" content="noindex" data-seo/.test(read('404.html')), '404.html: must carry a data-seo noindex robots tag (so useSeo replaces it, not duplicates it)')
