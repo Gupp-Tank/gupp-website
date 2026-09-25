@@ -4,6 +4,7 @@ import { useActiveSection } from '../../hooks/useActiveSection'
 import { useI18n } from '../../hooks/useI18n'
 import { useLocalePath } from '../../hooks/useLocalePath'
 import { useMobileMenu } from '../../hooks/useMobileMenu'
+import { useScrollToTop } from '../../hooks/useScrollToTop'
 import { useSwitchLocale } from '../../hooks/useSwitchLocale'
 import { SiteFooter } from './SiteFooter'
 import './SkipLink.css'
@@ -13,10 +14,11 @@ import { SiteHeader } from './SiteHeader'
 // only their own content into the Outlet.
 export function SiteLayout() {
   const { locale, t } = useI18n()
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
   const localePath = useLocalePath()
   const switchLocale = useSwitchLocale()
   const menu = useMobileMenu()
+  useScrollToTop(pathname, hash)
 
   const sectionIds = t.header.links.filter((link) => link.href.startsWith('#')).map((link) => link.href.slice(1))
   const activeSection = useActiveSection(sectionIds, pathname)

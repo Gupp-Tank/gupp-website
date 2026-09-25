@@ -80,7 +80,7 @@ export function SiteFooter({
             <ul>
               {modules.map((module) => (
                 <li key={module.slug}>
-                  <a href={`#module-${module.slug}`}>{module.title}</a>
+                  <a href={`${localePath()}#module-${module.slug}`}>{module.title}</a>
                 </li>
               ))}
             </ul>

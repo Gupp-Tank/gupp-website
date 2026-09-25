@@ -79,7 +79,7 @@ describe('SiteFooter', () => {
     renderFooter()
     const nav = screen.getByRole('navigation', { name: es.footer.productLabel })
     for (const module of es.modules.items) {
-      expect(within(nav).getByRole('link', { name: module.title })).toHaveAttribute('href', `#module-${module.slug}`)
+      expect(within(nav).getByRole('link', { name: module.title })).toHaveAttribute('href', `/es#module-${module.slug}`)
     }
   })
 
@@ -93,8 +93,8 @@ describe('SiteFooter', () => {
     expect(within(controls).getByRole('button', { name: es.header.themeToDark })).toBeInTheDocument()
   })
 
-  it('renders no legal column (and no dead links) until legal pages are configured', () => {
-    renderFooter()
+  it('renders no legal column (and no dead links) when no legal links are configured', () => {
+    renderFooter({ ...es.footer, legalLinks: [] })
     expect(screen.queryByRole('navigation', { name: es.footer.legalLabel })).not.toBeInTheDocument()
   })
 
@@ -129,7 +129,7 @@ describe('footer in the layout', () => {
     )
     const nav = screen.getByRole('navigation', { name: es.footer.productLabel })
     for (const link of within(nav).getAllByRole('link')) {
-      expect(document.getElementById(link.getAttribute('href')!.slice(1))).not.toBeNull()
+      expect(document.getElementById(link.getAttribute('href')!.split('#')[1])).not.toBeNull()
     }
   })
 
