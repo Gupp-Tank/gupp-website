@@ -29,17 +29,19 @@ function fakeDocument(locale: Locale) {
 
 const { render } = (await import(pathToFileURL(join('dist-ssr', 'entry-server.js')).href)) as { render: (url: string) => Promise<string> }
 
-// Pages that get static HTML: the home page plus the legal pages, each with its own title and description.
-const PAGES = ['', '/privacy', '/terms'] as const
+// Pages that get static HTML: the home page, the legal pages, and the unsubscribe shell.
+const INDEXED_PAGES = ['', '/privacy', '/terms'] as const
+const ALL_PAGES = [...INDEXED_PAGES, '/unsubscribe'] as const
 
-function pageMeta(locale: Locale, path: (typeof PAGES)[number]) {
-  const { meta, faq, legal } = dictionaries[locale]
+function pageMeta(locale: Locale, path: (typeof ALL_PAGES)[number]) {
+  const { meta, faq, legal, unsubscribe } = dictionaries[locale]
   if (path === '') return { title: meta.title, description: meta.description, faq: faq.items }
+  if (path === '/unsubscribe') return { title: unsubscribe.metaTitle, description: unsubscribe.metaDescription, noindex: true }
   const doc = legal[path === '/privacy' ? 'privacy' : 'terms']
   return { title: `${doc.title} · ${site.name}`, description: doc.intro }
 }
 
-function page(locale: Locale, path: (typeof PAGES)[number], body: string): string {
+function page(locale: Locale, path: (typeof ALL_PAGES)[number], body: string): string {
   const seo = buildSeo({ locale, path, ...pageMeta(locale, path) })
   const head = [...seo.tags.map(tag), ...seo.jsonLd.map((d) => `    <script type="application/ld+json" data-seo>${JSON.stringify(d).replace(/</g, '\\u003c')}</script>`)].join('\n')
 
@@ -53,7 +55,7 @@ function page(locale: Locale, path: (typeof PAGES)[number], body: string): strin
 
 for (const locale of LOCALES) {
   fakeDocument(locale)
-  for (const path of PAGES) {
+  for (const path of ALL_PAGES) {
     const body = await render(`/${locale}${path}`)
     const dir = join(dist, locale, path)
     mkdirSync(dir, { recursive: true })
@@ -64,6 +66,6 @@ for (const locale of LOCALES) {
 
 // Unknown paths: the client renders the localized 404 (inside the layout for /es/whatever).
 writeFileSync(join(dist, '404.html'), template.replace('</head>', '    <meta name="robots" content="noindex" data-seo />\n  </head>'))
-writeFileSync(join(dist, 'sitemap.xml'), buildSitemap([...PAGES]))
+writeFileSync(join(dist, 'sitemap.xml'), buildSitemap([...INDEXED_PAGES]))
 writeFileSync(join(dist, 'robots.txt'), buildRobots())
 console.log('wrote 404.html, sitemap.xml, robots.txt')

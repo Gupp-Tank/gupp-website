@@ -19,3 +19,10 @@
   max-width: 32em;
   color: var(--text-body);
 }
+
+.status-screen__actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}

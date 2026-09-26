@@ -39,6 +39,19 @@ export interface NotFoundCopy {
   homeLabel: string
 }
 
+export interface UnsubscribeCopy {
+  metaTitle: string
+  metaDescription: string
+  loadingTitle: string
+  loadingMessage: string
+  successTitle: string
+  successMessage: string
+  invalidTitle: string
+  errorTitle: string
+  homeLabel: string
+  retryLabel: string
+}
+
 export interface LegalLink {
   label: string
   /** Path without the language prefix, e.g. '/privacy'. */

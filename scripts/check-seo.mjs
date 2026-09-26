@@ -50,6 +50,13 @@ const robots = read('robots.txt')
 check(/Allow: \//.test(robots) && robots.includes(`Sitemap: ${ORIGIN}/sitemap.xml`), 'robots.txt: must allow crawling and list the sitemap')
 check(/name="robots" content="noindex" data-seo/.test(read('404.html')), '404.html: must carry a data-seo noindex robots tag (so useSeo replaces it, not duplicates it)')
 check(!read('index.html').includes('data-seo'), 'index.html (the / redirect shell) must not carry page SEO tags')
+for (const locale of ['es', 'en']) {
+  const unsubFile = `${locale}/unsubscribe/index.html`
+  const unsubHtml = read(unsubFile)
+  check(/name="robots" content="noindex/.test(unsubHtml), `${unsubFile}: must carry a noindex robots tag`)
+  check((unsubHtml.match(/<h1[\s>]/g) ?? []).length === 1, `${unsubFile}: expected exactly one <h1> in the prerendered HTML`)
+  check(!sitemap.includes(`/${locale}/unsubscribe`), `sitemap.xml: must not include noindex ${locale}/unsubscribe`)
+}
 
 if (problems.length) {
   console.error(problems.map((p) => `  - ${p}`).join('\n'))
