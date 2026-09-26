@@ -87,6 +87,16 @@ describe('AppRoutes', () => {
     expect(h1()).toContain('Fishkeeping')
   })
 
+  it.each([
+    ['es', dictionaries.es.unsubscribe.invalidTitle],
+    ['en', dictionaries.en.unsubscribe.invalidTitle],
+  ])('renders the unsubscribe page inside layout at /%s/unsubscribe without token', (locale, title) => {
+    renderAt(`/${locale}/unsubscribe`)
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(title)
+    expect(screen.getByRole('banner')).toBeInTheDocument()
+    expect(document.documentElement.lang).toBe(locale)
+  })
+
   describe('language switch', () => {
     it('changes the language in the URL and keeps the rest of it', () => {
       renderAt('/es/nope?ref=1#top')

@@ -6,15 +6,16 @@ interface StatusScreenProps {
   message: string
   /** `alert` for failures that interrupt the user; omit for calm states like a 404. */
   role?: 'alert'
+  as?: 'main' | 'div' | 'section'
   children?: ReactNode
 }
 
-export function StatusScreen({ title, message, role, children }: StatusScreenProps) {
+export function StatusScreen({ as: Tag = 'div', title, message, role, children }: StatusScreenProps) {
   return (
-    <main className="status-screen" role={role}>
+    <Tag className="status-screen" role={role}>
       <h1 className="status-screen__title">{title}</h1>
       <p className="status-screen__message">{message}</p>
       {children}
-    </main>
+    </Tag>
   )
 }

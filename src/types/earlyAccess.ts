@@ -14,6 +14,14 @@ export interface EarlyAccessResult {
   registered: true
 }
 
+export interface UnsubscribeRequest {
+  token: string
+}
+
+export interface UnsubscribeResult {
+  unsubscribed: true
+}
+
 export type EarlyAccessFieldError = 'emailRequired' | 'emailInvalid' | 'consentRequired'
 
 export interface EarlyAccessCopy {

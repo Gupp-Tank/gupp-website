@@ -4,7 +4,7 @@ import type { DeviceViewsData } from './deviceViews'
 import type { ConsentCopy } from './consent'
 import type { EarlyAccessCopy } from './earlyAccess'
 import type { LegalCopy } from './legal'
-import type { CtaCopy, PlansCopy, ErrorFallbackCopy, FaqCopy, HowItWorksCopy, FooterCopy, HeaderCopy, NotFoundCopy, HeroContent, HeroVisualCopy, ModulesCopy, SiteMeta } from './content'
+import type { CtaCopy, PlansCopy, ErrorFallbackCopy, FaqCopy, HowItWorksCopy, FooterCopy, HeaderCopy, NotFoundCopy, UnsubscribeCopy, HeroContent, HeroVisualCopy, ModulesCopy, SiteMeta } from './content'
 
 // Every locale implements this whole shape, so a string missing in one
 // language is a type error instead of a blank on the page.
@@ -13,6 +13,7 @@ export interface Dictionary {
   errors: ErrorMessages
   errorFallback: ErrorFallbackCopy
   notFound: NotFoundCopy
+  unsubscribe: UnsubscribeCopy
   header: HeaderCopy
   footer: FooterCopy
   hero: HeroContent

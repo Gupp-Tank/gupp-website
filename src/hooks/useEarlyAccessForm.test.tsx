@@ -11,7 +11,7 @@ const submitEvent = { preventDefault: vi.fn() } as unknown as FormEvent
 const change = (name: string, value: string | boolean) =>
   ({ target: Object.assign(document.createElement('input'), { name, type: typeof value === 'boolean' ? 'checkbox' : 'text', ...(typeof value === 'boolean' ? { checked: value } : { value }) }) }) as unknown as ChangeEvent<HTMLInputElement>
 
-const serviceWith = (register: EarlyAccessService['register']): EarlyAccessService => ({ register })
+const serviceWith = (register: EarlyAccessService['register']): EarlyAccessService => ({ register, unsubscribe: vi.fn() })
 
 function setup(register: EarlyAccessService['register'] = vi.fn(async () => ({ registered: true as const }))) {
   const hook = renderHook(() => useEarlyAccessForm(serviceWith(register)))

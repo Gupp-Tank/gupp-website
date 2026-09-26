@@ -3,6 +3,7 @@ import { SiteLayout } from '../components/layout/SiteLayout'
 import { HomePage } from '../pages/HomePage'
 import { LegalPage } from '../pages/LegalPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
+import { UnsubscribePage } from '../pages/UnsubscribePage'
 import { LocaleRoute } from './LocaleRoute'
 import { RootRedirect } from './RootRedirect'
 
@@ -17,6 +18,7 @@ export function AppRoutes() {
           <Route index element={<HomePage />} />
           <Route path="privacy" element={<LegalPage document="privacy" />} />
           <Route path="terms" element={<LegalPage document="terms" />} />
+          <Route path="unsubscribe" element={<UnsubscribePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>

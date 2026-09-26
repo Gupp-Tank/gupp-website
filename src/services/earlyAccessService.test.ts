@@ -41,4 +41,30 @@ describe('earlyAccessService', () => {
     const error = await serviceWith(failing as unknown as typeof fetch).register(request).catch((e) => e)
     expect(error.code).toBe(ErrorCode.NETWORK_ERROR)
   })
+
+  describe('unsubscribe', () => {
+    it('POSTs { token } to /api/v1/early-access/unsubscribe without credentials', async () => {
+      const fetchImpl = respond(200, { unsubscribed: true })
+      await expect(serviceWith(fetchImpl as unknown as typeof fetch).unsubscribe({ token: 'test-token' })).resolves.toEqual({ unsubscribed: true })
+      const [url, init] = fetchImpl.mock.calls[0] as unknown as [string, RequestInit]
+      expect(url).toBe('https://api.test/api/v1/early-access/unsubscribe')
+      expect(init.method).toBe('POST')
+      expect(init.credentials).toBe('omit')
+      expect(JSON.parse(init.body as string)).toEqual({ token: 'test-token' })
+    })
+
+    it('turns an INVALID_UNSUBSCRIBE_TOKEN response into an AppError with that code', async () => {
+      const fetchImpl = respond(400, { code: 'INVALID_UNSUBSCRIBE_TOKEN', message: 'invalid token' })
+      const error = await serviceWith(fetchImpl as unknown as typeof fetch).unsubscribe({ token: 'bad-token' }).catch((e) => e)
+      expect(error).toBeInstanceOf(AppError)
+      expect(error.code).toBe(ErrorCode.INVALID_UNSUBSCRIBE_TOKEN)
+    })
+
+    it('rejects an invalid response shape', async () => {
+      const fetchImpl = respond(200, { wrong: true })
+      const error = await serviceWith(fetchImpl as unknown as typeof fetch).unsubscribe({ token: 'tok' }).catch((e) => e)
+      expect(error).toBeInstanceOf(AppError)
+      expect(error.code).toBe(ErrorCode.INVALID_RESPONSE)
+    })
+  })
 })
