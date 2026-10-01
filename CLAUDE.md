@@ -34,6 +34,10 @@ Public marketing/landing site for Gupp Tank. React + TypeScript + Vite, deployed
 - Do not change repo settings (branch protection, security features) without asking.
 - Never invent product facts, handles, prices or links; leave a clearly marked placeholder and say so in the PR.
 
+## Gemini API usage
+
+- This repo doesn't call Gemini directly today, but if that ever changes: never call the real API from tests or CI — mock it. Real Gemini usage runs against a metered budget; only Josué runs it, manually.
+
 ## Writing rules
 
 - Comments explain non-obvious *why*, never *what* — the code already says that.
