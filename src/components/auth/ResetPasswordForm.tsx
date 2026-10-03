@@ -31,8 +31,7 @@ export function ResetPasswordForm({
   const confirmPasswordError = fieldErrors.confirmPassword ? copy.fieldErrors[fieldErrors.confirmPassword] : null
 
   return (
-    <section className="reset-password-page">
-      <div className="reset-password-card">
+    <div className="reset-password-card">
         <div className="reset-password-header">
           <h1 className="reset-password-header__title">{copy.title}</h1>
           <p className="reset-password-header__subtitle">{copy.subtitle}</p>
@@ -90,7 +89,7 @@ export function ResetPasswordForm({
             {busy ? copy.submittingButton : copy.submitButton}
           </button>
         </form>
-      </div>
-    </section>
+        <p className="reset-password-trust">{copy.trustNote}</p>
+    </div>
   )
 }

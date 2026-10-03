@@ -20,6 +20,7 @@ export interface ResetPasswordCopy {
   metaDescription: string
   title: string
   subtitle: string
+  trustNote: string
   newPasswordLabel: string
   newPasswordPlaceholder: string
   confirmPasswordLabel: string

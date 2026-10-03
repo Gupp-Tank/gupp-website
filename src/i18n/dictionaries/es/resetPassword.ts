@@ -5,6 +5,7 @@ export const resetPassword: Dictionary['resetPassword'] = {
   metaDescription: 'Crea una nueva contraseña para acceder a tu cuenta de Gupp Tank.',
   title: 'Restablecer contraseña',
   subtitle: 'Ingresa tu nueva contraseña para acceder a tu cuenta.',
+  trustNote: 'Nadie de Gupp Tank puede ver tu contraseña.',
   newPasswordLabel: 'Nueva contraseña',
   newPasswordPlaceholder: 'Mínimo 8 caracteres',
   confirmPasswordLabel: 'Confirmar contraseña',
