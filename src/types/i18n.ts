@@ -4,6 +4,7 @@ import type { DeviceViewsData } from './deviceViews'
 import type { ConsentCopy } from './consent'
 import type { EarlyAccessCopy } from './earlyAccess'
 import type { LegalCopy } from './legal'
+import type { ResetPasswordCopy } from './auth'
 import type { CtaCopy, PlansCopy, ErrorFallbackCopy, FaqCopy, HowItWorksCopy, FooterCopy, HeaderCopy, NotFoundCopy, UnsubscribeCopy, HeroContent, HeroVisualCopy, ModulesCopy, SiteMeta } from './content'
 
 // Every locale implements this whole shape, so a string missing in one
@@ -14,6 +15,7 @@ export interface Dictionary {
   errorFallback: ErrorFallbackCopy
   notFound: NotFoundCopy
   unsubscribe: UnsubscribeCopy
+  resetPassword: ResetPasswordCopy
   header: HeaderCopy
   footer: FooterCopy
   hero: HeroContent

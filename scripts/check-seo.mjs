@@ -56,7 +56,15 @@ for (const locale of ['es', 'en']) {
   check(/name="robots" content="noindex/.test(unsubHtml), `${unsubFile}: must carry a noindex robots tag`)
   check((unsubHtml.match(/<h1[\s>]/g) ?? []).length === 1, `${unsubFile}: expected exactly one <h1> in the prerendered HTML`)
   check(!sitemap.includes(`/${locale}/unsubscribe`), `sitemap.xml: must not include noindex ${locale}/unsubscribe`)
+
+  const resetFile = `${locale}/reset-password/index.html`
+  const resetHtml = read(resetFile)
+  check(/name="robots" content="noindex/.test(resetHtml), `${resetFile}: must carry a noindex robots tag`)
+  check((resetHtml.match(/<h1[\s>]/g) ?? []).length === 1, `${resetFile}: expected exactly one <h1> in the prerendered HTML`)
+  check(!sitemap.includes(`/${locale}/reset-password`), `sitemap.xml: must not include noindex ${locale}/reset-password`)
 }
+check(/name="robots" content="noindex/.test(read('reset-password/index.html')), 'reset-password/index.html: must carry a noindex robots tag')
+check((read('reset-password/index.html').match(/<h1[\s>]/g) ?? []).length === 1, 'reset-password/index.html: expected exactly one <h1>')
 
 if (problems.length) {
   console.error(problems.map((p) => `  - ${p}`).join('\n'))

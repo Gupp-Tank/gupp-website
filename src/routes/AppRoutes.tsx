@@ -3,6 +3,7 @@ import { SiteLayout } from '../components/layout/SiteLayout'
 import { HomePage } from '../pages/HomePage'
 import { LegalPage } from '../pages/LegalPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
+import { ResetPasswordPage } from '../pages/ResetPasswordPage'
 import { UnsubscribePage } from '../pages/UnsubscribePage'
 import { LocaleRoute } from './LocaleRoute'
 import { RootRedirect } from './RootRedirect'
@@ -13,12 +14,16 @@ export function AppRoutes() {
   return (
     <Routes>
       <Route index element={<RootRedirect />} />
+      <Route element={<SiteLayout />}>
+        <Route path="reset-password" element={<ResetPasswordPage />} />
+      </Route>
       <Route path=":locale" element={<LocaleRoute />}>
         <Route element={<SiteLayout />}>
           <Route index element={<HomePage />} />
           <Route path="privacy" element={<LegalPage document="privacy" />} />
           <Route path="terms" element={<LegalPage document="terms" />} />
           <Route path="unsubscribe" element={<UnsubscribePage />} />
+          <Route path="reset-password" element={<ResetPasswordPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
