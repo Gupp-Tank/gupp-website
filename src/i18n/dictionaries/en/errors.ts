@@ -9,6 +9,7 @@ export const errors: Dictionary['errors'] = {
   RATE_LIMITED: 'Too many attempts. Please wait a moment and try again.',
   CONSENT_REQUIRED: 'To sign up you need to accept the terms and the privacy policy.',
   INVALID_UNSUBSCRIBE_TOKEN: 'This unsubscribe link is not valid or has expired.',
+  INVALID_RESET_TOKEN: 'This password reset link is not valid or has expired. Please request a new one.',
   VALIDATION_FAILED: 'Some of the information is not valid. Please review it.',
   RENDER_FAILED: 'This page could not be displayed.',
 }

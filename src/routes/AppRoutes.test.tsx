@@ -97,6 +97,28 @@ describe('AppRoutes', () => {
     expect(document.documentElement.lang).toBe(locale)
   })
 
+  it('renders the reset password page at /reset-password without token', () => {
+    renderAt('/reset-password')
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(dictionaries.es.resetPassword.invalidTitle)
+    expect(screen.getByRole('banner')).toBeInTheDocument()
+  })
+
+  it.each([
+    ['es', dictionaries.es.resetPassword.invalidTitle],
+    ['en', dictionaries.en.resetPassword.invalidTitle],
+  ])('renders the reset password page inside layout at /%s/reset-password without token', (locale, title) => {
+    renderAt(`/${locale}/reset-password`)
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(title)
+    expect(screen.getByRole('banner')).toBeInTheDocument()
+    expect(document.documentElement.lang).toBe(locale)
+  })
+
+  it('renders the reset password form when token is present', () => {
+    renderAt('/es/reset-password?token=valid-test-token')
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(dictionaries.es.resetPassword.title)
+    expect(screen.getByRole('banner')).toBeInTheDocument()
+  })
+
   describe('language switch', () => {
     it('changes the language in the URL and keeps the rest of it', () => {
       renderAt('/es/nope?ref=1#top')

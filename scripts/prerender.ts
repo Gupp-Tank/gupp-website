@@ -29,14 +29,15 @@ function fakeDocument(locale: Locale) {
 
 const { render } = (await import(pathToFileURL(join('dist-ssr', 'entry-server.js')).href)) as { render: (url: string) => Promise<string> }
 
-// Pages that get static HTML: the home page, the legal pages, and the unsubscribe shell.
+// Pages that get static HTML: the home page, the legal pages, the unsubscribe shell, and the reset-password shell.
 const INDEXED_PAGES = ['', '/privacy', '/terms'] as const
-const ALL_PAGES = [...INDEXED_PAGES, '/unsubscribe'] as const
+const ALL_PAGES = [...INDEXED_PAGES, '/unsubscribe', '/reset-password'] as const
 
 function pageMeta(locale: Locale, path: (typeof ALL_PAGES)[number]) {
-  const { meta, faq, legal, unsubscribe } = dictionaries[locale]
+  const { meta, faq, legal, unsubscribe, resetPassword } = dictionaries[locale]
   if (path === '') return { title: meta.title, description: meta.description, faq: faq.items }
   if (path === '/unsubscribe') return { title: unsubscribe.metaTitle, description: unsubscribe.metaDescription, noindex: true }
+  if (path === '/reset-password') return { title: resetPassword.metaTitle, description: resetPassword.metaDescription, noindex: true }
   const doc = legal[path === '/privacy' ? 'privacy' : 'terms']
   return { title: `${doc.title} · ${site.name}`, description: doc.intro }
 }
@@ -63,6 +64,14 @@ for (const locale of LOCALES) {
     console.log(`prerendered /${locale}${path}  (${(body.length / 1024).toFixed(0)} kB of markup)`)
   }
 }
+
+// Prerender root /reset-password for direct hits from email links
+fakeDocument('es')
+const rootResetBody = await render('/reset-password')
+const rootResetDir = join(dist, 'reset-password')
+mkdirSync(rootResetDir, { recursive: true })
+writeFileSync(join(rootResetDir, 'index.html'), page('es', '/reset-password', rootResetBody))
+console.log(`prerendered /reset-password  (${(rootResetBody.length / 1024).toFixed(0)} kB of markup)`)
 
 // Unknown paths: the client renders the localized 404 (inside the layout for /es/whatever).
 writeFileSync(join(dist, '404.html'), template.replace('</head>', '    <meta name="robots" content="noindex" data-seo />\n  </head>'))

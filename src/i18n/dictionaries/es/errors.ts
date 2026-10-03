@@ -9,6 +9,7 @@ export const errors: Dictionary['errors'] = {
   RATE_LIMITED: 'Demasiados intentos. Espera un momento e intenta de nuevo.',
   CONSENT_REQUIRED: 'Para registrarte debes aceptar los términos y la política de privacidad.',
   INVALID_UNSUBSCRIBE_TOKEN: 'Este enlace de baja no es válido o ya venció.',
+  INVALID_RESET_TOKEN: 'Este enlace para restablecer tu contraseña no es válido o ya venció. Solicita uno nuevo.',
   VALIDATION_FAILED: 'Alguno de los datos no es válido. Revísalos.',
   RENDER_FAILED: 'No pudimos mostrar esta página.',
 }
