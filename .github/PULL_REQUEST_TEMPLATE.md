@@ -1,6 +1,10 @@
 ## Summary
 
-<!-- What changed and why. Link the issue: Closes #N -->
+<!-- What changed and why. -->
+
+## Closes
+
+<!-- Closes #N (one per line). Write "None" if this PR does not close an issue. -->
 
 ## Visual change?
 
