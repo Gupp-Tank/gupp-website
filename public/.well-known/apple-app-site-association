@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "A677L38YBF.app.gupp.guppApp"
+        ],
+        "components": [
+          { "/": "/reset-password" },
+          { "/": "/es/reset-password" },
+          { "/": "/en/reset-password" }
+        ]
+      }
+    ]
+  }
+}
