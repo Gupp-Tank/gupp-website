@@ -4,7 +4,7 @@
     "target": {
       "namespace": "android_app",
       "package_name": "app.gupp.gupp_app",
-      "sha256_cert_fingerprints": []
+      "sha256_cert_fingerprints": ["2C:F8:26:07:5F:60:A6:2A:EC:44:9F:DB:90:62:96:47:CB:34:65:E0:4C:BD:78:1D:2B:CB:73:51:C9:33:DB:A7"]
     }
   }
 ]

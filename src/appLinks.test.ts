@@ -34,13 +34,14 @@ describe('app links', () => {
     expect(rule?.headers).toContainEqual({ key: 'Content-Type', value: 'application/json' })
   })
 
-  it('declares the Android package, with its fingerprint still to fill in', () => {
+  it('declares the Android package, signed by the Play app signing key', () => {
     const [entry] = JSON.parse(read('public/.well-known/assetlinks.json')) as Array<{
       relation: string[]
       target: { package_name: string; sha256_cert_fingerprints: string[] }
     }>
     expect(entry.relation).toEqual(['delegate_permission/common.handle_all_urls'])
     expect(entry.target.package_name).toBe('app.gupp.gupp_app')
+    expect(entry.target.sha256_cert_fingerprints).toHaveLength(1)
     for (const fingerprint of entry.target.sha256_cert_fingerprints) {
       expect(fingerprint).toMatch(/^([0-9A-F]{2}:){31}[0-9A-F]{2}$/)
     }
