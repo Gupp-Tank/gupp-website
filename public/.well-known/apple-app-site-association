@@ -3,8 +3,7 @@
     "details": [
       {
         "appIDs": [
-          "A677L38YBF.app.gupp.guppApp",
-          "82CFNFH82N.app.gupp.guppApp"
+          "A677L38YBF.app.gupp.guppApp"
         ],
         "components": [
           { "/": "/reset-password" },
