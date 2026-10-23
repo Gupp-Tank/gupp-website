@@ -22,6 +22,7 @@ export function AppRoutes() {
           <Route index element={<HomePage />} />
           <Route path="privacy" element={<LegalPage document="privacy" />} />
           <Route path="terms" element={<LegalPage document="terms" />} />
+          <Route path="delete-account" element={<LegalPage document="deleteAccount" />} />
           <Route path="unsubscribe" element={<UnsubscribePage />} />
           <Route path="reset-password" element={<ResetPasswordPage />} />
           <Route path="*" element={<NotFoundPage />} />

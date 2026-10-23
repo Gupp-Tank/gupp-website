@@ -19,6 +19,9 @@ export interface LegalDocument {
 export interface LegalCopy {
   privacy: LegalDocument
   terms: LegalDocument
+  deleteAccount: LegalDocument
+  /** Link text for `{deleteAccount}` inside the other documents. */
+  deleteAccountLabel: string
   versionLabel: string
   updatedLabel: string
   tocLabel: string

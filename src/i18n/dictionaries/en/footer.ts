@@ -14,5 +14,6 @@ export const footer: Dictionary['footer'] = {
   legalLinks: [
     { label: 'Privacy policy', path: '/privacy' },
     { label: 'Terms and conditions', path: '/terms' },
+    { label: 'Delete your account', path: '/delete-account' },
   ],
 }
