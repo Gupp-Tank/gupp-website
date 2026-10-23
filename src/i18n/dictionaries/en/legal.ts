@@ -72,7 +72,7 @@ export const legal: Dictionary["legal"] = {
         paragraphs: [
           "We keep your early-access email until 6 months after the app launches, or sooner if you unsubscribe. The record of your consent is deleted together with your sign-up.",
           "We keep the data of your app account for as long as the account exists. When you delete your account, everything is deleted immediately: your account, your tanks and everything under them, your history, your notification data and every diagnosis photo and your avatar. Nothing is kept anonymized.",
-          "Two things outside our servers do not go at once: the backups of the database are overwritten and are gone at most 7 days after you delete your account, and the email provider keeps its sending logs, which include the recipient address, for 30 days. The stores and RevenueCat keep the records of purchases under their own policies and the tax rules that apply to them.",
+          "One thing outside our servers does not go at once: the email provider keeps its sending logs, which include the recipient address, for 30 days. We do not keep separate backups of the database. The stores and RevenueCat keep the records of purchases under their own policies and the tax rules that apply to them.",
           "Your cookie choice stays in your browser until you change it or clear the site data.",
         ],
       },
@@ -241,10 +241,9 @@ export const legal: Dictionary["legal"] = {
         id: "retained",
         heading: "What is kept, and for how long",
         paragraphs: [
-          "Only what sits outside our servers and cannot be removed at once:",
+          "Only what sits outside our servers and cannot be removed at once. We do not keep separate backups of the database:",
         ],
         items: [
-          "Database backups: overwritten, and gone at most 7 days after you delete the account.",
           "The email provider’s sending logs, which include the address the emails went to: 30 days.",
           "Purchase records kept by Google Play, the App Store and RevenueCat, under their own policies and the tax rules that apply to them.",
         ],

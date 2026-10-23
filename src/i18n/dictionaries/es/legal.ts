@@ -72,7 +72,7 @@ export const legal: Dictionary["legal"] = {
         paragraphs: [
           "Guardamos tu correo de acceso anticipado hasta 6 meses después del lanzamiento de la app, o antes si te das de baja. La constancia de tu consentimiento se elimina junto con tu registro.",
           "Guardamos los datos de tu cuenta de la app mientras la cuenta exista. Cuando eliminas tu cuenta, todo se borra de inmediato: tu cuenta, tus acuarios y todo lo que contienen, tu historial, tus datos de notificaciones y cada foto de diagnóstico y tu avatar. Nada se conserva anonimizado.",
-          "Dos cosas fuera de nuestros servidores no desaparecen al instante: los respaldos de la base de datos se sobrescriben y desaparecen como máximo 7 días después de que eliminas tu cuenta, y el proveedor de correo conserva sus registros de envío, que incluyen la dirección del destinatario, durante 30 días. Las tiendas y RevenueCat conservan los registros de compras según sus propias políticas y las reglas tributarias que les aplican.",
+          "Una cosa fuera de nuestros servidores no desaparece al instante: el proveedor de correo conserva sus registros de envío, que incluyen la dirección del destinatario, durante 30 días. No guardamos respaldos aparte de la base de datos. Las tiendas y RevenueCat conservan los registros de compras según sus propias políticas y las reglas tributarias que les aplican.",
           "Tu decisión sobre cookies se queda en tu navegador hasta que la cambies o borres los datos del sitio.",
         ],
       },
@@ -243,10 +243,9 @@ export const legal: Dictionary["legal"] = {
         id: "retained",
         heading: "Qué se conserva y por cuánto tiempo",
         paragraphs: [
-          "Solo lo que está fuera de nuestros servidores y no se puede quitar de inmediato:",
+          "Solo lo que está fuera de nuestros servidores y no se puede quitar de inmediato. No guardamos respaldos aparte de la base de datos:",
         ],
         items: [
-          "Respaldos de la base de datos: se sobrescriben y desaparecen como máximo 7 días después de eliminar la cuenta.",
           "Los registros de envío del proveedor de correo, que incluyen la dirección a la que se enviaron los correos: 30 días.",
           "Los registros de compras que conservan Google Play, la App Store y RevenueCat, según sus propias políticas y las reglas tributarias que les aplican.",
         ],
