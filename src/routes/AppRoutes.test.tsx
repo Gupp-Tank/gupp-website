@@ -122,7 +122,7 @@ describe('AppRoutes', () => {
   describe('language switch', () => {
     it('changes the language in the URL and keeps the rest of it', () => {
       renderAt('/es/nope?ref=1#top')
-      fireEvent.click(header().getByRole('button', { name: 'English' }))
+      fireEvent.click(header().getByRole('button', { name: /English/ }))
       expect(here()).toBe('/en/nope?ref=1#top')
       expect(document.documentElement.lang).toBe('en')
       expect(screen.getByRole('heading', { name: dictionaries.en.notFound.title })).toBeInTheDocument()
@@ -130,15 +130,15 @@ describe('AppRoutes', () => {
 
     it('goes from /es to /en on the home page', () => {
       renderAt('/es')
-      fireEvent.click(header().getByRole('button', { name: 'English' }))
+      fireEvent.click(header().getByRole('button', { name: /English/ }))
       expect(here()).toBe('/en')
       expect(h1()).toContain('Fishkeeping')
     })
 
     it('marks the active language as pressed', () => {
       renderAt('/en')
-      expect(header().getByRole('button', { name: 'English' })).toHaveAttribute('aria-pressed', 'true')
-      expect(header().getByRole('button', { name: 'Español' })).toHaveAttribute('aria-pressed', 'false')
+      expect(header().getByRole('button', { name: /English/ })).toHaveAttribute('aria-pressed', 'true')
+      expect(header().getByRole('button', { name: /Español/ })).toHaveAttribute('aria-pressed', 'false')
     })
   })
 

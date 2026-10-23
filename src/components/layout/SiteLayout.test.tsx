@@ -82,7 +82,7 @@ describe('mobile menu', () => {
   it('offers the language and theme controls with the menu closed', () => {
     renderHome()
     const header = within(screen.getByRole('banner'))
-    expect(header.getByRole('button', { name: 'English' })).toBeInTheDocument()
+    expect(header.getByRole('button', { name: /English/ })).toBeInTheDocument()
     expect(header.getByRole('button', { name: dictionaries.es.header.themeToDark })).toBeInTheDocument()
   })
 })

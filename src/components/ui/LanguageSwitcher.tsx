@@ -16,7 +16,9 @@ export function LanguageSwitcher({ locale, onChange, label }: LanguageSwitcherPr
           lang={option}
           className="pref-control__button"
           aria-pressed={option === locale}
-          aria-label={LOCALE_NAMES[option]}
+          // The name has to contain the visible text ("ES") for voice control
+          // users who say what they see (WCAG 2.5.3).
+          aria-label={`${option.toUpperCase()}, ${LOCALE_NAMES[option]}`}
           onClick={() => onChange(option)}
         >
           {option.toUpperCase()}
