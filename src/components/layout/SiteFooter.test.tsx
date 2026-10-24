@@ -90,7 +90,7 @@ describe('SiteFooter', () => {
     const user = userEvent.setup()
     renderFooter(es.footer, onLocaleChange)
     const controls = screen.getByRole('group', { name: es.header.preferencesLabel })
-    await user.click(within(controls).getByRole('button', { name: 'English' }))
+    await user.click(within(controls).getByRole('button', { name: /English/ }))
     expect(onLocaleChange).toHaveBeenCalledWith('en')
     expect(within(controls).getByRole('button', { name: es.header.themeToDark })).toBeInTheDocument()
   })
