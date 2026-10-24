@@ -81,7 +81,7 @@ for (const [locale, t] of Object.entries(COPY)) {
       await form(page).getByRole('combobox').selectOption('reef')
       await form(page).getByRole('button', { name: t.submit }).click()
       await expect(page.locator('#cta').getByRole('status')).toContainText(t.success)
-      expect(bodies).toEqual([{ email: 'ana@example.com', locale, tankType: 'reef', consent: { accepted: true, documentsVersion: '2026-09-24' } }])
+      expect(bodies).toEqual([{ email: 'ana@example.com', locale, tankType: 'reef', consent: { accepted: true, documentsVersion: '2026-10-23' } }])
     })
 
     test('an email already on the list gets the same success (nothing is revealed)', async ({ page }) => {

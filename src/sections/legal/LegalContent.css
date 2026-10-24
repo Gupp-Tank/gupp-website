@@ -38,13 +38,13 @@
 }
 
 .legal__toc a,
-.legal a[href^='mailto:'] {
+.legal a[href^="mailto:"] {
   color: var(--primary-green);
   text-underline-offset: 3px;
 }
 
 .legal__toc a:focus-visible,
-.legal a[href^='mailto:']:focus-visible {
+.legal a[href^="mailto:"]:focus-visible {
   outline: 2px solid var(--secondary-blue);
   outline-offset: 2px;
 }

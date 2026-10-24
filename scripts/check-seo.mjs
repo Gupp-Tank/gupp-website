@@ -8,7 +8,7 @@ const check = (ok, message) => ok || problems.push(message)
 const read = (f) => readFileSync(`dist/${f}`, 'utf8')
 
 const ORIGIN = 'https://gupp.app'
-const PAGES = ['', '/privacy', '/terms']
+const PAGES = ['', '/privacy', '/terms', '/delete-account']
 for (const [locale, path] of ['es', 'en'].flatMap((l) => PAGES.map((p) => [l, p]))) {
   const file = `${locale}${path}/index.html`
   const html = read(file)

@@ -7,7 +7,10 @@ import { gzipSync } from 'node:zlib'
 
 const KB = 1024
 const BUDGET = {
-  entryJsGzip: 120 * KB, // the main bundle: React, router, app code
+  // The main bundle: React, router, app code, and the copy of both languages. Raised from 120 when
+  // the privacy policy grew to cover the app and the account deletion page was added (about 4 kB
+  // of legal text); the next step is to load the legal copy on demand rather than raise this again.
+  entryJsGzip: 125 * KB,
   totalJsGzip: 135 * KB, // every JS chunk together
   totalCssGzip: 12 * KB,
   fontFile: 40 * KB, // one woff2 subset
