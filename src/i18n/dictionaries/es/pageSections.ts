@@ -30,7 +30,6 @@ export const plans: Dictionary['plans'] = {
     { id: 'evolution', label: 'Evolución con fotos: compara un pez o un tratamiento en el tiempo', free: { kind: 'none', text: 'No incluido' }, premium: { kind: 'included', text: 'Incluido' } },
     { id: 'fish-record', label: 'Ficha propia por habitante: nombre, tiempo en el acuario, tamaño, enfermedades y más', free: { kind: 'none', text: 'No incluido' }, premium: { kind: 'included', text: 'Incluido' } },
     { id: 'tank-history', label: 'Historial del acuario: línea de tiempo de altas, bajas y tratamientos', free: { kind: 'none', text: 'No incluido' }, premium: { kind: 'included', text: 'Incluido' } },
-    { id: 'extra-tools', label: 'Herramientas extra: salinidad y estimador del ciclo del nitrógeno', free: { kind: 'none', text: 'No incluido' }, premium: { kind: 'included', text: 'Incluido' } },
     { id: 'reports', label: 'Reportes y exportación a PDF o CSV', free: { kind: 'none', text: 'No incluido' }, premium: { kind: 'included', text: 'Incluido' } },
   ],
   note: 'El precio del plan premium se anunciará más adelante. Los límites pueden ajustarse antes del lanzamiento.',
