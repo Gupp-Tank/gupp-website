@@ -30,7 +30,6 @@ export const plans: Dictionary['plans'] = {
     { id: 'evolution', label: 'Photo evolution: compare a fish or a treatment over time', free: { kind: 'none', text: 'Not included' }, premium: { kind: 'included', text: 'Included' } },
     { id: 'fish-record', label: 'Own record per inhabitant: name, time in the tank, size, illnesses and more', free: { kind: 'none', text: 'Not included' }, premium: { kind: 'included', text: 'Included' } },
     { id: 'tank-history', label: 'Tank history: a timeline of additions, losses and treatments', free: { kind: 'none', text: 'Not included' }, premium: { kind: 'included', text: 'Included' } },
-    { id: 'extra-tools', label: 'Extra tools: salinity and nitrogen-cycle estimator', free: { kind: 'none', text: 'Not included' }, premium: { kind: 'included', text: 'Included' } },
     { id: 'reports', label: 'Reports and export to PDF or CSV', free: { kind: 'none', text: 'Not included' }, premium: { kind: 'included', text: 'Included' } },
   ],
   note: 'The premium price will be announced later. Limits may change before launch.',
